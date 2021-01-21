@@ -1,0 +1,12 @@
+{
+  "code": 0,
+  "data": {
+    "登录页产品名称": "loginName",
+    "登录页产品logo": "loginLogo",
+    "登录页产品描述": "loginDesc",
+    "菜单左上角产品logo": "menusLogo",
+    "菜单左上角产品名称": "menusName",
+    "产品版权信息": "copyright",
+    "产品关联网站": "links"
+  }
+}

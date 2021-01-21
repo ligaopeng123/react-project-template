@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@img/*": [
+        "public/*"
+      ],
+      "@assets/*": [
+        "public/assets/*"
+      ],
+      "@share/*": [
+        "src/share/*"
+      ],
+      "@router/*": [
+        "src/router/*"
+      ],
+      "@admin/*": [
+        "src/router/admin/*"
+      ],
+      "@mocks/*": [
+        "src/mocks/*"
+      ],
+      "@static/*": [
+        "src/static/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@containers/*": [
+        "src/containers/*"
+      ]
+    }
+  }
+}

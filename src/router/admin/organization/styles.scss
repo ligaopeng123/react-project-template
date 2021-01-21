@@ -1,0 +1,6 @@
+@import "@/styles/index.scss";
+
+// 冲掉树的样式
+.ant-drawer-wrapper-body {
+  height: auto;
+}
