@@ -64,7 +64,7 @@ const BasicLayout = (props: any) => {
          * 菜单信息
          */
         HttpClient.get({
-            url: '/menus.json'
+            url: '/json/menus.json'
         }).then((res: any) => {
             if (res) {
                 // 将服务端表格数据获取到 并转成树状数据

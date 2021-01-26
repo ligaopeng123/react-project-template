@@ -54,10 +54,10 @@ export async function getOemConfig() {
     return new Promise((resolve, reject) => {
         Promise.all([
             HttpClient.get({
-                url: '/menus.json'
+                url: '/json/menus.json'
             }),
             HttpClient.get({
-                url: '/OEM.json'
+                url: '/json/OEM.json'
             })
         ]).then((values: any) => {
             resolve({

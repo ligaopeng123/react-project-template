@@ -128,6 +128,7 @@ export default class HttpClient {
                                         }: any) {
         this.interceptors(intercept);
         const Axios: any = axios({
+            baseURL: process.env.REACT_APP_HTTPBASEURL || '',
             headers: this.headers,
             method: method,
             url: url,

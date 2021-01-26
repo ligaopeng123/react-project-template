@@ -1,5 +1,5 @@
 import {ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat} from '@apollo/client';
-import {createBrowserHistory} from 'history';
+import {createBrowserHistory, createHashHistory} from 'history';
 import {onError} from '@apollo/client/link/error';
 import {getToken} from './GLOBALCONFIG';
 import Message from '../Message/index';
@@ -7,7 +7,7 @@ import Message from '../Message/index';
 /**
  * 路由外跳转 使用该对象
  */
-export const BrowserHistory = createBrowserHistory();
+export const BrowserHistory = createHashHistory();// createBrowserHistory();
 
 /**
  * ApolloClient的监听

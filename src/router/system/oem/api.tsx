@@ -8,7 +8,7 @@ import {MutateResponse} from '../../data.d';
 export function getOemConfig() {
     return new Promise((resolve, reject) => {
         HttpClient.get({
-            url: '/OEM.json'
+            url: '/json/OEM.json'
         }).then(({code, data}: any) => {
             resolve(data);
         })
