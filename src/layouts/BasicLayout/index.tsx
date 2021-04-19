@@ -65,11 +65,22 @@ const BasicLayout = (props: any) => {
      * 设置菜单
      */
     useEffect(() => {
-        setMenusData((getIsibleMenus(getMenus(stores[GLOBALCONFIG.MENUS]?.menus)) || []).map((item: any) => {
+        // 将服务端表格数据获取到 并转成树状数据
+        const menusInfo: any = getMenus(stores[GLOBALCONFIG.MENUS]?.menus);
+        // 将可见的菜单渲染出来
+        setMenusData((getIsibleMenus(menusInfo) || []).map((item: any) => {
             item.icon = createIcon(item.icon as string);
             return item;
         }));
+        // 设置路由
+        setRouters(getRouters(null).routers);
+        // 保证选中样式加上 此处延迟赋值
+        setTimeout(() => {
+            // 如果未输入路由 则使用第一个路由地址 如果输入路由 则使用路由地址
+            setPath(pathname === '/' ? getFirstPath(menusInfo) : pathname);
+        });
     }, [stores[GLOBALCONFIG.MENUS]]);
+
 
     // title 后期需要冲掉 默认的产品名称 后期去库里去获取
     // logo={`/logo192.png`}
