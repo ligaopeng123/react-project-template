@@ -18,12 +18,11 @@ import ProLayout, {
 import {RouteWithSubRoutes} from '@share/HigherOrderComponent/routeWithSubRoutes';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
-import './styles.scss'
 import BackUp from './BackTop';
 import RightLayout from '../RightLayout/index';
-import HttpClient from '@share/HttpClient/index';
 import GLOBALCONFIG, {getFirstPath, getIsibleMenus, getMenus, getOemValueByKey} from '@share/HttpClient/GLOBALCONFIG';
 import {getRouters} from '@router/routers';
+import './styles.scss';
 
 /**
  * 创建icon图标
