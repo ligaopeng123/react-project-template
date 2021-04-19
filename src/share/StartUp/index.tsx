@@ -61,8 +61,9 @@ export async function getOemConfig() {
             })
         ]).then((values: any) => {
             resolve({
-                config: values?.values[0]?.data,
-                deploy: values?.values[1]?.data,
+                config: {}, // 数据配置
+                menus: values[0]?.data,
+                deploy: values[1]?.data,
             });
         })
     })
@@ -74,15 +75,15 @@ export async function getOemConfig() {
  * @constructor
  */
 const StartUp = async (): Promise<GlobalStates> => {
-    const OEM = await getOemConfig();
-
+    const OEM: any = await getOemConfig();
     // 默认参数
     const defaultGlobal: any = {};
     // 菜单数据
     defaultGlobal[GLOBALCONFIG.MENUS] = {
         treeData: [],
-        menus: [],
+        menus: OEM?.menus,
     };
+
     // 用户信息
     defaultGlobal[GLOBALCONFIG.USER] = getUSERlocalStorage();
     // OEM定制信息

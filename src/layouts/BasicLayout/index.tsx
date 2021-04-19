@@ -1,7 +1,7 @@
 /**
  * 布局管理
  */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, createElement} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {
     Switch,
@@ -25,13 +25,16 @@ import HttpClient from '@share/HttpClient/index';
 import GLOBALCONFIG, {getFirstPath, getIsibleMenus, getMenus, getOemValueByKey} from '@share/HttpClient/GLOBALCONFIG';
 import {getRouters} from '@router/routers';
 
-
+/**
+ * 创建icon图标
+ * @param icon
+ */
 const createIcon = (icon: string) => {
     const _icon = (Icon as any)[icon];
-    return _icon ? React.createElement(_icon, {
+    return _icon ? createElement(_icon, {
         style: {fontSize: '16px'}
     }) : null;
-}
+};
 
 
 const BasicLayout = (props: any) => {
@@ -52,38 +55,22 @@ const BasicLayout = (props: any) => {
      */
     const pathname = props.history.location.pathname;
     /**
-     *
-     * @type {unknown}
+     * 获取redux数据
      */
-    const store = useSelector((stores: any) => {
-        return stores[GLOBALCONFIG.OEM]
+    const stores = useSelector((stores: any) => {
+        return stores
     });
 
+    /**
+     * 设置菜单
+     */
     useEffect(() => {
-        /**
-         * 菜单信息
-         */
-        HttpClient.get({
-            url: '/json/menus.json'
-        }).then((res: any) => {
-            if (res) {
-                // 将服务端表格数据获取到 并转成树状数据
-                const menusInfo: any = getMenus(res.data);
-                // 将可见的菜单渲染出来
-                setMenusData((getIsibleMenus(menusInfo) || []).map((item: any) => {
-                    item.icon = createIcon(item.icon as string);
-                    return item;
-                }));
-                // 设置路由
-                setRouters(getRouters(null).routers);
-                // 保证选中样式加上 此处延迟赋值
-                setTimeout(() => {
-                    // 如果未输入路由 则使用第一个路由地址 如果输入路由 则使用路由地址
-                    setPath(pathname === '/' ? getFirstPath(menusInfo) : pathname);
-                })
-            }
-        });
-    }, []);
+        setMenusData((getIsibleMenus(getMenus(stores[GLOBALCONFIG.MENUS]?.menus)) || []).map((item: any) => {
+            item.icon = createIcon(item.icon as string);
+            return item;
+        }));
+    }, [stores[GLOBALCONFIG.MENUS]]);
+
     // title 后期需要冲掉 默认的产品名称 后期去库里去获取
     // logo={`/logo192.png`}
     return (
@@ -93,14 +80,14 @@ const BasicLayout = (props: any) => {
                            getOemValueByKey({
                                key: 'menusLogo',
                                value: `logo.svg`,
-                               ...store
+                               ...stores[GLOBALCONFIG.OEM]
                            })
                        }
                        title={
                            getOemValueByKey({
                                key: 'menusName',
                                value: `可视化产品`,
-                               ...store
+                               ...stores[GLOBALCONFIG.OEM]
                            })
                        }
                        route={{routes: menusData, path: "/"}}
@@ -144,7 +131,6 @@ const BasicLayout = (props: any) => {
             <BackUp/>
         </React.Fragment>
     );
-}
-
+};
 
 export default withRouter(BasicLayout)
