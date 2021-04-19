@@ -8,7 +8,8 @@ export default {
     "fixedHeader": true,
     "fixSiderbar": true,
     "menu": {
-        "locale": true
+        "locale": true,
+        "loading": false
     },
     "title": "可视化产品",
     "pwa": false,
