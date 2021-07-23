@@ -1,4 +1,4 @@
-import {TableListItem, TableListParams} from '../../data.d';
+import {TableListItem, TableListParams} from '../../../router/data.d';
 
 export interface OemTableListItem extends TableListItem {
     id?: number;

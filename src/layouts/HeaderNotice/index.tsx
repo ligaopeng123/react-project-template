@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Spin, Tabs, Badge} from 'antd';
 import useMergeValue from 'use-merge-value';
 import HeaderDropdown from '../HeaderDropdown/index';

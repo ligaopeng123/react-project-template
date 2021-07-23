@@ -9,10 +9,13 @@
         "public/*"
       ],
       "@assets/*": [
-        "public/assets/*"
+        "scr/assets/*"
       ],
       "@share/*": [
         "src/share/*"
+      ],
+      "@store/*": [
+        "src/store/*"
       ],
       "@router/*": [
         "src/router/*"
@@ -21,16 +24,16 @@
         "src/router/admin/*"
       ],
       "@mocks/*": [
-        "src/mocks/*"
+        "../mocks/*"
       ],
-      "@static/*": [
-        "src/static/*"
+      "@pages/*": [
+        "src/pages/*"
       ],
       "@components/*": [
         "src/components/*"
       ],
-      "@containers/*": [
-        "src/containers/*"
+      "@hooks/*": [
+        "src/hooks/*"
       ]
     }
   }

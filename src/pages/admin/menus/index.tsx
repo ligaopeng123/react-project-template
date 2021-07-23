@@ -13,7 +13,7 @@
 
 import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
-import BasicContents from '@components/Contents/BasicContents';
+import BasicContents from '../../../components/Contents/BasicContents';
 
 const RouterAdminMenus: React.FC<{}> = (props: any) => {
     return (

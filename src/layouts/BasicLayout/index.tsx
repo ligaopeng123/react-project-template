@@ -1,146 +1,124 @@
 /**
  * 布局管理
  */
-import React, {useEffect, useState, createElement} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, {useState, createElement, useEffect} from 'react';
 import {
-    Switch,
-    Link,
-    Redirect,
-    withRouter
+	Switch,
+	Link,
+	withRouter
 } from 'react-router-dom';
-import ProLayout, {
-    MenuDataItem,
-    BasicLayoutProps as ProLayoutProps,
-    Settings,
-    DefaultFooter,
-} from '@ant-design/pro-layout'
-import {RouteWithSubRoutes} from '@share/HigherOrderComponent/routeWithSubRoutes';
+import ProLayout from '@ant-design/pro-layout';
+import RouteWithModuleRoutes from '@/hoc/routeWithSubRoutes';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
 import RightLayout from '../RightLayout/index';
-import GLOBALCONFIG, {getFirstPath, getIsibleMenus, getMenus, getOemValueByKey} from '@share/HttpClient/GLOBALCONFIG';
-import {getRouters} from '@router/routers';
-import './styles.scss';
+import useOEM from "@/hooks/useOEM";
+import styles from './styles.module.less';
+import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 
 /**
  * 创建icon图标
  * @param icon
  */
-const createIcon = (icon: string) => {
-    const _icon = (Icon as any)[icon];
-    return _icon ? createElement(_icon, {
-        style: {fontSize: '16px'}
-    }) : null;
+const createIcon = (icon?: string): React.ReactNode | undefined => {
+	const i = icon ? (Icon as any)[icon] : undefined;
+	return i ? createElement(i, {
+		style: {fontSize: '16px'}
+	}) : i;
 };
 
+const loadMenus = async () => {
+	const res = await fetch('/json/menus.json');
+	return await res.clone().json()
+};
 
 const BasicLayout = (props: any) => {
-    /**
-     * 设置menus的数据
-     */
-    const [menusData, setMenusData] = useState<any[]>([]);
-    /**
-     * 设置路由数据
-     */
-    const [routers, setRouters] = useState<any[]>([]);
-    /**
-     * 设置重定向数据 默认的加载页面
-     */
-    const [path, setPath] = useState<string>('');
-    /**
-     * 历史路由
-     */
-    const pathname = props.history.location.pathname;
-    /**
-     * 获取redux数据
-     */
-    const stores = useSelector((stores: any) => {
-        return stores
-    });
-
-    /**
-     * 设置菜单
-     */
-    useEffect(() => {
-        // 将服务端表格数据获取到 并转成树状数据
-        const menusInfo: any = getMenus(stores[GLOBALCONFIG.MENUS]?.menus);
-        // 将可见的菜单渲染出来
-        setMenusData((getIsibleMenus(menusInfo) || []).map((item: any) => {
-            item.icon = createIcon(item.icon as string);
-            return item;
-        }));
-        // 设置路由
-        setRouters(getRouters(null).routers);
-        // 保证选中样式加上 此处延迟赋值
-        setTimeout(() => {
-            // 如果未输入路由 则使用第一个路由地址 如果输入路由 则使用路由地址
-            setPath(pathname === '/' ? getFirstPath(menusInfo) : pathname);
-        });
-    }, [stores[GLOBALCONFIG.MENUS]]);
-
-
-    // title 后期需要冲掉 默认的产品名称 后期去库里去获取
-    // logo={`/logo192.png`}
-    return (
-        <React.Fragment>
-            <ProLayout {...proSettings}
-                       logo={
-                           getOemValueByKey({
-                               key: 'menusLogo',
-                               value: `logo.svg`,
-                               ...stores[GLOBALCONFIG.OEM]
-                           })
-                       }
-                       title={
-                           getOemValueByKey({
-                               key: 'menusName',
-                               value: `可视化产品`,
-                               ...stores[GLOBALCONFIG.OEM]
-                           })
-                       }
-                       route={{routes: menusData, path: "/"}}
-                       menuItemRender={(menuItemProps: any, defaultDom) => {
-                           // 渲染菜单项
-                           const path: string = menuItemProps.path;
-                           const icon: any = menuItemProps.icon;
-                           return (<React.Fragment>{icon}<Link
-                               to={path}>{menuItemProps.name}</Link></React.Fragment>);
-                       }}
-                       breadcrumbRender={(routes) => {
-                           // 面包屑
-                           return routes;
-                       }}
-                       itemRender={(route: any, params: any, routes: any, paths: Array<string>) => {
-                           return null;
-                       }}
-                       onPageChange={(location) => {
-                           // 頁面跳轉是觸法
-                       }}
-                       menuDataRender={(menuList: any) => {
-                           // menuData 的 render 方法，用来自定义 menuData
-                           return menuList
-                       }}
-                       onMenuHeaderClick={(menu) => {
-                           //      {/*menu 菜单的头部点击事件*/}
-                       }}
-                       rightContentRender={() => (<RightLayout/>)}
-            >
-                <Switch>
-                    {routers.map((route: any, i: number) => {
-                        return (
-                            <RouteWithSubRoutes key={`root-route-${i}`} {...route} />
-                        )
-                    })}
-                </Switch>
-            </ProLayout>
-            {
-                <Redirect to={path}/>
-            }
-            <BackUp/>
-        </React.Fragment>
-    );
+	/**
+	 * 设置重定向数据 默认的加载页面
+	 */
+	const [pathname, setPathname] = useState<string>(props.history.location.pathname);
+	/**
+	 * 路由管理
+	 */
+	const [router, setRouter] = useState<Array<any>>([]);
+	/**
+	 * OEM数据
+	 */
+	const menusLogo = useOEM('menusLogo');
+	const menusName = useOEM('menusName');
+	
+	/**
+	 * 重定向到第一页
+	 */
+	const redirect = (menuData: MenuDataItem) => {
+		if (pathname === '/') {
+			setTimeout(() => {
+				const firstPath = menuData[0].path as string;
+				setPathname(firstPath);
+				props.history.push({
+					pathname: firstPath
+				})
+			});
+		}
+	};
+	/**
+	 * 加载数据
+	 */
+	useEffect(() => {
+		loadMenus().then((menuData: MenuDataItem) => {
+			setRouter(menuData as Array<any>);
+			redirect(menuData);
+		})
+	}, []);
+	
+	return (
+		<React.Fragment>
+			<ProLayout
+				{...proSettings}
+				location={{pathname}}
+				logo={menusLogo}
+				title={menusName}
+				route={{routes: router, path: "/"}}
+				postMenuData={(menuData: MenuDataItem) => {
+					return menuData;
+				}}
+				// menu={{request: loadMenus, defaultOpenAll: true}}
+				menuItemRender={({path, icon, name}: MenuDataItem, defaultDom) => {
+					// 渲染菜单项
+					return (<div className={styles.layoutMenuItem} onClick={() => {
+						setPathname(path as string);
+					}}>
+						{createIcon(icon as string)}
+						<Link to={path as string}>
+							{name}
+						</Link>
+					</div>);
+				}}
+				breadcrumbRender={(routes: any) => {
+					// 面包屑
+					return routes;
+				}}
+				itemRender={(route: any, params: any, routes: any, paths: Array<string>) => {
+					return null;
+				}}
+				onPageChange={(location: any) => {
+					// 頁面跳轉是觸法
+					// setPathname(location.pathname);
+				}}
+				menuDataRender={(menuList: any) => {
+					// menuData 的 render 方法，用来自定义 menuData
+					return menuList
+				}}
+				onMenuHeaderClick={(menu: any) => {
+					//      {/*menu 菜单的头部点击事件*/}
+				}}
+				rightContentRender={() => (<RightLayout/>)}
+			>
+				<RouteWithModuleRoutes routers={router} pathname={pathname}/>
+			</ProLayout>
+			<BackUp/>
+		</React.Fragment>
+	);
 };
-
 export default withRouter(BasicLayout)

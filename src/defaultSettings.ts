@@ -1,21 +1,21 @@
 import {Settings as LayoutSettings} from '@ant-design/pro-layout';
 
 export default {
-    "navTheme": "realDark", // 风格
-    "primaryColor": "#1890ff", // 主题色
-    "layout": "side", // 'side' | 'top' | 'mix';
-    "contentWidth": "Fixed",
-    "fixedHeader": true,
-    "fixSiderbar": true,
-    "menu": {
-        "locale": true,
-        "loading": false
-    },
-    "title": "可视化产品",
-    "pwa": false,
-    "iconfontUrl": "",
-    "splitMenus": false
+	"navTheme": "dark", // 风格 realDark
+	"primaryColor": 'daybreak',
+	"layout": "mix", // 'side' | 'top' | 'mix';
+	"contentWidth": "Fixed", // Fixed Fluid
+	"fixedHeader": true,
+	"fixSiderbar": true,
+	"menu": {
+		"locale": true,
+		"loading": false
+	},
+	"title": "可视化产品",
+	"pwa": false,
+	"iconfontUrl": "",
+	"splitMenus": false
 } as LayoutSettings & {
-    pwa: boolean;
+	pwa: boolean;
 };
 

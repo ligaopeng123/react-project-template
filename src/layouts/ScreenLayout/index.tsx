@@ -7,7 +7,7 @@
 import React from 'react';
 import {Switch} from 'react-router-dom';
 import {getRouters} from "@router/routers";
-import {RouteWithSubRoutes} from "@share/HigherOrderComponent/routeWithSubRoutes";
+import {RouteWithSubRoutes} from "@/hoc/routeWithSubRoutes";
 
 const ScreenLayout: React.FC<any> = (props: any) => {
     const {screenRouters} = getRouters();

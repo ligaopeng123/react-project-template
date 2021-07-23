@@ -1,8 +1,8 @@
-import HttpClient from '@/share/HttpClient';
+import HttpClient from '../../../share/HttpClient';
 import {gql} from '@apollo/client';
-import AppUtil from '@share/Utils/AppUtil';
+import AppUtil from '../../../share/Utils/AppUtil';
 import {OemTableListItem} from './data.d';
-import {MutateResponse} from '../../data.d';
+import {MutateResponse} from '../../../router/data.d';
 
 
 export function getOemConfig() {

@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux'
-import App from './router/App';
+import {RecoilRoot} from 'recoil'
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import StartUp from '@share/StartUp/index';
 import DynamicLoadScript from './components/DynamicLoadScript/index';
 import GlobalStaticFile from './globalStaticFile';
 import './index.scss';
@@ -13,24 +12,23 @@ import './index.scss';
  * @constructor
  */
 function LoadScript(onLoad: any) {
-    ReactDOM.render(
-        <React.StrictMode>
-            <DynamicLoadScript url={GlobalStaticFile} onLoad={onLoad}/>
-        </React.StrictMode>,
-        document.getElementById('root')
-    )
+	ReactDOM.render(
+		<React.StrictMode>
+			<DynamicLoadScript url={GlobalStaticFile} onLoad={onLoad}/>
+		</React.StrictMode>,
+		document.getElementById('root')
+	)
 }
 
 async function LoadApp() {
-    const {store} = await StartUp();
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </React.StrictMode>,
-        document.getElementById('root')
-    )
+	ReactDOM.render(
+		<React.StrictMode>
+			<RecoilRoot>
+				<App/>
+			</RecoilRoot>
+		</React.StrictMode>,
+		document.getElementById('root')
+	)
 }
 
 /**
@@ -40,11 +38,10 @@ async function LoadApp() {
  * @returns {Promise<void>}
  */
 async function startUp() {
-    LoadScript(() => {
-        LoadApp();
-    });
-}
-
+	LoadScript(async () => {
+		LoadApp();
+	});
+};
 
 startUp();
 

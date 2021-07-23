@@ -12,7 +12,7 @@
 
 import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
-import BasicContents from '@components/Contents/BasicContents';
+import BasicContents from '../../../components/Contents/BasicContents';
 import './styles.scss';
 
 
