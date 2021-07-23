@@ -65,7 +65,7 @@ export const RouteWithModuleRoutes = (props: any) => {
 	const {pathname, routers} = props;
 	useEffect(() => {
 		if (pathname && props.pathname !== '/') {
-			setRouter(cacheRouter(pathname, routers));
+			setRouter(cacheRouter(pathname, routers)[0]);
 		}
 	}, [pathname, routers]);
 	
