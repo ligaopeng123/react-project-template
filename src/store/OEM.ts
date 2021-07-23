@@ -18,20 +18,11 @@ const OEM = atom({
 
 /**
  * 获取OEM配置信息
- * @param {any} config
- * @param {any} deploy
- * @param {any} key
- * @returns {any}
  */
 
 export const oemData = async () => {
 	const res = await fetch('/json/OEM.json');
 	return await res.clone().json();
-};
-
-export const getOemValue = ({config, key, value}: any) => {
-	if (config && config[key]) return config[key];
-	return value;
 };
 
 export default OEM;

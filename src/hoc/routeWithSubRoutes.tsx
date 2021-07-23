@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import AppUtil from '@share/Utils/AppUtil';
 import {memoized} from "@gaopeng123/utils";
+import loadable from '@loadable/component';
 
 // A special wrapper for <Route> that knows how to
 // handle "sub"-routes by passing them in a `routes`
@@ -17,7 +18,7 @@ export const RouteWithChildrenSubRoutes = (route: any) => {
 		key={AppUtil.uuid()}
 		path={route.path}
 		exact={!!route.exact}
-		component={React.lazy(() => import(`../${route.component}`))}
+		component={loadable(() => import(`../${route.component}`))}
 	/>
 };
 
@@ -72,6 +73,7 @@ export const RouteWithModuleRoutes = (props: any) => {
 	return (
 		<React.Suspense fallback={<div>loading...</div>}>
 			{
+				// router ? <RouteWithChildrenSubRoutes {...router}/> : null
 				router ? <RouteWithChildrenSubRoutes {...router}/> : null
 			}
 		</React.Suspense>
