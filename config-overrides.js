@@ -71,7 +71,7 @@ module.exports = override(
 				loader: 'file-loader'
 			});
 		} else {
-			// 允许访问外部的值
+			// 允许访问外部的值 主要就是访问mock服务
 			config.resolve.plugins = config.resolve.plugins.filter(plugin => !(plugin instanceof ModuleScopePlugin));
 		}
 		return config

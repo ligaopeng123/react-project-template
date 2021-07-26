@@ -14,8 +14,8 @@ import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
 import RightLayout from '../RightLayout/index';
 import useOEM from "@/hooks/useOEM";
-import styles from './styles.module.less';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
+import './styles.less';
 
 /**
  * 创建icon图标
@@ -89,7 +89,7 @@ const BasicLayout = (props: any) => {
 				// menu={{request: loadMenus, defaultOpenAll: true}}
 				menuItemRender={({path, icon, name}: MenuDataItem, defaultDom) => {
 					// 渲染菜单项
-					return (<div className={styles.layoutMenuItem} onClick={() => {
+					return (<div className={`layoutMenuItem`} onClick={() => {
 						setPathname(path as string);
 					}}>
 						{createIcon(icon as string)}
