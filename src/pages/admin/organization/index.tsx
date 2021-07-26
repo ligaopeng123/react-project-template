@@ -7,21 +7,20 @@
  *
  *@date 2020/9/14
  *
- *@版权所有：
  */
 
-import React, {useState} from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom';
-import BasicContents from '../../../components/Contents/BasicContents';
+import BasicContents from '@components/Contents/BasicContents';
 import './styles.scss';
 
 
 const Organization = (props: any) => {
-    return (
-        <BasicContents>
-            组织表
-        </BasicContents>
-    )
+	return (
+		<BasicContents>
+			组织表
+		</BasicContents>
+	)
 }
 
 

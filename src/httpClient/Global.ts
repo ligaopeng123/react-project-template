@@ -1,8 +1,6 @@
-enum GLOBALCONFIG {
-	USER = 'user', // 保存用戶信息字段
-	USERlocalStorage = 'customize-user',
-	MENUS = 'menus', // 菜單信息
-	OEM = 'OEM' // 定制化信息
+enum Global {
+	user = 'customize-user',
+	oem = 'customize-oem' // 定制化信息
 }
 
 /**
@@ -19,7 +17,7 @@ export const getToken = () => {
  * @returns {any}
  */
 export const getUSERlocalStorage = () => {
-	return JSON.parse(localStorage.getItem(GLOBALCONFIG.USERlocalStorage) || '{}');
+	return JSON.parse(localStorage.getItem(Global.user) || '{}');
 }
 
 /**
@@ -50,8 +48,7 @@ export const getIsibleMenus = (menus: any = []) => {
  * @param value
  */
 export const setUSERlocalStorage = (value: any) => {
-	localStorage.setItem(GLOBALCONFIG.USERlocalStorage, JSON.stringify(value));
+	localStorage.setItem(Global.user, JSON.stringify(value));
 };
 
-
-export default GLOBALCONFIG;
+export default Global;

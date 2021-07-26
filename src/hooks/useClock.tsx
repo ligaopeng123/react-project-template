@@ -10,7 +10,7 @@
  *@版权所有：
  */
 import React, {useEffect, useState} from 'react';
-import AppUtil from "../share/Utils/AppUtil";
+import AppUtil from "@share/Utils/AppUtil";
 
 const useClock = (props: any) => {
 	const [clock, setClock] = useState<string>('');

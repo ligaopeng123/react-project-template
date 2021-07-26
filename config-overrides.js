@@ -19,13 +19,14 @@ module.exports = override(
 		"@": path.resolve(__dirname, "./src"),
 		"@img": path.resolve(__dirname, "./public/*"),
 		"@assets": path.resolve(__dirname, "./src/assets/*"),
+		"@components": path.resolve(__dirname, "./src/components"),
+		"@hoc": path.resolve(__dirname, "./src/hoc"),
+		"@hooks": path.resolve(__dirname, "./src/hooks"),
+		"@httpClient": path.resolve(__dirname, "./src/httpClient"),
+		"@pages": path.resolve(__dirname, "./src/pages"),
 		"@share": path.resolve(__dirname, "./src/share"),
 		"@store": path.resolve(__dirname, "./src/store"),
-		"@router": path.resolve(__dirname, "./src/router"),
-		"@pages": path.resolve(__dirname, "./src/pages"),
 		"@mocks": path.resolve(__dirname, "../mocks"),
-		"@hooks": path.resolve(__dirname, "./src/hooks"),
-		"@components": path.resolve(__dirname, "./src/components"),
 	}),
 	// 处理antd样式问题
 	fixBabelImports("import", {

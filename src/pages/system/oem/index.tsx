@@ -11,17 +11,15 @@
  */
 
 import React from 'react';
-import BasicContents from "../../../components/Contents/BasicContents";
+import BasicContents from "@components/Contents/BasicContents";
 
 const OemConfig: React.FC<{}> = (props: any) => {
-    return (
-        <React.Fragment>
-            <BasicContents>
-              OEM模块
-            </BasicContents>
-        </React.Fragment>)
+	return (
+		<React.Fragment>
+			<BasicContents>
+				OEM模块
+			</BasicContents>
+		</React.Fragment>)
 }
 
 export default OemConfig;
-
-

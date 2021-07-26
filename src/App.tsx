@@ -9,8 +9,9 @@ import {
 } from 'react-router-dom';
 import BasicLayout from './layouts/BasicLayout';
 import UserLayout from './layouts/UserLayout';
-import {BrowserHistory} from '@share/HttpClient/Apollo_Client';
 import OEM, {oemData} from "@store/OEM";
+import unregister from "@httpClient/Intercept";
+import {BrowserHistory} from "@httpClient/toLogin";
 import './styles/ant.less';
 
 const App: React.FC<any> = (props: any) => {
@@ -18,7 +19,11 @@ const App: React.FC<any> = (props: any) => {
 	useEffect(() => {
 		oemData().then((res: any) => {
 			setOem(res.data);
-		})
+		});
+		return () => {
+			// 卸载拦截器
+			unregister();
+		}
 	}, []);
 	// 从上到下匹配
 	return (

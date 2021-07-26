@@ -11,29 +11,29 @@
             "@assets/*": [
                 "scr/assets/*"
             ],
+            "@components/*": [
+                "src/components/*"
+            ],
+            "@hooks/*": [
+                "src/hooks/*"
+            ],
+            "@hoc/*": [
+                "src/hoc/*"
+            ],
+            "@httpClient/*": [
+                "src/httpClient/*"
+            ],
+            "@pages/*": [
+                "src/pages/*"
+            ],
             "@share/*": [
                 "src/share/*"
             ],
             "@store/*": [
                 "src/store/*"
             ],
-            "@router/*": [
-                "src/router/*"
-            ],
-            "@admin/*": [
-                "src/router/admin/*"
-            ],
             "@mocks/*": [
                 "../mocks/*"
-            ],
-            "@pages/*": [
-                "src/pages/*"
-            ],
-            "@components/*": [
-                "src/components/*"
-            ],
-            "@hooks/*": [
-                "src/hooks/*"
             ]
         }
     }

@@ -46,6 +46,9 @@ const BasicLayout = (props: any) => {
 	 * OEM数据
 	 */
 	const menusLogo = useOEM('menusLogo');
+	/**
+	 * 项目名称
+	 */
 	const menusName = useOEM('menusName');
 	
 	/**
@@ -80,7 +83,7 @@ const BasicLayout = (props: any) => {
 				logo={menusLogo}
 				title={menusName}
 				route={{routes: router, path: "/"}}
-				postMenuData={(menuData: MenuDataItem) => {
+				postMenuData={(menuData: any) => {
 					return menuData;
 				}}
 				// menu={{request: loadMenus, defaultOpenAll: true}}

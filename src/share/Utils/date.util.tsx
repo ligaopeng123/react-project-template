@@ -1,4 +1,4 @@
-class _DateUtil {
+export default class DateUtil {
     /**
      * 获取当前时间对象
      * @param longTypeDate
@@ -299,7 +299,3 @@ class _DateUtil {
         return this.hourMilliseconds() * 24;
     }
 }
-
-const DateUtil: any = _DateUtil;
-
-export default DateUtil;

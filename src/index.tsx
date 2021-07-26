@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {RecoilRoot} from 'recoil'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import DynamicLoadScript from './components/DynamicLoadScript/index';
-import GlobalStaticFile from './globalStaticFile';
+import HeadersJS from './headersJS';
+import {DynamicLoadScript} from "@gaopeng123/hoc";
 import './index.scss';
 
 /**
@@ -14,7 +14,7 @@ import './index.scss';
 function LoadScript(onLoad: any) {
 	ReactDOM.render(
 		<React.StrictMode>
-			<DynamicLoadScript url={GlobalStaticFile} onLoad={onLoad}/>
+			<DynamicLoadScript url={HeadersJS} onLoad={onLoad}/>
 		</React.StrictMode>,
 		document.getElementById('root')
 	)
@@ -33,15 +33,14 @@ async function LoadApp() {
 
 /**
  * 启动前处理
- * 1 判断用户是否是登录状态
- * 2 请求菜单信息
+ * 将外部依赖 加载到header上
  * @returns {Promise<void>}
  */
 async function startUp() {
 	LoadScript(async () => {
 		LoadApp();
 	});
-};
+}
 
 startUp();
 

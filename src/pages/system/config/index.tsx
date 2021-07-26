@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import BasicContents from '../../../components/Contents/BasicContents';
+import React from 'react';
+import BasicContents from '@components/Contents/BasicContents';
 
 
 const SystemConfig = (props: any)=> {
@@ -10,7 +10,6 @@ const SystemConfig = (props: any)=> {
             </div>
         </BasicContents>
     );
-}
-
+};
 
 export default SystemConfig;

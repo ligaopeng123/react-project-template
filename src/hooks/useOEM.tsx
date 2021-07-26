@@ -37,7 +37,7 @@ const defaultConfig = {
 };
 
 const useOEM = (key: string) => {
-	const [oem, setOem] = useState<string>('');
+	const [oem, setOem] = useState<any>('');
 	const config = useRecoilValue(OEM);
 	useEffect(() => {
 		const allConfig: any = Object.assign({}, defaultConfig, config);

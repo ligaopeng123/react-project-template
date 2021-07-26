@@ -11,16 +11,16 @@
  */
 
 
-import React, {useState} from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom';
-import BasicContents from '../../../components/Contents/BasicContents';
+import BasicContents from '@components/Contents/BasicContents';
 
 const RouterAdminMenus: React.FC<{}> = (props: any) => {
-    return (
-        <BasicContents>
-           菜单表
-        </BasicContents>
-    )
+	return (
+		<BasicContents>
+			菜单表
+		</BasicContents>
+	)
 };
 
 export default withRouter(RouterAdminMenus)

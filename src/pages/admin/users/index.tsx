@@ -12,7 +12,7 @@
 
 import React, {useState, useRef} from 'react';
 import {withRouter} from 'react-router-dom';
-import BasicContents from '../../../components/Contents/BasicContents';
+import BasicContents from '@components/Contents/BasicContents';
 
 
 const RouterAdminUsers: React.FC<{}> = (props: any) => {
@@ -24,7 +24,6 @@ const RouterAdminUsers: React.FC<{}> = (props: any) => {
         </React.Fragment>
     )
 }
-
 
 export default withRouter(RouterAdminUsers);
 
