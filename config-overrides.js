@@ -45,10 +45,13 @@ module.exports = override(
 			module: true,
 			javascriptEnabled: true,
 			localIdentName: '[local]--[hash:base64:5]',
-			modifyVars: getThemeVariables({
-				dark: false, // 开启暗黑模式
-				compact: false, // 开启紧凑模式
-			}),
+			modifyVars: {
+				...getThemeVariables({
+					dark: false, // 开启暗黑模式
+					compact: false, // 开启紧凑模式
+				}),
+				// 此处定义主题，也可直接在ant.less中定义
+			},
 		}
 	}),
 	// 处理scss和less互相使用
