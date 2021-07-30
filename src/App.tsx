@@ -22,7 +22,7 @@ const App: React.FC<any> = (props: any) => {
 		});
 		return () => {
 			// 卸载拦截器
-			unregister();
+			// unregister();
 		}
 	}, []);
 	// 从上到下匹配

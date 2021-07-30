@@ -2,18 +2,14 @@
  * 布局管理
  */
 import React, {useState, createElement, useEffect} from 'react';
-import {
-	Switch,
-	Link,
-	withRouter
-} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import ProLayout from '@ant-design/pro-layout';
-import RouteWithModuleRoutes from '@/hoc/routeWithSubRoutes';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
 import RightLayout from '../RightLayout/index';
 import useOEM from "@/hooks/useOEM";
+import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 import './styles.less';
 
@@ -118,10 +114,10 @@ const BasicLayout = (props: any) => {
 				}}
 				rightContentRender={() => (<RightLayout/>)}
 			>
-				<RouteWithModuleRoutes routers={router} pathname={pathname}/>
+				<RouteWithModuleRoutes routers={router}/>
 			</ProLayout>
 			<BackUp/>
 		</React.Fragment>
 	);
 };
-export default withRouter(BasicLayout)
+export default withRouter(BasicLayout);
