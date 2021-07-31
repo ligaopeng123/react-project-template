@@ -1,29 +1,37 @@
 // 主目录结构
-import React, {useEffect} from 'react';
-import {useRecoilState} from "recoil";
+import React, {useEffect, useState} from 'react';
+import {useRecoilState, useRecoilValue} from "recoil";
 import {
 	// BrowserRouter as Router, // 不再使用BrowserRouter  因为要在外部进行路由跳转 此处直接使用Router
 	Router,
 	Switch,
 	Route,
+	RouteComponentProps,
+	Redirect
 } from 'react-router-dom';
 import BasicLayout from './layouts/BasicLayout';
 import UserLayout from './layouts/UserLayout';
 import OEM, {oemData} from "@store/OEM";
-import unregister from "@httpClient/Intercept";
+import {unregisterFetch} from "@httpClient/Intercept";
 import {BrowserHistory} from "@httpClient/toLogin";
+import CurrentUser from "@store/CurrentUser";
+import {isEmptyObject} from "@gaopeng123/utils";
 import './styles/ant.less';
 
-const App: React.FC<any> = (props: any) => {
+const App: React.FC<RouteComponentProps> = (props) => {
 	const [oem, setOem] = useRecoilState(OEM);
+	const currentUser = useRecoilValue(CurrentUser);
+	/**
+	 * 检查是否登录过
+	 */
+	const notLogged = isEmptyObject(currentUser);
+	
 	useEffect(() => {
 		oemData().then((res: any) => {
 			setOem(res.data);
 		});
-		return () => {
-			// 卸载拦截器
-			// unregister();
-		}
+		// 卸载拦截器
+		return unregisterFetch;
 	}, []);
 	// 从上到下匹配
 	return (
@@ -39,6 +47,7 @@ const App: React.FC<any> = (props: any) => {
 				{/*业务业务*/}
 				<Route exact path="*">
 					<BasicLayout/>
+					<Redirect to={notLogged ? '/login' : '/'}/>
 				</Route>
 			</Switch>
 		</Router>

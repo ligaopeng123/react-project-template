@@ -34,3 +34,10 @@ const Intercept: any = {
 };
 
 export default Intercept;
+
+/**
+ * 卸载fetch拦截器
+ */
+export const unregisterFetch = () => {
+	Intercept();
+};

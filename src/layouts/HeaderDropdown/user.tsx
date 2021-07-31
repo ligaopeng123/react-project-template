@@ -3,30 +3,30 @@ import {withRouter} from 'react-router-dom';
 import {Avatar, Menu, Spin, Drawer} from 'antd';
 import {LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
 import HeaderDropdown from './index';
+import {useRecoilState} from "recoil";
+import CurrentUser, {CurrentUserState} from "@store/CurrentUser";
 import styles from '../RightLayout/index.module.less';
 
+
 const UserDropdown: React.FC<{}> = (props: any) => {
-	
+	/**
+	 * 设置是否可见
+	 */
 	const [visible, setVisible] = useState(false);
-	
-	const currentUser = {
-		avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
-		name: 'test'
-	};
+	/**
+	 * 用户信息
+	 */
+	const [currentUser, setCurrentUser]: CurrentUserState = useRecoilState(CurrentUser);
 	
 	const menu: any = null;
 	
 	const onMenuClick = (event: any) => {
 		const {key} = event;
 		if (key === 'logout') {
-			// dispatch({
-			//     type: GLOBALCONFIG.USER,
-			//     value: {}
-			// });
-			// dispatch({
-			//     type: GLOBALCONFIG.MENUS,
-			//     value: {}
-			// });
+			/**
+			 * 将保存的用户信息释放
+			 */
+			setCurrentUser({});
 			props.history.replace({
 				pathname: '/login',
 			});
@@ -64,8 +64,8 @@ const UserDropdown: React.FC<{}> = (props: any) => {
 	return currentUser && currentUser.name ? (
 		<HeaderDropdown overlay={menuHeaderDropdown}>
             <span className={`${styles.action} ${styles.account}`}>
-              <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar"/>
-              <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+              <Avatar size="small" className={styles.avatar} src={currentUser?.avatar || '/avatar.png'} alt="avatar"/>
+              <span className={`${styles.name} anticon`}>{currentUser?.name}</span>
                 <Drawer
 	                zIndex={10000}
 	                width={500}
