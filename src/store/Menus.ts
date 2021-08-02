@@ -1,10 +1,10 @@
 /**********************************************************************
  *
- * @模块名称: OEM
+ * @模块名称: Menus
  *
- * @模块用途: OEM
+ * @模块用途: Menus
  *
- * @date: 2021/7/23 9:55
+ * @date: 2021/8/2 18:42
  *
  * @版权所有: pgli
  *
@@ -12,15 +12,12 @@
 import {atom} from 'recoil';
 import {loadLocalJson} from "@httpClient/Global";
 
-const OEM = atom({
-	key: 'oem',
-	default: {},
+const Menus = atom({
+	key: 'menus',
+	default: [],
 });
-
 /**
- * 获取OEM配置信息
+ * 获取json数据
  */
-
-export const oemData = loadLocalJson('/json/OEM.json');
-
-export default OEM;
+export const menuData = loadLocalJson('/json/menus.json');
+export default Menus;

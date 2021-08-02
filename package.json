@@ -11,7 +11,6 @@
         "@ant-design/pro-form": "^1.18.3",
         "@ant-design/pro-layout": "^6.15.3",
         "@ant-design/pro-table": "^2.30.8",
-        "@apollo/client": "^3.1.4",
         "@gaopeng123/hoc": "^0.1.7",
         "@gaopeng123/login-module": "^0.1.5",
         "@gaopeng123/utils": "^0.1.9",
@@ -33,12 +32,8 @@
         "use-merge-value": "^1.0.2"
     },
     "scripts": {
-        "electron-start": "dotenv -e .env.electron electron .",
-        "electron-build": "electron-packager . chubao --platform=win32 --arch=x64 --icon=icon.ico --out=./out --asar --app-version=0.0.1",
-        "build-electron": "node ./lib/build.js && set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.electron react-app-rewired build",
         "start": "set PORT=9000 && dotenv -e .env react-app-rewired start",
         "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod react-app-rewired build",
-        "build:produce": "#!/usr/bin/env node --max_old_space_size=36000 && react-app-rewired build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -73,7 +68,6 @@
         "babel-plugin-import": "^1.13.3",
         "customize-cra": "^1.0.0",
         "dotenv-cli": "^4.0.0",
-        "electron": "^11.2.1",
         "fetch-mock": "^9.10.7",
         "http-proxy-middleware": "^1.0.6",
         "less-loader": "^6.1.0",

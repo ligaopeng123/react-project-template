@@ -11,6 +11,8 @@ import RightLayout from '../RightLayout/index';
 import useOEM from "@/hooks/useOEM";
 import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
+import {useRecoilValue} from "recoil";
+import Menus, {menuData} from "@store/Menus";
 import './styles.less';
 
 /**
@@ -22,11 +24,6 @@ const createIcon = (icon?: string): React.ReactNode | undefined => {
 	return i ? createElement(i, {
 		style: {fontSize: '16px'}
 	}) : i;
-};
-
-const loadMenus = async () => {
-	const res = await fetch('/json/menus.json');
-	return await res.clone().json()
 };
 
 const BasicLayout = (props: any) => {
@@ -61,15 +58,17 @@ const BasicLayout = (props: any) => {
 			});
 		}
 	};
+	
 	/**
 	 * 加载数据
 	 */
 	useEffect(() => {
-		loadMenus().then((menuData: MenuDataItem) => {
+		menuData.then((res: Array<any>) => {
+			const menuData = res[0];
 			setRouter(menuData as Array<any>);
 			redirect(menuData);
-		})
-	}, []);
+		});
+	}, [menuData]);
 	
 	return (
 		<React.Fragment>

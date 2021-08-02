@@ -4,20 +4,19 @@
  * @date 2021/1/10
  */
 
-import React from 'react';
-import {Switch} from 'react-router-dom';
-import {RouteWithSubRoutes} from "@/hoc/routeWithSubRoutes";
+import React, {useEffect, useState} from 'react';
+import {RouteWithModuleRoutes} from "@gaopeng123/hoc";
+import {menuData} from "@store/Menus";
 
 const ScreenLayout: React.FC<any> = (props: any) => {
-	const screenRouters: any[] = [];
+	const [screenRouters, setScreenRouters] = useState<Array<any>>([]);
+	useEffect(() => {
+		menuData.then(([menus]) => {
+			setScreenRouters(menus);
+		});
+	}, []);
 	return (
-		<Switch>
-			{screenRouters.map((route: any, i: number) => {
-				return (
-					<RouteWithSubRoutes key={`root-route-${i}`} {...route} />
-				)
-			})}
-		</Switch>
+		<RouteWithModuleRoutes routers={screenRouters}/>
 	)
 };
 

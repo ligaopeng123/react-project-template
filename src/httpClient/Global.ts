@@ -1,3 +1,5 @@
+import {asyncMemoized} from "@gaopeng123/utils";
+
 enum Global {
 	user = 'customize-user',
 	oem = 'customize-oem' // 定制化信息
@@ -50,5 +52,15 @@ export const getIsibleMenus = (menus: any = []) => {
 export const setCurrentUserToStorage = (value: any) => {
 	localStorage.setItem(Global.user, JSON.stringify(value));
 };
+/**
+ * 获取本地json数据
+ * @param path
+ */
+export const loadLocalJson = asyncMemoized(async (path: string) => {
+	const res = await fetch(path);
+	const json = await res.clone().json();
+	return json;
+});
+
 
 export default Global;
