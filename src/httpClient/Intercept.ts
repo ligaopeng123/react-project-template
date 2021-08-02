@@ -28,16 +28,8 @@ const Intercept: any = {
 	
 	responseError: function (error: Error) {
 		// Handle an fetch error
-		console.log(error)
 		return Promise.reject(error);
 	}
 };
 
 export default Intercept;
-
-/**
- * 卸载fetch拦截器
- */
-export const unregisterFetch = () => {
-	Intercept();
-};

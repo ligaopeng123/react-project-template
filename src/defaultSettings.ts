@@ -11,11 +11,10 @@ export default {
 		"locale": true,
 		"loading": false
 	},
-	"title": "可视化产品",
+	"title": "管理系统",
 	"pwa": false,
 	"iconfontUrl": "",
 	"splitMenus": false
 } as LayoutSettings & {
 	pwa: boolean;
 };
-

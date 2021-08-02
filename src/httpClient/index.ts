@@ -44,10 +44,18 @@ export const del: Fetch = (url, option) => {
 	return cetateFetch(url, Object.assign({method: 'DELETE'}, option));
 };
 
+/**
+ * 卸载fetch拦截器
+ */
+export const unregisterFetch = () => {
+	unregister();
+};
+
 export default {
 	get,
 	post,
 	put,
 	del,
-	unregister
-}
+	unregister,
+	unregisterFetch
+};
