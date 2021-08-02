@@ -1,5 +1,3 @@
-import {gql} from '@apollo/client';
-import {query} from '@httpClient/GraphqlClient';
 import {post} from '@/httpClient';
 
 export interface UserLoginParams {
@@ -21,15 +19,3 @@ export function login(params: UserLoginParams): Promise<UserInfo> {
 		body: params
 	});
 }
-
-const logInQuery = () => {
-	return query('', {
-		query: gql`
-            query User {
-                getUser {
-                    username,
-                    token
-                }
-            }`
-	})
-};

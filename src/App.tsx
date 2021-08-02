@@ -27,8 +27,8 @@ const App: React.FC<RouteComponentProps> = (props) => {
 	const notLogged = isEmptyObject(currentUser);
 	
 	useEffect(() => {
-		oemData().then((res: any) => {
-			setOem(res.data);
+		oemData.then((res: any) => {
+			setOem(res[0]?.data);
 		});
 		// 卸载拦截器
 		return unregisterFetch;
