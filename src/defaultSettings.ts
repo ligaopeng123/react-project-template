@@ -11,7 +11,7 @@ export default {
 		"locale": true,
 		"loading": false
 	},
-	"title": "管理系统",
+	"title": "<%= title %>",
 	"pwa": false,
 	"iconfontUrl": "",
 	"splitMenus": false

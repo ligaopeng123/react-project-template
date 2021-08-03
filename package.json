@@ -1,5 +1,5 @@
 {
-    "name": "react-project-template",
+    "name": "<%= name %>",
     "version": "0.1.2",
     "private": false,
     "main": "main.js",
