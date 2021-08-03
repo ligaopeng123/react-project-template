@@ -18,10 +18,10 @@ import OEM from "@/store/OEM";
 
 const defaultConfig = {
 	loginLogo: '/logo.svg', // 登录页logo
-	loginName: '可视化配置', // 登录页title
-	loginDesc: '基于数据动态配置可视化需求', // 登录页描述
+	loginName: '<%= title %>', // 登录页title
+	loginDesc: '项目描述信息', // 登录页描述
 	menusLogo: `logo.svg`, // 菜单上logo
-	menusName: `可视化产品`, // 菜单上logo
+	menusName: `<%= title %>`, // 菜单上logo
 	copyright: `${new Date().getFullYear()} 某某出品并提供技术支持`,
 	links: [{
 		key: 'cy-tech',
