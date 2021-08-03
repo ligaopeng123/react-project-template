@@ -18,7 +18,7 @@ import CurrentUser from "@store/CurrentUser";
 import {isEmptyObject} from "@gaopeng123/utils";
 import './styles/ant.less';
 
-const App: React.FC<RouteComponentProps> = (props) => {
+const App: React.FC<any> = (props) => {
 	const [oem, setOem] = useRecoilState(OEM);
 	const currentUser = useRecoilValue(CurrentUser);
 	/**

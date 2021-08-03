@@ -9,7 +9,7 @@ const {
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const {getThemeVariables} = require('antd/dist/theme');
 const path = require("path");
-const AntdScssThemePlugin = require("antd-scss-theme-plugin");
+// const AntdScssThemePlugin = require("antd-scss-theme-plugin");
 // 后去去掉map文件
 // process.env.GENERATE_SOURCEMAP = false
 
