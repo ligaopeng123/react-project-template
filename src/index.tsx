@@ -24,7 +24,7 @@ async function LoadApp() {
 	ReactDOM.render(
 		<React.StrictMode>
 			<RecoilRoot>
-				<App />
+				<App/>
 			</RecoilRoot>
 		</React.StrictMode>,
 		document.getElementById('root')
