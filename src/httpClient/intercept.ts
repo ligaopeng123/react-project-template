@@ -9,27 +9,33 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {Option} from "@httpClient/typing";
+import {Intercept, Option} from "@gaopeng123/fetch";
 
-const Intercept: any = {
+const intercept: Intercept = {
 	request: function (url: string, config: Option) {
 		// Modify the url or config here
+		console.log('request', config);
+		// config.headers.token = 'tttt';
 		return [url, config];
 	},
 	
 	requestError: function (error: Error) {
+		console.log('requestError');
 		return Promise.reject(error);
 	},
 	
-	response: function (response: Response) {
+	response: (response: Response): Promise<any> => {
 		// Modify the reponse object
-		return response;
+		return new Promise((resolve, reject) => {
+			resolve(response);
+		});
 	},
 	
 	responseError: function (error: Error) {
 		// Handle an fetch error
+		console.log('responseError');
 		return Promise.reject(error);
 	}
 };
 
-export default Intercept;
+export default intercept;

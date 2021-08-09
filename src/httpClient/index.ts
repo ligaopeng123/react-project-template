@@ -9,53 +9,12 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {Fetch} from "@httpClient/typing";
-import fetchIntercept from "fetch-intercept";
-import Intercept from "@httpClient/Intercept";
-// 拦截器
-const unregister = fetchIntercept.register(Intercept);
+import intercept from "@httpClient/intercept";
+import {register} from '@gaopeng123/fetch';
 
-const cetateFetch: Fetch = (url, option) => {
-	return fetch(url, Object.assign({
-		headers: {
-			'content-type': 'application/json',
-			// 此处或者拦截器中可添加业务token
-		},
-	}, option)).then((res: Response) => {
-		return res.clone().json();
-	}).catch((error: Error) => {
-		console.error(`${url}请求出错，`, error)
-	});
-};
+export {get as get} from "@gaopeng123/fetch";
+export {post as post} from "@gaopeng123/fetch";
+export {put as put} from "@gaopeng123/fetch";
+export {del as del} from "@gaopeng123/fetch";
 
-export const get: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: 'GET'}, option));
-};
-
-export const post: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: 'POST'}, option));
-};
-
-export const put: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: 'PUT'}, option));
-};
-
-export const del: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: 'DELETE'}, option));
-};
-
-/**
- * 卸载fetch拦截器
- */
-export const unregisterFetch = () => {
-	unregister();
-};
-
-export default {
-	get,
-	post,
-	put,
-	del,
-	unregister,
-	unregisterFetch
-};
+export const unregisterFetch = register(intercept);
