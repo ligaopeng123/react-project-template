@@ -7,10 +7,14 @@
 
 ### 目录文件
 
+src/json/menus.json: 定义路由模块相关
+
+src/json/OEM.json: 定义OEM相关
+
 src/pages：业务代码放在该目录下，路由规则会基于该目录匹配。
 
 src/headersJS：在header中引入的外部js文件
 
-src/httpClient/Intercept：定义拦截器
+src/httpClient/intercept：定义拦截器
 
 src/defaultSettings：定义布局相关
