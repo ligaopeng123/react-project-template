@@ -9,7 +9,7 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import intercept from "@httpClient/Intercept";
+import intercept from "@httpClient/intercept";
 import {register} from '@gaopeng123/fetch';
 
 export {get as get} from "@gaopeng123/fetch";

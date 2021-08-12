@@ -13,7 +13,7 @@ import {ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat} from '@apollo
 import {onError} from '@apollo/client/link/error';
 import {memoized} from "@gaopeng123/utils";
 import toLogin from "@httpClient/toLogin";
-import Intercept from "@httpClient/Intercept";
+import intercept from "@httpClient/intercept";
 import {GraphqlClientEvents} from "@httpClient/typing";
 
 /**
@@ -42,7 +42,8 @@ const logoutLink = onError(({networkError}: any) => {
  */
 const authMiddleware = new ApolloLink((operation, forward) => {
 	// add the authorization to the headers
-	operation.setContext(Intercept.request('', {} as any)[1]);
+	// @ts-ignore
+	operation.setContext(intercept.request('', {}) as any);
 	return forward(operation);
 });
 

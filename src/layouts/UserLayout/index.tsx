@@ -44,7 +44,8 @@ const UserLayout: React.FC<any> = (props: any) => {
 		const afterSubmit = (submitData: AfterSubmit) => {
 			const {response, data, token} = submitData?.detail;
 			if (response.status === 200) {
-				setCurrentUser({name: data?.username});
+				// 此处token可能在submitData?.detail上 也可能在response上，看业务接口实现
+				setCurrentUser({name: data?.username, token: token});
 				onFinish();
 			} else {
 				message.error(response?.message)

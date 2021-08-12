@@ -12,7 +12,7 @@
         "@ant-design/pro-layout": "^6.15.3",
         "@ant-design/pro-table": "^2.30.8",
         "@apollo/client": "^3.4.1",
-        "@gaopeng123/fetch": "^0.1.4",
+        "@gaopeng123/fetch": "^0.1.7",
         "@gaopeng123/hoc": "^0.1.7",
         "@gaopeng123/login-module": "^0.1.5",
         "@gaopeng123/utils": "^0.1.14",
