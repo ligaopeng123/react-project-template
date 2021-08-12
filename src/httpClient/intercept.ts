@@ -10,12 +10,16 @@
  *
  **********************************************************************/
 import {Intercept, Option} from "@gaopeng123/fetch";
+import {getToken} from "@httpClient/Global";
 
 const intercept: Intercept = {
 	request: function (url: string, config: Option) {
 		// Modify the url or config here
 		console.log('request', config);
-		// config.headers.token = 'tttt';
+		if (config?.headers) {
+			// 此处定义token 获取其他
+			config.headers.token = getToken();
+		}
 		return [url, config];
 	},
 	
