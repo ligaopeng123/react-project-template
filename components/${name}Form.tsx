@@ -48,7 +48,8 @@ const <%= name %>From: React.FC<FormForTableProps> = forwardRef((props, ref) => 
 		<React.Fragment>
 			<Form
 				ref={formRef}
-				name="FormForTable"
+				preserve={false}
+				name="<%= name %>Form"
 				labelCol={{span: 8}}
 				wrapperCol={{span: 16}}
 				initialValues={formData}

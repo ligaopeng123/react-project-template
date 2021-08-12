@@ -13,8 +13,7 @@
 import React, {useEffect, useRef} from 'react';
 import {Button, Tooltip, Input, Popconfirm} from 'antd';
 import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOutlined} from '@ant-design/icons';
-import type {ProColumns, ActionType} from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {StoreEnum, TableListItem, TableProps} from "../typing";
 import {list} from "../api";
 import styles from '../styles.module.less';
@@ -137,6 +136,9 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 			valueType: 'option',
 			className: styles.editColumn,
 			render: (text, record, index) => [
+				<Button type="link" size={`small`} onClick={() => edit(record)}>
+					编辑
+				</Button>,
 				<Popconfirm
 					title="请确认是否删除！"
 					onConfirm={() => del(record)}
@@ -146,10 +148,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 					<Button danger type="text" size={`small`}>
 						删除
 					</Button>
-				</Popconfirm>,
-				<Button type="link" size={`small`} onClick={() => edit(record)}>
-					编辑
-				</Button>
+				</Popconfirm>
 			],
 		},
 	];

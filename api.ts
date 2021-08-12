@@ -23,6 +23,7 @@ export const list = async () => {
 			name: 'AppName',
 			containers: Math.floor(Math.random() * 20),
 			creator: creators[Math.floor(Math.random() * creators.length)],
+			// @ts-ignore
 			status: valueEnum[Math.floor(Math.random() * 10) % 4],
 			createdAt: Date.now() - Math.floor(Math.random() * 2000),
 			money: Math.floor(Math.random() * 2000) * i,

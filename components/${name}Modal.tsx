@@ -16,6 +16,11 @@ import <%= name %>From from "./<%= name %>Form";
 import {Modal} from 'antd';
 import {uuid} from "@gaopeng123/utils";
 
+enum Title {
+	add = '新增',
+	edit = '编辑'
+}
+
 const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	const {state, dispatch} = props;
 	const [isModalVisible, setIsModalVisible] = useState(false);
@@ -34,7 +39,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	
 	useEffect(() => {
 		if (state[StoreEnum.add]) {
-			setTitle(`新建`);
+			setTitle(Title.add);
 			setFormData(state[StoreEnum.add]);
 			setIsModalVisible(true);
 		}
@@ -42,7 +47,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	
 	useEffect(() => {
 		if (state[StoreEnum.edit]) {
-			setTitle(`编辑`);
+			setTitle(Title.edit);
 			setFormData(state[StoreEnum.edit]);
 			setIsModalVisible(true);
 		}
@@ -51,6 +56,12 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	const handleOk = () => {
 		formRef?.current?.values().then((data: any) => {
 			console.log(data);
+			// 新增处理
+			if (title === Title.add) {
+			
+			} else {
+			
+			}
 			setIsModalVisible(false);
 			refresh();
 		});
@@ -62,7 +73,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	
 	return (
 		<React.Fragment>
-			<Modal title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+			<Modal destroyOnClose title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
 				<<%= name %>From ref={formRef} formData={formData}/>
 			</Modal>
 		</React.Fragment>
