@@ -6,9 +6,9 @@
 - recoil
 
 ### 目录文件
-src/json/menus.json: 定义路由模块相关
+public/json/menus.json: 定义路由模块相关
 
-src/json/OEM.json: 定义OEM相关
+public/json/OEM.json: 定义OEM相关
 
 src/pages：业务代码放在该目录下，路由规则会基于该目录匹配。
 
