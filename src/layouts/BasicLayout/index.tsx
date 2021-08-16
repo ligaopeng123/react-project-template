@@ -11,8 +11,7 @@ import RightLayout from '../RightLayout/index';
 import useOEM from "@/hooks/useOEM";
 import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
-import {useRecoilValue} from "recoil";
-import Menus, {menuData} from "@store/Menus";
+import {menuData} from "@store/Menus";
 import './styles.less';
 
 /**
@@ -87,9 +86,9 @@ const BasicLayout = (props: any) => {
 					return (<div className={`layoutMenuItem`} onClick={() => {
 						setPathname(path as string);
 					}}>
-						{createIcon(icon as string)}
 						<Link to={path as string}>
-							{name}
+							{createIcon(icon as string)}
+							<span className={`ant-pro-menu-item-title`}>{name}</span>
 						</Link>
 					</div>);
 				}}
