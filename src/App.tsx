@@ -6,7 +6,6 @@ import {
 	Router,
 	Switch,
 	Route,
-	RouteComponentProps,
 	Redirect
 } from 'react-router-dom';
 import BasicLayout from './layouts/BasicLayout';
