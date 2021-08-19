@@ -59,7 +59,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	useEffect(() => {
 		if (state[StoreEnum.refresh]) {
 			// @ts-ignore
-			ref.current.reload();
+			ref.current?.reload();
 		}
 	}, [state[StoreEnum.refresh]]);
 	
