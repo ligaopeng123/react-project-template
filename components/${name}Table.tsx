@@ -49,6 +49,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	const edit = (row: any) => {
 		dispatch({
 			type: StoreEnum.edit,
+			// 避免编辑 不触发
 			value: Object.assign({_: uuid()}, row)
 		});
 	};
