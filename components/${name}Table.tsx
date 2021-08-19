@@ -15,6 +15,7 @@ import {Button, Tooltip, Input, Popconfirm} from 'antd';
 import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOutlined} from '@ant-design/icons';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {StoreEnum, TableListItem, TableProps} from "../typing";
+import {uuid} from '@gaopeng123/utils';
 import {list} from "../api";
 import styles from '../styles.module.less';
 
@@ -48,7 +49,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	const edit = (row: any) => {
 		dispatch({
 			type: StoreEnum.edit,
-			value: row
+			value: Object.assign({_: uuid()}, row)
 		});
 	};
 	/**
