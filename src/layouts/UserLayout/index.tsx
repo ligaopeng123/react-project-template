@@ -44,7 +44,8 @@ const UserLayout: React.FC<any> = (props: any) => {
 		const afterSubmit = (submitData: AfterSubmit) => {
 			const {response, data, token} = submitData?.detail;
 			if (response.status === 200) {
-				setCurrentUser({name: data?.username});
+				// 此处token可能在submitData?.detail上 也可能在response上，看业务接口实现
+				setCurrentUser({name: data?.username, token: token});
 				onFinish();
 			} else {
 				message.error(response?.message)
@@ -54,15 +55,17 @@ const UserLayout: React.FC<any> = (props: any) => {
 		 * TODO submit 此段代码可删除 提交时处理 原则上用于登录调试
 		 * @param data
 		 */
-		const submitError = (data: SubmitError) => {
+		const submit = (data: SubmitError) => {
 			setCurrentUser({name: data?.detail?.data?.username});
 			onFinish();
 		};
-		form.current.addEventListener('submitError', submitError);
+		form.current.addEventListener('submit', submit);
+		form.current.addEventListener('submitError', submit);
 		form.current.addEventListener('afterSubmit', afterSubmit);
 		return () => {
-			form?.current?.removeEventListener('submitError', submitError);
+			form?.current?.removeEventListener('submitError', submit);
 			form?.current?.removeEventListener('afterSubmit', afterSubmit);
+			form?.current?.removeEventListener('submit', afterSubmit);
 		}
 	}, []);
 	
@@ -70,7 +73,7 @@ const UserLayout: React.FC<any> = (props: any) => {
 		<React.Fragment>
 			<login-module
 				ref={form}
-				url="http://***"
+				url="/login"
 				method="POST"
 				user="username"
 				password="password"
