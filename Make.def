@@ -17,8 +17,8 @@ DOCKER_BUILD_OPTIONS += --pull
 
 DOWNLOAD_WITH_MD5_CHECK := \
    function download { \
-      local url=$${1:?}; \
-      local pkg=$${2:-$$(basename "$$url")}; \
+      local url=<%= imagesMD5Url %>; \
+      local pkg=<%= imagesMD5Pkg %>; \
       ! grep $$pkg md5sum.txt | md5sum --check || return 0; \
       curl -fsSL "$$url" > $$pkg && grep $$pkg md5sum.txt | md5sum --check; \
    }; \
