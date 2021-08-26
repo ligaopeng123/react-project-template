@@ -55,15 +55,17 @@ const UserLayout: React.FC<any> = (props: any) => {
 		 * TODO submit 此段代码可删除 提交时处理 原则上用于登录调试
 		 * @param data
 		 */
-		const submitError = (data: SubmitError) => {
+		const submit = (data: SubmitError) => {
 			setCurrentUser({name: data?.detail?.data?.username});
 			onFinish();
 		};
-		form.current.addEventListener('submitError', submitError);
+		form.current.addEventListener('submit', submit);
+		form.current.addEventListener('submitError', submit);
 		form.current.addEventListener('afterSubmit', afterSubmit);
 		return () => {
-			form?.current?.removeEventListener('submitError', submitError);
+			form?.current?.removeEventListener('submitError', submit);
 			form?.current?.removeEventListener('afterSubmit', afterSubmit);
+			form?.current?.removeEventListener('submit', afterSubmit);
 		}
 	}, []);
 	
@@ -71,7 +73,7 @@ const UserLayout: React.FC<any> = (props: any) => {
 		<React.Fragment>
 			<login-module
 				ref={form}
-				url="http://***"
+				url="/login"
 				method="POST"
 				user="username"
 				password="password"

@@ -9,11 +9,12 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {Intercept, Option} from "@gaopeng123/fetch";
+import {FetchInterceptorResponse, Intercept, Options} from "@gaopeng123/fetch";
 import {getToken} from "@httpClient/Global";
+import toLogin from "@httpClient/toLogin";
 
 const intercept: Intercept = {
-	request: function (url: string, config: Option) {
+	request: function (url: string, config: Options) {
 		// Modify the url or config here
 		console.log('request', config);
 		if (config?.headers) {
@@ -28,8 +29,15 @@ const intercept: Intercept = {
 		return Promise.reject(error);
 	},
 	
-	response: (response: Response): Promise<any> => {
+	response: async (response: FetchInterceptorResponse): Promise<any> => {
 		// Modify the reponse object
+		// 此处返回
+		if (response.request.options.responseType) {
+			// 此处拿到返回值信息 服务端权限异常 有可能放到业务接口中处理状态
+			const res = await response.clone()[response.request.options.responseType]();
+			// 鉴权失败后退出登录
+			// if (res) toLogin();
+		}
 		return new Promise((resolve, reject) => {
 			resolve(response);
 		});
