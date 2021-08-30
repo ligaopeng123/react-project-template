@@ -15,147 +15,9 @@ import {
 } from './AppUtilHelper';
 import BaseColorHelper from './base-color-helper';
 import {ColorConversionHelper} from './color-conversion.helper';
-import {isEmptyObject} from "@gaopeng123/utils";
+import {isArray, isEmptyObject, isObject, isString, isUndefined} from "@gaopeng123/utils";
 
 export default class AppUtil {
-	private static config: any = {};
-	
-	/**
-	 * 初始化静态函数
-	 */
-	public static init(config = {}) {
-		this.config = config;
-	}
-	
-	/**
-	 *@函数名称：
-	 *@参数：
-	 *@作用：利用对象原型的toString方法来判断数据类型
-	 *@date 2018/5/17
-	 */
-	private static readonly toString = Object.prototype.toString;
-	/**
-	 *@函数名称：
-	 *@参数：
-	 *@作用：IE6 使用toString判断是Object
-	 *@date 2018/5/17
-	 */
-	public static isObject = function (val: any) {
-		return this.toString.call(null) === '[object Object]'
-			? val !== null &&
-			val !== undefined &&
-			this.toString.call(val) === '[object Object]' &&
-			val.ownerDocument === undefined // 排除dom
-			: this.toString.call(val) === '[object Object]';
-	};
-	/**
-	 * 判断是否是数组
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isArray = function (val: any) {
-		return 'isArray' in Array
-			? Array.isArray(val)
-			: this.toString.call(val) === '[object Array]';
-	};
-	
-	/**
-	 *
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isString(val: any) {
-		return typeof val === 'string';
-	}
-	
-	/**
-	 *@函数名称：isUndefined
-	 *@参数：
-	 *@作用：判断是不是没有赋值
-	 *@date 2018/5/18
-	 */
-	public static isUndefined(val: any) {
-		return typeof val === 'undefined';
-	}
-	
-	/**
-	 * Safari 3.x 4.x type判断dom返回的是function
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isFunction = function (val: any) {
-		return typeof document !== 'undefined' &&
-		typeof document.getElementsByTagName('body') === 'function'
-			? !!val && toString.call(val) === '[object Function]'
-			: !!val && typeof val === 'function';
-	};
-	/**
-	 * 判断是否为布尔值
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isBoolean = function (val: any) {
-		return typeof val === 'boolean';
-	};
-	
-	/**
-	 * 判断是否为Promise
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isPromise(obj: any) {
-		return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
-		
-	}
-	
-	/**
-	 * 判断数字
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isNumber = function (val: any) {
-		return typeof val === 'number' && isFinite(val);
-	};
-	/**
-	 * 判断dom  nodeType 属性可返回节点的类型。
-	 * @param val
-	 * @returns {boolean}
-	 元素类型     节点类型
-	 元素element       1
-	 属性attr          2
-	 文本text          3
-	 注释comments      8
-	 文档document      9
-	 */
-	public static isElement = function (val: any) {
-		return val ? val.nodeType === 1 : false;
-	};
-	/**
-	 * 字符串为“”，数组为空数组
-	 * @param val
-	 */
-	public static isEmpty = function (val: any) {
-		return (
-			val === undefined ||
-			val === null ||
-			val === '' ||
-			(this.isArray(val) && val.length === 0)
-		);
-	};
-	
-	/**
-	 * @函数名称：isEqualByObj
-	 * @作用：判断俩个对象是否相等
-	 * @param {Object} k
-	 * @param {Object} l
-	 * @returns {boolean}
-	 * @return：obj
-	 * @date 2018/9/18
-	 */
-	public static isEqualByObj = function (k: object, l: object) {
-		return JSON.stringify(k) === JSON.stringify(l);
-	}
-	
 	/**
 	 * 判断浏览器类型 出自ext.js
 	 * @param regex
@@ -346,51 +208,6 @@ export default class AppUtil {
 	}
 	
 	/**
-	 * 深层属性拷贝
-	 * @param object
-	 * @param config
-	 * @param defaults
-	 */
-	public static apply = function (object: any, config: any, defaults: any = '') {
-		// ES6 使用新方法实现该功能
-		if (Object.assign) {
-			if (defaults) {
-				Object.assign(object, config, defaults);
-			} else {
-				Object.assign(object, config);
-			}
-			return object;
-		}
-		const enumerables = [
-			'valueOf',
-			'toLocaleString',
-			'toString',
-			'constructor',
-		];
-		// 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable',
-		if (defaults) {
-			this.apply(object, defaults);
-		}
-		if (object && config && this.isObject(config)) {
-			let i, j, k;
-			for (i in config) {
-				object[i] = config[i];
-			}
-			/**
-			 * 处理可枚举属性的copy
-			 */
-			if (enumerables) {
-				for (j = enumerables.length; j--;) {
-					k = enumerables[j];
-					if (config.hasOwnProperty(k)) {
-						object[k] = config[k];
-					}
-				}
-			}
-		}
-	};
-	
-	/**
 	 * 全属性copy
 	 * @param targetConfig
 	 * @param sourceConfig
@@ -399,11 +216,11 @@ export default class AppUtil {
 		if (sourceConfig2) {
 			this.depthAssign(targetConfig, sourceConfig2);
 		}
-		if (targetConfig && sourceConfig && this.isObject(sourceConfig)) {
+		if (targetConfig && sourceConfig && isObject(sourceConfig)) {
 			// 默认5层递归 如果层次过多 请传递层次次数
 			this.copyObjectProperties(targetConfig, sourceConfig, level);
 		} else {
-			this.apply(targetConfig || {}, sourceConfig || {});
+			Object.assign(targetConfig || {}, sourceConfig || {});
 		}
 	};
 	
@@ -415,17 +232,17 @@ export default class AppUtil {
 	public static copyObjectProperties(targetConfig: any, sourceConfig: any, index: number): void {
 		index -= 1;
 		if (index < 0) return;
-		if (this.isObject(sourceConfig)) {
+		if (isObject(sourceConfig)) {
 			for (let key in sourceConfig) {
-				if (this.isObject(sourceConfig[key])) {
-					targetConfig[key] = this.isUndefined(targetConfig[key]) ? {} : targetConfig[key];
+				if (isObject(sourceConfig[key])) {
+					targetConfig[key] = isUndefined(targetConfig[key]) ? {} : targetConfig[key];
 					this.copyObjectProperties(targetConfig[key], sourceConfig[key], index);
 				} else {
-					targetConfig[key] = this.isUndefined(sourceConfig[key]) ? targetConfig[key] : sourceConfig[key];
+					targetConfig[key] = isUndefined(sourceConfig[key]) ? targetConfig[key] : sourceConfig[key];
 				}
 			}
 		} else {
-			targetConfig = this.isUndefined(sourceConfig) ? targetConfig : sourceConfig;
+			targetConfig = isUndefined(sourceConfig) ? targetConfig : sourceConfig;
 		}
 	}
 	
@@ -694,10 +511,10 @@ export default class AppUtil {
 	 * 对象和string互转方法
 	 */
 	public static objToStr(val: any, direction = true) {
-		if (direction && this.isObject(val)) {
+		if (direction && isObject(val)) {
 			return JSON.stringify(val);
 		} else if (!direction &&
-			(val === '{}' || (this.isString(val) && ((val.startsWith('{') && val.endsWith('}')) || (val.startsWith('[') && val.endsWith(']')))))) {
+			(val === '{}' || (isString(val) && ((val.startsWith('{') && val.endsWith('}')) || (val.startsWith('[') && val.endsWith(']')))))) {
 			return (new Function('return ' + val))();
 		} else {
 			return val;
@@ -740,13 +557,13 @@ export default class AppUtil {
 	public static arrayToObject(arr: any[], key?: any) {
 		if (!arr)
 			throw new Error(`arrayToObject must provide array param!`);
-		if (!this.isArray(arr))
+		if (!isArray(arr))
 			throw new Error(`arrayToObject provided arr param must be array type!`);
 		
 		if (!key)
 			key = 'key';
 		
-		if (!this.isString(key))
+		if (!isString(key))
 			throw new Error(`arrayToObject provided key param must be string type!`);
 		
 		let acptObj: any = {};
@@ -764,7 +581,7 @@ export default class AppUtil {
 	public static objectToArray(obj: any) {
 		if (!obj)
 			throw new Error(`objectToArray must provide object param!`);
-		if (!this.isObject(obj))
+		if (!isObject(obj))
 			throw new Error(`objectToArray provided obj param must be object type!`);
 		
 		let acptArr = [];
@@ -782,7 +599,7 @@ export default class AppUtil {
 	public static objectToTwoDimensionalArray(obj: any) {
 		if (!obj)
 			throw new Error(`objectToArray must provide object param!`);
-		if (!this.isObject(obj))
+		if (!isObject(obj))
 			throw new Error(`objectToArray provided obj param must be object type!`);
 		
 		let acptArr = [];
@@ -834,7 +651,7 @@ export default class AppUtil {
 	 * @returns {boolean}
 	 */
 	public static checkObjHasSingleAttr(obj: any, attr: string) {
-		if (this.isUndefined(obj[attr]) || obj[attr] === null) {
+		if (isUndefined(obj[attr]) || obj[attr] === null) {
 			return false;
 		}
 		return true;
@@ -866,7 +683,7 @@ export default class AppUtil {
 	 * @returns {any}
 	 */
 	public static getGraphQlTableData(data: any): any {
-		if (this.isUndefined(data)) {
+		if (isUndefined(data)) {
 			return data;
 		}
 		if (data.__typename) {
