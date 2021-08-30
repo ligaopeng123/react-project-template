@@ -1,44 +1,6 @@
 //  import * as CryptoJS from 'crypto-js';
 // import { saveAs } from 'file-saver';
-
-/**
- * 字符串格式化函数
- * @returns {string}
- */
 // @ts-nocheck
-String.prototype.format = function (args: any) {
-	let result: any = this;
-	if (arguments.length > 0) {
-		if (arguments.length == 1 && typeof (args) == 'object') {
-			for (let key in args) {
-				if (args[key] != undefined) {
-					const reg: any = new RegExp('({' + key + '})', 'g');
-					result = result.replace(reg, args[key]);
-				}
-			}
-		} else {
-			for (let i = 0; i < arguments.length; i++) {
-				if (arguments[i] != undefined) {
-					const reg: any = new RegExp('({)' + i + '(})', 'g');
-					result = result.replace(reg, arguments[i]);
-				}
-			}
-		}
-	}
-	return result;
-};
-
-/**
- * 获取随机数
- * @param min
- * @param max
- * @returns {number}
- */
-export function getRandomNumFun(min: number, max: number) {
-	min = min || 0;
-	max = max || 10;
-	return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 /**
  * 通过自定义标签获取所有的dom集合
@@ -446,56 +408,6 @@ export function downloadZipImage(imgArr: any[], imgKey = '', downloadName = 'img
 }
 
 
-/**
- * 获取文本宽度
- * @param {string} text
- */
-export function getTextWidth(ctx: any, text: string, size: number = 12, font: string = 'Arial') {
-	if (!ctx) {
-		ctx = document.createElement('canvas').getContext('2d');
-	}
-	ctx.font = size + 'px ' + font; // sans-serif
-	return ctx.measureText(text).width;
-}
-
-/**
- * 字符串截取...显示
- * @param {string} text
- * @param {number} width
- * @param {number} size
- * @param {string} font
- * @returns {string}
- */
-export function ellipsps(text: string = '', width: number, size: number = 12, font: string = 'Arial',) {
-	const w = getTextWidth(null, text, size, font);
-	if (w < width) return text;
-	let ellipspsText = '';
-	const len = text.length;
-	for (let i = 0; i < len; i++) {
-		ellipspsText += text[i];
-		if (getTextWidth(null, ellipspsText + '...', size, font) > width) return ellipspsText + '...';
-	}
-	return text;
-}
-
-/**
- * 去掉url的参数
- * @param url
- * @returns {any}
- */
-export function removeUlrParames(url: string) {
-	if (url) {
-		url = url.replace(/#/, '')
-		if (url.indexOf('?') !== -1) {
-			return url.substring(0, url.indexOf('?'));
-		}
-	}
-	return url;
-}
-
-export function isEmptyObject(val: any) {
-	return JSON.stringify(val) === '{}';
-}
 
 
 /**

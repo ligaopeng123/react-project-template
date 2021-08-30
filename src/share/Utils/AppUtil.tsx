@@ -10,15 +10,12 @@
  */
 
 import {
-	getRandomNumFun,
 	getWindowSize,
 	removeTip,
-	ellipsps,
-	isEmptyObject,
 } from './AppUtilHelper';
 import BaseColorHelper from './base-color-helper';
 import {ColorConversionHelper} from './color-conversion.helper';
-import DateUtil from './date.util';
+import {isEmptyObject} from "@gaopeng123/utils";
 
 export default class AppUtil {
 	private static config: any = {};
@@ -145,12 +142,6 @@ export default class AppUtil {
 			(this.isArray(val) && val.length === 0)
 		);
 	};
-	/**
-	 * 判断是不是空对象
-	 * @param val
-	 * @returns {boolean}
-	 */
-	public static isEmptyObject = isEmptyObject;
 	
 	/**
 	 * @函数名称：isEqualByObj
@@ -439,315 +430,6 @@ export default class AppUtil {
 	}
 	
 	/**
-	 * 浅层属性拷贝
-	 * @param object
-	 * @param config
-	 * @returns {*}
-	 */
-	public static applyIf = function (object: any, config: any) {
-		let property;
-		if (object) {
-			for (property in config) {
-				if (object[property] === undefined) {
-					object[property] = config[property];
-				}
-			}
-		}
-		return object;
-	};
-	
-	/**
-	 *  或者数据的length  主要是用来获取对象的  数组和字符串类型也支持，一般不会用到
-	 * @param d  传入参数
-	 * @returns {number}
-	 */
-	public static getLength = function (d: any) {
-		if (this.isObject(d)) {
-			return Object.keys(d).length;
-		} else if (this.isArray(d) || this.isString(d)) {
-			return d.length;
-		}
-		return 0;
-	}
-	
-	private static readonly __DAYTIME: number = 86400000;
-	private static readonly __DATAMAP: any = {
-		day: 1,
-		week: 7,
-		month: DateUtil.getNumberDaysByMonth(),
-		year: 365,
-	};
-	
-	/**
-	 * 获取当前时间
-	 * @param type
-	 * @param {boolean} natural 为false  默认取自然月 自然周时间戳
-	 * @returns {{startTime: number; endTime: number}}
-	 */
-	public static getTimeStamp = function (type: any = null, natural: boolean = false) {
-		if (!natural) {
-			return this.getRecentTimeStamp(type);
-		}
-		const thisDayZore: any = this.thisDayZore();
-		const thisDayEarly: any = this.thisDayEarly();
-		let num = 1;
-		if (this.isNumber(type)) {
-			num = type;
-		} else if (this.isString(type)) {
-			const data = this.__DATAMAP;
-			num = data[type] || num;
-		}
-		return {
-			// (Number(thisDayZore) - num  * 86400) * 1000, 1502640000000 ---- 1502726400000
-			startTime: num === 1 ? thisDayZore : thisDayZore - (num - 1) * this.__DAYTIME,
-			endTime: thisDayEarly, // (Number(thisDayZore) + 86400) * 1000
-		}
-	}
-	
-	/**
-	 * 获取自然维度时间戳
-	 * @param type
-	 * @returns {any}
-	 */
-	public static getRecentTimeStamp = function (type: string) {
-		let time: any;
-		switch (type) {
-			case 'week':
-				time = this.getWeekDayTime();
-				break;
-			case 'month':
-				time = this.getMonthDayTime();
-				break;
-			case 'quarter':
-				time = this.getQuarterDayTime();
-				break;
-			case 'year':
-				time = this.getYearDayTime();
-				break;
-			case 'yesterday':
-				const {startTime, endTime} = this.getTimeStamp('day', true);
-				time = {
-					startTime: startTime - this.__DAYTIME,
-					endTime: endTime - this.__DAYTIME
-				}
-				break;
-			default:
-				time = this.getTimeStamp('day', true);
-				break;
-		}
-		return time;
-	}
-	
-	/**
-	 * 获取当月的时间
-	 * @returns {{startTime: number; endTime: number}}
-	 */
-	public static getMonthDayTime() {
-		// 当前时间的星期几
-		const _month = new Date().getDate();
-		return this.__getMonthOrWeelDayTime(this.__DATAMAP['month'], _month);
-	}
-	
-	/**
-	 * 获取月和周的时间维度
-	 * @param days
-	 * @param nowDay
-	 * @returns {{startTime: number; endTime: number}}
-	 */
-	private static __getMonthOrWeelDayTime(days: number, nowDay: number) {
-		const _days = days;
-		const _nowDay = nowDay;
-		const thisDayZore = this.thisDayZore();
-		const thisDayEarly = this.thisDayEarly();
-		return {
-			startTime: thisDayZore - (_nowDay - 1) * this.__DAYTIME,
-			endTime: thisDayEarly + (_days - _nowDay) * this.__DAYTIME,
-		}
-	}
-	
-	/**
-	 * 获取周的时间
-	 * @returns {{startTime: number; endTime: number}}
-	 */
-	public static getWeekDayTime() {
-		// 当前时间的星期几
-		const _week = new Date().getDay() || 7;
-		return this.__getMonthOrWeelDayTime(this.__DATAMAP['week'], new Date().getDay() || 7);
-	}
-	
-	/**
-	 * 获取自然年的时间戳
-	 * @returns {{startTime: number; endTime: number}}
-	 */
-	public static getYearDayTime() {
-		const firstDay = new Date().setFullYear(new Date().getFullYear(), 0, 1);
-		const lastDay = new Date().setFullYear(new Date().getFullYear(), 11, 31);
-		return {
-			startTime: Number(new Date(firstDay).setHours(0, 0, 0, 0)),
-			endTime: Number(new Date(lastDay).setHours(23, 59, 59, 999)),
-		}
-	}
-	
-	/**
-	 * 获取自然季度的时间戳
-	 * @returns {{startTime: number; endTime: number}}
-	 */
-	public static getQuarterDayTime() {
-		const firstDay = DateUtil.getStartQuarterDay();
-		const lastDay = DateUtil.getEndQuarterDay();
-		return {
-			startTime: Number(new Date(firstDay).setHours(0, 0, 0, 0)),
-			endTime: Number(new Date(lastDay).setHours(23, 59, 59, 999)),
-		}
-	}
-	
-	/**
-	 * 获取今天开始时间
-	 * @returns {number}
-	 */
-	public static thisDayZore() {
-		return Number(new Date(new Date().setHours(0, 0, 0, 0)));
-	}
-	
-	/**
-	 * 今天结束时间
-	 * @returns {number}
-	 */
-	public static thisDayEarly() {
-		return Number(new Date(new Date().setHours(23, 59, 59, 999)));
-	}
-	
-	/**
-	 * 根据时间戳获取是什么取件的时间
-	 * @param timeStampObj
-	 * @returns {any}
-	 */
-	public static getDayTypeByTimeStamp(timeStampObj: any) {
-		const startTime = timeStampObj.startTime;
-		const endTime = timeStampObj.endTime;
-		const keyArr = Object.keys(this.__DATAMAP);
-		const len = keyArr.length;
-		for (let i = len - 1; i >= 0; i--) {
-			const key: string = keyArr[i];
-			if ((endTime - startTime + 1) / this.__DAYTIME === this.__DATAMAP[key]) {
-				return key;
-			}
-		}
-	}
-	
-	/**
-	 *@函数名称：timestampToTime
-	 *@参数：timestamp时间戳 type时间格式 yyyy-MM-dd yyyy-MM-dd HH:mm:ss HH:mm:ssv  HH
-	 *@作用：将时间戳转换成日期
-	 *@date 2018/5/21
-	 */
-	public static timestampToTime(timestamp: any, type: any = 'yyyy-MM-dd HH:mm:ss') {
-		// DateUtil.dateFormat(timestamp)
-		//
-		const t = Number(timestamp);
-		timestamp = new Date(isNaN(t) ? timestamp : Number(timestamp));
-		const time: any = {
-			'yyyy': 'dateFormatY',
-			'yyyy-MM-dd': 'dateFormat',
-			'yyyy-MM-dd HH:mm:ss': 'datetimeFormat_1',
-			'HH:mm:ss': 'dateFormatHMS',
-			'HH': 'dateFormatH',
-			'MM-dd': 'dateFormat_MM_dd',
-			'MM': 'dateFormat_MM',
-			'dd': 'dateFormat_dd',
-			'ss': 'dateFormatS',
-		};
-		if (this.isString(type) && time[type]) {
-			return (DateUtil as any)[time[type]](timestamp);
-		} else {
-			return (DateUtil as any)[time['yyyy-MM-dd HH:mm:ss']](timestamp);
-		}
-	}
-	
-	/**
-	 * 将时间类型转换成时间戳
-	 * @param {string | any[]} timestamp
-	 * @returns {any}
-	 */
-	public static timeTotimestampArray(timestamp: any) {
-		if (this.isArray(timestamp)) {
-			return timestamp.map((item: string) => {
-				return this.getTimestampByDate(item);
-			});
-		} else {
-			return [this.getTimestampByDate(timestamp)];
-		}
-	}
-	
-	/**
-	 *  根据日志获取时间戳
-	 * @param data   日期格式
-	 * @returns {number}
-	 */
-	public static getTimestampByDate(data: any) {
-		return new Date(data).getTime();
-	}
-	
-	/**
-	 * 根据时间戳获取日志
-	 * @param timestamp
-	 * @returns {any}
-	 */
-	public static getDateByTimestamp(timestamp: any) {
-		if (this.isArray(timestamp)) {
-			const len = timestamp.length;
-			const date = [];
-			for (let i = 0; i < len; i++) {
-				date.push(new Date(timestamp[i]));
-			}
-			return date;
-		}
-		return new Date(timestamp);
-	}
-	
-	/**
-	 * 根据组件获取的对象获取开始和结束时间
-	 * @param {any[]} data
-	 */
-	public static getTimeStampByPicker(data: any[], startKey = 'startTime', endKey = 'endTime') {
-		const param: any = {};
-		if (this.isArray(data) && data.length) {
-			param[startKey] = this.getTimestampByDate(data[0]);
-			param[endKey] = this.getTimestampByDate(data[1]);
-		}
-		return param;
-	}
-	
-	/**
-	 *@函数名称：toThousands
-	 *@参数：value Number  num,小数点精确到几位数
-	 *@作用：将数字格式化成千位符号进行展示
-	 *@date 2018/5/22
-	 */
-	public static toThousands(val: string | number, digit: number = 0) {
-		const value = Number(val);
-		const num: any = (value || 0).toFixed(digit || 0).toString();
-		let result = '';
-		let integer: any = num.match(/(\S*)\./);
-		let decimal = '';
-		// 将字符串从'.'断开 用点之前的数据做分割处理，最后再加上小数点后面的数字
-		if (integer) {
-			integer = integer[1];
-			decimal = num.match(/\.(\S*)/)[0]; // 拿到小数点后面的数字
-		} else {
-			integer = num;
-		}
-		while (integer.length > 3) {
-			result = ',' + integer.slice(-3) + result;
-			integer = integer.slice(0, integer.length - 3);
-		}
-		if (integer) {
-			result = integer + result;
-		}
-		return result + decimal;
-	}
-	
-	/**
 	 * @param key 模块传入key值，获取相当应的颜色，方便统一管理
 	 * @returns {any}
 	 */
@@ -850,63 +532,7 @@ export default class AppUtil {
 		return obj;
 	}
 	
-	/**
-	 * copy 解除引用
-	 * @param val
-	 * @returns {*}
-	 */
-	public static clone = function (val: any) {
-		return JSON.parse(JSON.stringify(val));
-	};
-	private static cloneAllObject = function (val: any) {
-		const obj: any = {};
-		let item: any;
-		for (const k in val) {
-			item = val[k];
-			if (this.isArray(item)) {
-				// 判断数组
-				obj[k] = this.cloneAllArray(item);
-			} else if (this.isObject(item)) {
-				obj[k] = this.cloneAllItems(item);
-			} else {
-				obj[k] = item;
-			}
-		}
-		return item;
-	};
-	private static cloneAllArray = function (val: any) {
-		/**
-		 * 解除数组关系的引用
-		 * @type {Array.<T>}
-		 */
-		const arr = Array.prototype.slice.call(val),
-			newArr = [],
-			len = arr.length;
-		for (let i = 0; i < len; i++) {
-			const item: any = arr[i];
-			if (this.isArray(item)) {
-				newArr.push(this.cloneAllArray(item));
-			} else if (this.isObject(item)) {
-				newArr.push(this.cloneAllObject(item));
-			} else {
-				newArr.push(val);
-			}
-		}
-		return newArr;
-	};
-	/**
-	 * 深度copy
-	 * @param val
-	 * @returns {*}
-	 */
-	public static cloneAllItems = function (val: any) {
-		if (this.isArray(val)) {
-			this.cloneAllArray(val);
-		} else if (this.isObject(val)) {
-			this.cloneAllObject(val);
-		}
-		return val;
-	};
+	
 	/**
 	 * 判断是否支持排序，主要是判断浏览器差异的
 	 * @type {boolean}
@@ -968,34 +594,6 @@ export default class AppUtil {
 			}(_array, _sortFn);
 	}
 	
-	/**
-	 * 获取自动登录字段缓存
-	 * @returns {boolean}
-	 */
-	public static getAutoLogin() {
-		const autoLogin = localStorage.getItem('autoLogin');
-		if (autoLogin === 'true') {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	/**
-	 * 设置自动登录本地缓存
-	 * @param val
-	 */
-	public static setAutoLogin(val: any) {
-		localStorage.setItem('autoLogin', val);
-	}
-	
-	/**
-	 * 获取指定范围内的随机数，主要用于deom数据模拟
-	 * @param min
-	 * @param max
-	 * @returns {number}
-	 */
-	public static getRandomNum = getRandomNumFun;
 	
 	/**
 	 *  清理所有的tip信息
@@ -1050,78 +648,6 @@ export default class AppUtil {
 	
 	
 	/**
-	 * 钻取维度参数
-	 * @param cfg
-	 * @param params
-	 * @returns {any}
-	 */
-	public static getMapInterfaceParams(cfg: any, params: any) {
-		if (cfg && cfg.name) {
-			params['factory'] = cfg.name;
-		} else {
-			delete params['factory'];
-		}
-		return params;
-	}
-	
-	/**
-	 * 过滤地图数据  只取4级数据
-	 * @param data   地图数据
-	 * @param level  过滤级别
-	 * @param {string} customKey  自定义添加key值
-	 * @returns {Array}
-	 */
-	public static getMapLevelData(data: any, level: any = 4, customKey: string = '', customVal?: any, _num: boolean = false) {
-		const len = data.length;
-		const arr = [];
-		let num: any = 0;
-		for (let i = 0; i < len; i++) {
-			const item = data[i];
-			if (item && (parseInt(item.level, 10) === parseInt(level, 10))) {
-				if (customKey && customVal) item[customKey] = customVal;
-				arr.push(item);
-				num += item.value;
-			}
-		}
-		if (_num) return num;
-		return arr;
-	}
-	
-	/**
-	 * 获取地图左上角的信息 过滤一级区域数据
-	 * @param data
-	 * @returns {number}
-	 */
-	public static getAmount(data: any, level: number = 4) {
-		let amount = 0;
-		if (data) {
-			const len = data.length;
-			for (let i = 0; i < len; i++) {
-				const item = data[i];
-				if (item && (parseInt(item.level, 10) === level)) {
-					amount += item.value;
-				}
-			}
-		}
-		return amount;
-	}
-	
-	/**
-	 * 获取健康指数
-	 * @param data
-	 * @returns {string}
-	 */
-	public static getHealthVvalue(data: any) {
-		// 标准规则为 将100 - 当前的风险值去计算
-		const _risk = 100 - this.getAmount(data['risks']) || 0;
-		// const _risk = getRandomNumFun(80, 85);
-		return {
-			value: Number(_risk.toFixed()),
-			level: this.getRiskLevel(_risk).healthLevle
-		};
-	}
-	
-	/**
 	 * 根据最大值 统一阈值划分 0-60 60-80 80-90 90-100 4个层次 其他量级 依次规则进行划分
 	 * @param maxVal
 	 * @returns {{firstThreshold: number; secondThreshold: number; thirdThreshold: number}}
@@ -1135,72 +661,6 @@ export default class AppUtil {
 			secondThreshold,
 			thirdThreshold,
 		}
-	}
-	
-	/**
-	 * 获取健康及风险信息  扩展 展示图例信息
-	 * @param {number} val  数据
-	 * @param levelThreshold  区域值  可一次获取当前的阈值  否则需要传入最大值
-	 * @param {number} maxVal  最大值
-	 * @returns {{riskLevel: string; healthLevle: string; level: number; legend: string; color: (any | string)}}
-	 */
-	public static getRiskLevel(val: number, levelThreshold: any = null, maxVal: number = 100) {
-		// 风险值
-		let riskLevel: string;
-		// 健康值
-		let healthLevle: string;
-		// 图例值
-		let legend: string;
-		// 级别值
-		let level = 0;
-		// 风险值
-		const _risk = val;
-		// 3个级别
-		const {firstThreshold, secondThreshold, thirdThreshold} = levelThreshold || this.getLevelThresholdByMaxValue(maxVal);
-		
-		if (_risk >= firstThreshold) {
-			riskLevel = '危急';
-			healthLevle = '健康';
-			level = 4;
-			legend = `>= ${firstThreshold}`;
-		} else if (firstThreshold > _risk && _risk >= secondThreshold) {
-			riskLevel = '高危';
-			healthLevle = '良好';
-			level = 3;
-			legend = `${secondThreshold} - ${firstThreshold}`;
-		} else if (secondThreshold > _risk && _risk >= thirdThreshold) {
-			riskLevel = '中危';
-			healthLevle = '一般';
-			level = 2;
-			legend = `${thirdThreshold} - ${secondThreshold}`;
-		} else {
-			riskLevel = '低危';
-			healthLevle = '较差';
-			level = 1;
-			legend = `0 - ${thirdThreshold}`;
-		}
-		
-		return {
-			riskLevel,
-			healthLevle,
-			level,
-			legend,
-			color: this.getColor(riskLevel)
-		}
-	}
-	
-	/**
-	 *  根据最大值 计算legend
-	 * @param maxVal
-	 */
-	public static getRiskLegend(maxVal: number) {
-		const threshold = this.getLevelThresholdByMaxValue(maxVal);
-		const {firstThreshold, secondThreshold, thirdThreshold} = threshold;
-		const first = this.getRiskLevel(firstThreshold, threshold, maxVal);
-		const second = this.getRiskLevel(secondThreshold, threshold, maxVal);
-		const third = this.getRiskLevel(thirdThreshold, threshold, maxVal);
-		const fourth = this.getRiskLevel(0, threshold, maxVal);
-		return [first, second, third, fourth];
 	}
 	
 	/**
@@ -1227,23 +687,6 @@ export default class AppUtil {
 				}
 			}
 		}, 200);
-	}
-	
-	/**
-	 * 获取元素的某个属性的值
-	 * @param element  dom
-	 * @param attr    样式名称
-	 * @returns {any}
-	 */
-	public static getStyle(el: any, attr: any) {
-		if (el) {
-			if (el.currentStyle) {
-				return el.currentStyle[attr];
-			} else {
-				const computed = getComputedStyle(el, null);
-				return computed[attr] || computed.getPropertyValue ? computed.getPropertyValue(attr) : '';
-			}
-		}
 	}
 	
 	
@@ -1288,198 +731,6 @@ export default class AppUtil {
 		return this.strToObj(val);
 	}
 	
-	/**
-	 * 获取uuid方法 用于做唯一标识时使用
-	 * @param {number} len  id的长度  默认64位
-	 * @param {number} radix  数据基数你2 10 16等  默认62位全部正常字符
-	 * @returns {string}
-	 */
-	public static uuid(len: number = 64, radix: number = 62) {
-		const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-		const uuid = [];
-		let i;
-		radix = radix || chars.length;
-		
-		if (len) {
-			// Compact form
-			for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-		} else {
-			// rfc4122, version 4 form
-			let r;
-			
-			// rfc4122 requires these characters
-			uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-			uuid[14] = '4';
-			
-			// Fill in random data. At i==19 set the high bits of clock sequence as
-			// per rfc4122, sec. 4.1.5
-			for (i = 0; i < 36; i++) {
-				if (!uuid[i]) {
-					r = 0 | Math.random() * 16;
-					uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-				}
-			}
-		}
-		return uuid.join('');
-	}
-	
-	/**
-	 *
-	 * @param text
-	 * @param font
-	 */
-	private static _canvas: any;
-	private static _ctx: any;
-	
-	public static measureText(text: string, font = '12px Microsoft YaHei') {
-		if (!this._canvas) this._canvas = document.createElement('canvas');
-		if (!this._ctx) this._ctx = this._canvas.getContext('2d');
-		this._ctx.font = font;
-		return this._ctx.measureText(text).width;
-	}
-	
-	/**
-	 * @param text  字符串
-	 * @param maxWidth 最大宽度
-	 */
-	public static setTextByWidth(text: string, maxWidth: number, font = '12px Microsoft YaHei') {
-		const _w = this.measureText(text, font);
-		if (maxWidth >= _w) return text;
-		let str = text;
-		while (this.measureText(str + '...', font) > maxWidth) {
-			str = str.substring(0, str.length - 1);
-		}
-		return str + '...';
-	}
-	
-	/**
-	 * 下载函数 文件需在服务端存在
-	 * @param url
-	 * @param {string} name
-	 */
-	public static download({url, name, blob, parmas}: any) {
-		if (!url && !blob) return new Error('url不合法');
-		const href = blob ? URL.createObjectURL(blob) : url + this.urlJointParmas(parmas);
-		const elt = document.createElement('a');
-		elt.setAttribute('href', href);
-		elt.setAttribute('download', name || 'default');
-		elt.style.display = 'none';
-		document.body.appendChild(elt);
-		elt.click();
-		document.body.removeChild(elt);
-		if (blob) URL.revokeObjectURL(blob);
-	}
-	
-	/**
-	 * 图片转换
-	 * @param canvas
-	 * @param type
-	 * @returns {string | *}
-	 */
-	public static canvasToUrl({canvas, type}: any): string {
-		return canvas.toDataURL(type || 'image/png');
-	}
-	
-	/**
-	 * 获取canvas  video 或者canvas
-	 * @returns {*}
-	 */
-	public static getCavnasByVideo(video: any): HTMLCanvasElement {
-		let videoDom: any;
-		if (this.isElement(video)) {
-			videoDom = video;
-		} else {
-			videoDom = document.getElementById(video);
-		}
-		
-		let canvas;
-		if (videoDom.tagName === 'VIDEO') {
-			canvas = document.createElement('canvas');
-			canvas.width = videoDom.offsetWidth;
-			canvas.height = videoDom.offsetHeight;
-			canvas.style.height = `${videoDom.offsetWidth}px`;
-			canvas.style.height = `${videoDom.offsetHeight}px`;
-		} else {
-			canvas = videoDom;
-		}
-		return canvas;
-	}
-	
-	/**
-	 * 截屏图片下载
-	 * @param {any} dom   截屏的dom对象
-	 * @param {any} name  图片名称
-	 * @param {any} type  图片类型
-	 */
-	public static dowmloadCameraPicture({dom, name, type}: any): void {
-		this.download({url: this.canvasToUrl({canvas: this.getCavnasByVideo(dom), type}), name})
-	}
-	
-	/**
-	 * 文档流下载函数 建议使用此方式进行下载 服务端不需要保存冗余文件
-	 * @param {any} url
-	 * @param {any} name
-	 * @param {any} params
-	 */
-	public static downloadStream({url, options, params}: any) {
-		fetch(url, Object.assign({responseType: 'blob'}, options)).then((res: any) => {
-			const blob = new Blob([res], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"});
-			this.download({blob: blob, name: options.name});
-		});
-	};
-	
-	/**
-	 * @params  需要拼接的参数
-	 *    拼接url地址参数
-	 */
-	public static urlJointParmas(parmas: any) {
-		let count = 1;
-		if (this.isObject(parmas)) {
-			let str = `?`;
-			for (let i in parmas) {
-				let concatSymbol = count > 1 ? '&' : '';
-				str += `${concatSymbol}${i}=${parmas[i]}`;
-				count++;
-			}
-			return str;
-		} else {
-			return '';
-		}
-	}
-	
-	/**
-	 * 获取正确的title的值
-	 * @param {string} title
-	 */
-	public static replaceTitle = function (title: string = '{0}', str: any[]) {
-		const t: any = title;
-		return t['format'](...str);
-	}
-	
-	// 字符串解决方法
-	public static ellipsps = ellipsps;
-	
-	/**
-	 * 验证数组是否有重复
-	 * @param {Array<any>} arr
-	 * @returns {boolean}
-	 */
-	public static isRepeat(arr: Array<any>, item: any = null): any {
-		if (item) {
-			const _arr: any[] = this.cloneAllItems(arr);
-			_arr.unshift(item);
-			return this.isRepeat(_arr);
-		}
-		const hash: any = {};
-		for (const i in arr) {
-			if (hash[arr[i]]) {
-				return true;
-			}
-			// 不存在该元素，则赋值为true，可以赋任意值，相应的修改if判断条件即可
-			hash[arr[i]] = true;
-		}
-		return false;
-	}
 	
 	/**
 	 * 根据指定key将 对象数组 转换成对象
@@ -1542,15 +793,6 @@ export default class AppUtil {
 	}
 	
 	/**
-	 * 处理数字千位分隔符
-	 * @param number
-	 * @returns {String}
-	 */
-	public static toThousandsSpy(num: number) {
-		return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-	}
-	
-	/**
 	 * 处理数字单位化读法
 	 * @param number
 	 * @returns {String}
@@ -1605,7 +847,7 @@ export default class AppUtil {
 	 * @returns {boolean}
 	 */
 	public static checkObjHasAttr(obj: any, attr: string) {
-		if (!obj || this.isEmptyObject(obj)) return false;
+		if (!obj || isEmptyObject(obj)) return false;
 		const attrs = attr.split('.');
 		const len = attrs.length;
 		let storey = obj;
@@ -1653,40 +895,5 @@ export default class AppUtil {
 			return dom;
 		}
 		return this.getParentDomToExpected(dom.parentNode || dom.parentElement, fn);
-	}
-	
-	/**
-	 * 根据URL获取传递的参数
-	 * @param url
-	 * @returns {{}}
-	 */
-	public static getQueryObjectByUrl = (url: string) => {
-		const _url = url === null ? window.location.href : url;
-		const search = _url.substring(_url.lastIndexOf('?') + 1);
-		const obj: any = {};
-		const reg = /([^?&=]+)=([^?&=]*)/g;
-		// [^?&=]+表示：除了？、&、=之外的一到多个字符
-		// [^?&=]*表示：除了？、&、=之外的0到多个字符（任意多个）
-		search.replace(reg, function (rs: any, $1, $2) {
-			const name = decodeURIComponent($1);
-			const val = String(decodeURIComponent($2));
-			obj[name] = val;
-			return rs;
-		});
-		return obj;
-	}
-	/**
-	 * 根据event 获取鼠标位置
-	 * @param event
-	 * @returns {any}
-	 */
-	public static mousePosition = (event: any) => {
-		if (event.pageX || event.pageY) {
-			return {x: event.pageX, y: event.pageY};
-		}
-		return {
-			x: event.clientX + document.body.scrollLeft - document.body.clientLeft,
-			y: event.clientY + document.body.scrollTop - document.body.clientTop
-		};
 	}
 }

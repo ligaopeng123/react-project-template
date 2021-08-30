@@ -1,7 +1,7 @@
 [
     {
         "id": 30,
-        "name": "首页",
+        "name": "大屏1",
         "path": "/home",
         "component": "pages/home",
         "exact": true,
@@ -10,58 +10,10 @@
     },
     {
         "id": 47,
-        "name": "用户管理",
-        "path": "/auth",
+        "name": "大屏2",
+        "path": "/home2",
+        "component": "pages/home2",
         "exact": true,
-        "icon": null,
-        "children": [
-            {
-                "id": 48,
-                "name": "菜单管理",
-                "path": "/auth/menus",
-                "component": "pages/admin/menus",
-                "exact": true,
-                "auth": null,
-                "icon": null
-            },
-            {
-                "id": 49,
-                "name": "组织管理",
-                "path": "/auth/organization",
-                "component": "pages/admin/organization",
-                "auth": null,
-                "exact": true
-            },
-            {
-                "id": 50,
-                "name": "用户管理",
-                "path": "/auth/users",
-                "component": "pages/admin/users",
-                "auth": null
-            }
-        ]
-    },
-    {
-        "id": 51,
-        "name": "系统管理",
-        "path": "/system",
-        "auth": null,
-        "icon": null,
-        "children": [
-            {
-                "id": 52,
-                "name": "OEM配置",
-                "path": "/system/oem",
-                "component": "pages/system/oem",
-                "auth": null
-            },
-            {
-                "id": 53,
-                "name": "系统配置",
-                "path": "/system/config",
-                "component": "pages/system/config",
-                "auth": null
-            }
-        ]
+        "icon": null
     }
 ]

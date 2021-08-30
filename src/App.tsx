@@ -1,15 +1,14 @@
 // 主目录结构
 import React, {useEffect} from 'react';
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import {
 	// BrowserRouter as Router, // 不再使用BrowserRouter  因为要在外部进行路由跳转 此处直接使用Router
 	Router,
 	Switch,
 	Route,
-	RouteComponentProps,
 	Redirect
 } from 'react-router-dom';
-import BasicLayout from './layouts/BasicLayout';
+import ScreenLayout from "@/layouts/ScreenLayout";
 import UserLayout from './layouts/UserLayout';
 import OEM, {oemData} from "@store/OEM";
 import {BrowserHistory} from "@httpClient/toLogin";
@@ -18,8 +17,9 @@ import CurrentUser from "@store/CurrentUser";
 import {isEmptyObject} from "@gaopeng123/utils";
 import './styles/ant.less';
 
+
 const App: React.FC<any> = (props) => {
-	const [oem, setOem] = useRecoilState(OEM);
+	const setOem = useSetRecoilState(OEM);
 	const currentUser = useRecoilValue(CurrentUser);
 	/**
 	 * 检查是否登录过
@@ -46,7 +46,7 @@ const App: React.FC<any> = (props) => {
 				</Route>
 				{/*业务业务*/}
 				<Route exact path="*">
-					<BasicLayout/>
+					<ScreenLayout/>
 					{
 						notLogged ? <Redirect to={'/login'}/> : null
 					}

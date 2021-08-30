@@ -1,38 +1,46 @@
 // tree 样式覆盖
 @import "@/styles/index.scss";
 
+.background {
+    background: linear-gradient(rgba(0, 20, 132, 0) 0%, rgb(1, 0, 66) 100%)
+}
+
 // 内部样式设定 主要是为了给子组件设置100% 高度
 .contents {
-  .ant-card {
-    height: 100%;
-    .ant-card-body {
-      height: calc(100% - 38px);
-      .ant-row {
-        height: calc(100% - 38px);
-      }
+    .ant-card {
+        height: 100%;
+
+        .ant-card-body {
+            height: calc(100% - 38px);
+
+            .ant-row {
+                height: calc(100% - 38px);
+            }
+        }
     }
-  }
 }
 
 .layout {
-  @extend .contents;
+    @extend .contents;
 }
 
 .center-layout {
-  @extend .contents;
+    @extend .contents;
 }
 
 .contents-screenfill-message {
-  cursor: pointer;
-  .bulb-text {
-    font-size: initial;
-    font-weight: 600;
-    border: 1px #f5f5f5 solid;
-    margin: 2px;
-    padding: 2px;
-    border-radius: 4px;
-  }
-  .enter {
+    cursor: pointer;
 
-  }
+    .bulb-text {
+        font-size: initial;
+        font-weight: 600;
+        border: 1px #f5f5f5 solid;
+        margin: 2px;
+        padding: 2px;
+        border-radius: 4px;
+    }
+
+    .enter {
+
+    }
 }

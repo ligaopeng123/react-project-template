@@ -6,18 +6,27 @@
 
 import React, {useEffect, useState} from 'react';
 import {RouteWithModuleRoutes} from "@gaopeng123/hoc";
+import {withRouter} from "react-router-dom";
 import {menuData} from "@store/Menus";
+import {getFirstPath} from "@httpClient/Global";
 
 const ScreenLayout: React.FC<any> = (props: any) => {
-	const [screenRouters, setScreenRouters] = useState<Array<any>>([]);
+	const [router, setRouter] = useState([]);
 	useEffect(() => {
-		menuData.then(([menus]) => {
-			setScreenRouters(menus);
+		menuData.then(([menus]: Array<any>) => {
+			setRouter(menus);
 		});
 	}, []);
+	useEffect(() => {
+		if (router.length) {
+			props.history.push({
+				pathname: getFirstPath(router)
+			})
+		}
+	}, [router]);
 	return (
-		<RouteWithModuleRoutes routers={screenRouters}/>
+		<RouteWithModuleRoutes routers={router}/>
 	)
 };
 
-export default ScreenLayout;
+export default withRouter(ScreenLayout);

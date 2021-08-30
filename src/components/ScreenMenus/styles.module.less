@@ -1,0 +1,30 @@
+.headerMenus {
+    top: 40px;
+    left: 11%;
+    position: absolute;
+    display: flex;
+
+    :global .dv-border-box-2 {
+        max-width: 200px;
+        min-width: 30px;
+        height: 38px;
+        cursor: pointer;
+        margin: 0 4px;
+        background-color: #000;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        :global .border-box-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #b2b2b2;
+        }
+
+        :global .content-selected {
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.editColumn {
+    // 冲掉编辑列样式
+    :global .ant-space {
+        gap: 0px !important;
+    }
+}
+
+// header的高度
+@HEADER-HEIGHT: 80px;
+.topHeader {
+    position: relative;
+    width: 100%;
+    height: @HEADER-HEIGHT;
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
+    color: #fff;
+
+    .headerCenterDecoration {
+        width: 40%;
+        height: 60px;
+        margin-top: 30px;
+    }
+
+    .headerLeftDecoration,
+    .headerRightDecoration {
+        width: 25%;
+        height: 60px;
+    }
+
+    .centerTitle {
+        position: absolute;
+        font-size: 26px;
+        font-weight: bold;
+        left: 50%;
+        top: 15px;
+        transform: translateX(-50%);
+    }
+
+    .clock {
+        position: absolute;
+        top: 10px;
+        right: 50px;
+    }
+}

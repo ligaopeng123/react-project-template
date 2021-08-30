@@ -77,7 +77,7 @@ const UserLayout: React.FC<any> = (props: any) => {
 				password="password"
 				id="form"
 				publickey="***"
-				main-style={``}
+				main-style={`background-image: url(/img/bg.jpg);`}
 				body-style="right: 200px;"
 				title={loginName}>
 			</login-module>
