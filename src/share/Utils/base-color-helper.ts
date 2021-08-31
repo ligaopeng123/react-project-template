@@ -9,7 +9,6 @@
  *
  *@版权所有：
  */
-import {ColorConversionHelper} from './color-conversion.helper';
 // @ts-nocheck
 export default class BaseColorHelper {
 	/**
@@ -69,7 +68,6 @@ export default class BaseColorHelper {
 			return this.gradientColorCache;
 		}
 		const gradientColor: any = {};
-		const addOpacity = ColorConversionHelper.addOpacity;
 		// 渐变规则变更
 		this.BASECOLOR.forEach(items => {
 			gradientColor[items[0]] = [items[0], items[2]];

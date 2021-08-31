@@ -8,13 +8,7 @@
  *@date 2018/5/16
  *
  */
-
-import {
-	getWindowSize,
-	removeTip,
-} from './AppUtilHelper';
 import BaseColorHelper from './base-color-helper';
-import {ColorConversionHelper} from './color-conversion.helper';
 import {isArray, isEmptyObject, isObject, isString, isUndefined} from "@gaopeng123/utils";
 
 export default class AppUtil {
@@ -304,41 +298,6 @@ export default class AppUtil {
 	}
 	
 	/**
-	 * 将rgb颜色转换成16进制颜色
-	 * @param that
-	 * @returns {any}
-	 */
-	public static colorToHex = ColorConversionHelper.colorToHex;
-	
-	/**
-	 * 将16进制转换成rgb颜色
-	 * @param col
-	 * @returns {string}
-	 */
-	public static colorToRgb = ColorConversionHelper.colorToRgb;
-	
-	/**
-	 * 添加透明度
-	 * @param {string} color
-	 * @param {number} opacity
-	 */
-	public static addOpacity = ColorConversionHelper.addOpacity;
-	
-	/**
-	 * RGBA 转16进制颜色
-	 * @param color
-	 * @returns {string}
-	 */
-	public static RGBATOHEX = ColorConversionHelper.RGBATOHEX;
-	
-	/**
-	 * @param rgba_color rgba(0,0,0,0.1)
-	 * @returns {string}
-	 * @constructor
-	 */
-	public static RGBA2RGB = ColorConversionHelper.RGBA2RGB;
-	
-	/**
 	 * 给对象排序
 	 * @param {Object} obj
 	 * @returns {Object}
@@ -410,21 +369,6 @@ export default class AppUtil {
 				return array;
 			}(_array, _sortFn);
 	}
-	
-	
-	/**
-	 *  清理所有的tip信息
-	 */
-	public static removeTip = removeTip;
-	
-	/**
-	 *
-	 * @returns {{width: number; 浏览器宽度
-	 * height: number; 浏览器高度
-	 * availWidth: any;  可视化宽度
-	 * availHeight: any}} 可视化高度
-	 */
-	public static getWindowSize = getWindowSize;
 	
 	/**
 	 * 获取数组的最大值
