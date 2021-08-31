@@ -7,14 +7,17 @@ import {Props} from "./typing";
 import styles from './styles.module.less';
 
 const menus = [{
-	title: '数据看板',
-	router: '/screen/dashboard',
-	component: <div>123</div>
+	id: 'dashboard',
+	name: 'Dashboard',
+	path: '/home/screen/dashboard',
+	component: 'pages/home/Dashboard'
 }, {
-	title: '问题管理',
-	router: '/screen/problem',
-	component: <div>456</div>
+	id: 'dashboard2',
+	name: 'Dashboard2',
+	path: '/home/screen/table',
+	component: 'pages/home/Dashboard2'
 }];
+
 const RouterHome: React.FC<Props> = () => {
 	const [state, dispatch] = useReducer(reducer, State, init);
 	return (

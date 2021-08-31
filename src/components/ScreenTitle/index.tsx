@@ -31,6 +31,7 @@ const ScreenTitle: React.FC<any> = (props: any) => {
 				<div className={styles.centerTitle}><Text1 duration={0.6} delay={0}>{title}</Text1></div>
 				<span className={styles.clock}>{`${ymd} ${hms} ${week}`}</span>
 			</div>
+			
 		</React.Fragment>
 	)
 };

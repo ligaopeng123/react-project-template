@@ -12,11 +12,14 @@
 import React, {useEffect, useRef} from 'react';
 import {BorderBox2, Decoration5, Decoration1} from '@jiaminghi/data-view-react';
 import {withRouter} from 'react-router-dom';
+import RouteWithModuleSubRoutes from "@components/RouteWithModuleSubRoutes";
 import styles from './styles.module.less';
 
 export type Menu = {
-	title: string;
-	router?: string;
+	id: string | number,
+	name: string;
+	path: string;
+	component: string
 }
 
 /**
@@ -31,6 +34,8 @@ const ScreenMenus: React.FC<any> = (props: any) => {
 	 * 传递过来的tabs数据
 	 */
 	const {menus, history} = props;
+	
+	// console.log(history.location.pathname)
 	
 	/**
 	 * 绑定ref
@@ -58,13 +63,14 @@ const ScreenMenus: React.FC<any> = (props: any) => {
 			/**
 			 * 代理确定选中范围
 			 */
-			if (item.title === e.target.innerText) {
+			if (item.name === e.target.innerText) {
 				nodeList[i].classList.add(`content-selected`);
 				selected = item;
 			}
 		}
-		selected?.router && props.history.push({
-			pathname: selected?.router,
+		
+		selected?.path && props.history.push({
+			pathname: selected?.path,
 		});
 	};
 	/**
@@ -73,14 +79,14 @@ const ScreenMenus: React.FC<any> = (props: any) => {
 	useEffect(() => {
 		const nodeList = getNodeByClassName();
 		for (let item of nodeList) {
+			item.classList.remove(`content-selected`);
 			const router = item.querySelector('span').getAttribute('router-name');
-			if (window.location.hash.includes(router)) {
+			if (history.location.pathname.includes(router)) {
 				item.classList.add(`content-selected`);
 				return;
 			}
 		}
 		nodeList[0].classList.add(`content-selected`);
-		
 	}, []);
 	
 	return (
@@ -88,11 +94,14 @@ const ScreenMenus: React.FC<any> = (props: any) => {
 			<div className={styles.headerMenus} onClick={onClick} ref={tabsRef}>
 				{
 					menus.map((item: Menu) => {
-						return <BorderBox2 key={item.title} style={tabStyle}>
-							<span router-name={item.router}>{item.title}</span>
+						return <BorderBox2 key={item.id} style={tabStyle}>
+							<span router-name={item.path}>{item.name}</span>
 						</BorderBox2>
 					})
 				}
+			</div>
+			<div className={`content-body`}>
+				<RouteWithModuleSubRoutes routers={menus}/>
 			</div>
 		</React.Fragment>
 	)

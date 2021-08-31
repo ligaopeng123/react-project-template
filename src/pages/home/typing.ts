@@ -30,8 +30,7 @@ export type Action = {
  */
 export type Fn = (...args: any) => any;
 export type Props = {
-	state: any;
-	dispatch: Fn;
+	state?: any;
+	dispatch?: Fn;
 	[propName: string]: any;
 }
-

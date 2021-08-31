@@ -4,7 +4,7 @@
         "name": "大屏1",
         "path": "/home",
         "component": "pages/home",
-        "exact": true,
+        "exact": false,
         "auth": null,
         "icon": null
     },
@@ -13,7 +13,7 @@
         "name": "大屏2",
         "path": "/home2",
         "component": "pages/home2",
-        "exact": true,
+        "exact": false,
         "icon": null
     }
 ]
