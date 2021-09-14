@@ -1,18 +1,13 @@
-import React, {useReducer} from 'react';
-import Table from "./components/Table";
-import ModalForTable from "./components/Modal";
-import {reducer, init, State} from "./Store";
-import {Props} from "./typing";
+import React from 'react';
+import BasicContents from '@components/Contents/BasicContents';
 
 
-const RouterHome: React.FC<Props> = () => {
-	const [state, dispatch] = useReducer(reducer, State, init);
-	return (
-		<React.Fragment>
-			<Table state={state} dispatch={dispatch}/>
-			<ModalForTable state={state} dispatch={dispatch}/>
-		</React.Fragment>
-	)
-};
+const RouterHome = () => {
+    return (
+        <BasicContents>
+           我是首页
+        </BasicContents>
+    )
+}
 
 export default RouterHome;

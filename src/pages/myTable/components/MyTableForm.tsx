@@ -1,14 +1,15 @@
 /**********************************************************************
  *
- * @模块名称: Form
+ * @模块名称: MyTable Form
  *
- * @模块用途: Form
+ * @模块用途: MyTable Form  表单配置
  *
  * @创建人: pgli
  *
- * @date: 2021/8/4 9:21
+ * @date: 2021-08-26 16:20:21
  *
  **********************************************************************/
+
 import React, {forwardRef, useImperativeHandle, useRef} from 'react';
 import {
 	Form,
@@ -35,7 +36,7 @@ const validateMessages = {
 	},
 };
 
-const FormForTable: React.FC<FormForTableProps> = forwardRef((props, ref) => {
+const MyTableFrom: React.FC<FormForTableProps> = forwardRef((props, ref) => {
 	const {formData} = props;
 	const formRef = useRef<FormInstance>(null);
 	
@@ -47,7 +48,8 @@ const FormForTable: React.FC<FormForTableProps> = forwardRef((props, ref) => {
 		<React.Fragment>
 			<Form
 				ref={formRef}
-				name="FormForTable"
+				preserve={false}
+				name="MyTableForm"
 				labelCol={{span: 8}}
 				wrapperCol={{span: 16}}
 				initialValues={formData}
@@ -98,4 +100,4 @@ const FormForTable: React.FC<FormForTableProps> = forwardRef((props, ref) => {
 	);
 });
 
-export default FormForTable;
+export default MyTableFrom;

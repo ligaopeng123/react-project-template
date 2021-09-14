@@ -1,24 +1,25 @@
 /**********************************************************************
  *
- * @模块名称: Table
+ * @模块名称: MyTableTable
  *
- * @模块用途: Table
+ * @模块用途: MyTableTable  表格配置
  *
  * @创建人: pgli
  *
- * @date: 2021/8/4 9:20
+ * @date: 2021-08-26 16:20:21
  *
  **********************************************************************/
+
 import React, {useEffect, useRef} from 'react';
 import {Button, Tooltip, Input, Popconfirm} from 'antd';
 import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOutlined} from '@ant-design/icons';
-import type {ProColumns, ActionType} from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {StoreEnum, TableListItem, TableProps} from "../typing";
+import {uuid} from '@gaopeng123/utils';
 import {list} from "../api";
 import styles from '../styles.module.less';
 
-const Table: React.FC<TableProps> = (props) => {
+const MyTableTable: React.FC<TableProps> = (props) => {
 	const {state, dispatch} = props;
 	/**
 	 * 表格res
@@ -48,7 +49,8 @@ const Table: React.FC<TableProps> = (props) => {
 	const edit = (row: any) => {
 		dispatch({
 			type: StoreEnum.edit,
-			value: row
+			// 避免编辑不触发
+			value: Object.assign({_: uuid()}, row)
 		});
 	};
 	/**
@@ -57,7 +59,7 @@ const Table: React.FC<TableProps> = (props) => {
 	useEffect(() => {
 		if (state[StoreEnum.refresh]) {
 			// @ts-ignore
-			ref.current.reload();
+			ref.current?.reload();
 		}
 	}, [state[StoreEnum.refresh]]);
 	
@@ -136,6 +138,9 @@ const Table: React.FC<TableProps> = (props) => {
 			valueType: 'option',
 			className: styles.editColumn,
 			render: (text, record, index) => [
+				<Button type="link" size={`small`} onClick={() => edit(record)}>
+					编辑
+				</Button>,
 				<Popconfirm
 					title="请确认是否删除！"
 					onConfirm={() => del(record)}
@@ -145,10 +150,7 @@ const Table: React.FC<TableProps> = (props) => {
 					<Button danger type="text" size={`small`}>
 						删除
 					</Button>
-				</Popconfirm>,
-				<Button type="link" size={`small`} onClick={() => edit(record)}>
-					编辑
-				</Button>
+				</Popconfirm>
 			],
 		},
 	];
@@ -188,4 +190,4 @@ const Table: React.FC<TableProps> = (props) => {
 		/>
 	);
 };
-export default Table;
+export default MyTableTable;

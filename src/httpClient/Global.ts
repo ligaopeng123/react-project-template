@@ -1,8 +1,8 @@
 import {asyncMemoized} from "@gaopeng123/utils";
 
 enum Global {
-	user = 'customize-user',
-	oem = 'customize-oem' // 定制化信息
+	user = 'app-4-user',
+	oem = 'app-4-oem' // 定制化信息
 }
 
 /**

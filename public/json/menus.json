@@ -63,5 +63,12 @@
                 "auth": null
             }
         ]
+    },
+    {
+        "id": 128,
+        "name": "myTable",
+        "path": "/myTable",
+        "component": "pages/myTable",
+        "auth": null
     }
 ]

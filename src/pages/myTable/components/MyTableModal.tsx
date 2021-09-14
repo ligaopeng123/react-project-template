@@ -1,21 +1,27 @@
 /**********************************************************************
  *
- * @模块名称: Modal
+ * @模块名称: MyTableModal
  *
- * @模块用途: Modal
+ * @模块用途: MyTableModal  模态框配置
  *
- * @date: 2021/8/4 10:19
+ * @创建人: pgli
  *
- * @版权所有: pgli
+ * @date: 2021-08-26 16:20:21
  *
  **********************************************************************/
+
 import React, {useEffect, useRef, useState} from 'react';
 import {FormForTableRef, ModalForTableProps, StoreEnum} from "../typing";
-import FormForTable from "./Form";
+import MyTableFrom from "./MyTableForm";
 import {Modal} from 'antd';
 import {uuid} from "@gaopeng123/utils";
 
-const ModalForTable: React.FC<ModalForTableProps> = (props) => {
+enum Title {
+	add = '新增',
+	edit = '编辑'
+}
+
+const MyTableModal: React.FC<ModalForTableProps> = (props) => {
 	const {state, dispatch} = props;
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [title, setTitle] = useState<string>('');
@@ -33,7 +39,7 @@ const ModalForTable: React.FC<ModalForTableProps> = (props) => {
 	
 	useEffect(() => {
 		if (state[StoreEnum.add]) {
-			setTitle(`新建`);
+			setTitle(Title.add);
 			setFormData(state[StoreEnum.add]);
 			setIsModalVisible(true);
 		}
@@ -41,7 +47,7 @@ const ModalForTable: React.FC<ModalForTableProps> = (props) => {
 	
 	useEffect(() => {
 		if (state[StoreEnum.edit]) {
-			setTitle(`编辑`);
+			setTitle(Title.edit);
 			setFormData(state[StoreEnum.edit]);
 			setIsModalVisible(true);
 		}
@@ -50,6 +56,12 @@ const ModalForTable: React.FC<ModalForTableProps> = (props) => {
 	const handleOk = () => {
 		formRef?.current?.values().then((data: any) => {
 			console.log(data);
+			// 新增处理
+			if (title === Title.add) {
+			
+			} else {
+			
+			}
 			setIsModalVisible(false);
 			refresh();
 		});
@@ -61,11 +73,11 @@ const ModalForTable: React.FC<ModalForTableProps> = (props) => {
 	
 	return (
 		<React.Fragment>
-			<Modal title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-				<FormForTable ref={formRef} formData={formData}/>
+			<Modal destroyOnClose title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+				<MyTableFrom ref={formRef} formData={formData}/>
 			</Modal>
 		</React.Fragment>
 	);
 };
 
-export default ModalForTable;
+export default MyTableModal;
