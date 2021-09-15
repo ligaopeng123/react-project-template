@@ -28,4 +28,5 @@ package-lock.json
 # IDEs and editors
 /.idea
 /.vscode
+*.zip
 
