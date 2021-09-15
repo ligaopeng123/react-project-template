@@ -107,26 +107,6 @@ export default class AppUtil {
 		return acptArr;
 	}
 	
-	
-	/**
-	 *  复制文本
-	 * @param span 文本标签
-	 */
-	public static inputCache: any;
-	
-	public static copySpanText(span: any) {
-		const text = span.innerText;
-		if (!this.inputCache) {
-			this.inputCache = document.createElement('input');
-		}
-		this.inputCache.setAttribute('value', text);
-		// document.getElementsByTagName('body')[0].appendChild(input);
-		this.inputCache.select();
-		if (document.execCommand('copy')) {
-			console.log('复制成功')
-		}
-	}
-	
 	/**
 	 *  检查对象是否有某个属性
 	 * @param obj  要检查的对象
@@ -158,42 +138,5 @@ export default class AppUtil {
 			storey = obj[attrs[i]];
 		}
 		return true;
-	}
-	
-	/**
-	 * 获取proTable表格数据
-	 * @param data
-	 * @returns {any}
-	 */
-	public static getGraphQlTableData(data: any): any {
-		if (isUndefined(data)) {
-			return data;
-		}
-		if (data.__typename) {
-			return data;
-		}
-		return this.getGraphQlTableData(data.data);
-	}
-	
-	/**
-	 * 处理参数
-	 * @param params
-	 * @returns {any}
-	 */
-	public static setGraphQlParams(params: any): any {
-		return params;
-	}
-	
-	/**
-	 * 递归查找符合预期的dom结构
-	 * @param dom
-	 * @param fn
-	 * @returns {any}
-	 */
-	public static getParentDomToExpected(dom: any, fn: any): any {
-		if (fn(dom)) {
-			return dom;
-		}
-		return this.getParentDomToExpected(dom.parentNode || dom.parentElement, fn);
 	}
 }
