@@ -137,6 +137,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 			key: 'option',
 			valueType: 'option',
 			className: styles.editColumn,
+	        align: 'center',
 			render: (text, record, index) => [
 				<Button type="link" size={`small`} onClick={() => edit(record)}>
 					编辑
