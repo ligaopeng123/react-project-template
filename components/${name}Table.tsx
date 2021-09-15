@@ -143,11 +143,15 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 				</Button>,
 				<Popconfirm
 					title="请确认是否删除！"
-					onConfirm={() => del(record)}
+					onCancel={(e: any) => e.stopPropagation()}
+					onConfirm={(e: any) => {
+						e.stopPropagation();
+						del(record);
+					}}
 					okText="确认"
 					cancelText="取消"
 				>
-					<Button danger type="text" size={`small`}>
+					<Button danger type="text" size={`small`} onClick={(e)=> e.stopPropagation()}>
 						删除
 					</Button>
 				</Popconfirm>
