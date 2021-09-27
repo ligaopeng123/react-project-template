@@ -11,46 +11,6 @@
 import {isArray, isEmptyObject, isObject, isString, isUndefined} from "@gaopeng123/utils";
 
 export default class AppUtil {
-	
-	/**
-	 * 全属性copy
-	 * @param targetConfig
-	 * @param sourceConfig
-	 */
-	public static depthAssign<T extends {}>(targetConfig: T, sourceConfig: T, sourceConfig2: any = undefined, level = 5): void {
-		if (sourceConfig2) {
-			this.depthAssign(targetConfig, sourceConfig2);
-		}
-		if (targetConfig && sourceConfig && isObject(sourceConfig)) {
-			// 默认5层递归 如果层次过多 请传递层次次数
-			this.copyObjectProperties(targetConfig, sourceConfig, level);
-		} else {
-			Object.assign(targetConfig || {}, sourceConfig || {});
-		}
-	};
-	
-	/**
-	 * 属性copy 用于绝对的深层次copy
-	 * @param targetConfig
-	 * @param sourceConfig
-	 */
-	public static copyObjectProperties(targetConfig: any, sourceConfig: any, index: number): void {
-		index -= 1;
-		if (index < 0) return;
-		if (isObject(sourceConfig)) {
-			for (let key in sourceConfig) {
-				if (isObject(sourceConfig[key])) {
-					targetConfig[key] = isUndefined(targetConfig[key]) ? {} : targetConfig[key];
-					this.copyObjectProperties(targetConfig[key], sourceConfig[key], index);
-				} else {
-					targetConfig[key] = isUndefined(sourceConfig[key]) ? targetConfig[key] : sourceConfig[key];
-				}
-			}
-		} else {
-			targetConfig = isUndefined(sourceConfig) ? targetConfig : sourceConfig;
-		}
-	}
-	
 	/**
 	 * 对象和string互转方法
 	 */
