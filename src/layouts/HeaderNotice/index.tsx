@@ -1,6 +1,6 @@
 import React from 'react';
 import {Spin, Tabs, Badge} from 'antd';
-import useMergeValue from 'use-merge-value';
+import {useMergeValue} from '@gaopeng123/hooks';
 import HeaderDropdown from '../HeaderDropdown/index';
 import styles from './index.module.less';
 import classNames from 'classnames';
