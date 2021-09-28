@@ -10,9 +10,9 @@
  *
  **********************************************************************/
 import {get, post, put, del} from "@httpClient/index";
-import {valueEnum, TableListItem} from "./typing";
+import {valueEnum, TableListItem, Add<%= name %>, Edit<%= name %>} from "./typing";
 
-export const list = async () => {
+export const <%= name %>List = async () => {
 	const tableListDataSource: TableListItem[] = [];
 	
 	const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
@@ -45,19 +45,20 @@ export const list = async () => {
 /**
  * 新增接口
  */
-const add<%= name %> = async (params: any)=> {
-	return await post('', {body: params});
+const add<%= name %> = async (params: Add<%= name %>)=> {
+	return await post('./json/OEM.json', {body: params});
 };
 
 /**
  * 编辑接口
  */
-const edit<%= name %> = async (params: any)=> {
-	return await post('', {body: params});
+const edit<%= name %> = async (params: Edit<%= name %>)=> {
+	return await post('./json/OEM.json', {body: params});
 };
+
 /**
  * 删除接口
  */
-const del<%= name %> = async (row: any)=> {
-	return await del('', {body: {id: row?.id}});
+const del<%= name %> = async (row: TableListItem)=> {
+	return await del('./json/OEM.json', {body: {id: row?.id}});
 };

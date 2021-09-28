@@ -15,6 +15,8 @@ import {FormForTableRef, ModalForTableProps, StoreEnum} from "../typing";
 import <%= name %>From from "./<%= name %>Form";
 import {Modal} from 'antd';
 import {uuid} from "@gaopeng123/utils";
+import {add<%= name %>, edit<%= name %>} from "../api";
+import styles from '../styles.module.less';
 
 enum Title {
 	add = '新增',
@@ -63,12 +65,16 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 			// 新增处理
 			if (title === Title.add) {
 				// 新增回调处理
-				handle();
+				add<%= name %>(data).then((res)=> {
+					handle(res);
+				});
+
 			} else {
 				// 编辑回调处理
-				handle();
+				edit<%= name %>(Object.assign({}, data, {id: state[StoreEnum.edit]?.id})).then((res)=> {
+					handle(res);
+				});
 			}
-
 		});
 	};
 	

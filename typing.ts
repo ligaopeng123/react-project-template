@@ -55,8 +55,20 @@ export const valueEnum = {
 	2: 'online',
 	3: 'error',
 };
+export type <%= name %>Base = {
+	[propName: string]: any;
+}
+
+export type Add<%= name %> = {
+	[propName: string]: any;
+} & <%= name %>Base;
+
+export type Eidt<%= name %> = {
+	[propName: string]: any;
+} & <%= name %>Base;
 
 export type TableListItem = {
+	id?: number;
 	key: number;
 	name: string;
 	containers: number;

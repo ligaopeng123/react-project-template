@@ -16,7 +16,7 @@ import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOut
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {StoreEnum, TableListItem, TableProps} from "../typing";
 import {uuid} from '@gaopeng123/utils';
-import {list, del<%= name %>} from "../api";
+import {<%= name %>List, del<%= name %>} from "../api";
 import styles from '../styles.module.less';
 
 const <%= name %>Table: React.FC<TableProps> = (props) => {
@@ -167,7 +167,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 			request={async (params, sorter, filter) => {
 				// 表单搜索项会从 params 传入，传递给后端接口。
 				console.log(params, sorter, filter);
-				const data = await list();
+				const data = await <%= name %>List();
 				return {
 					data,
 					success: true,
