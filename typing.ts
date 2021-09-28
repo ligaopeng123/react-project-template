@@ -59,11 +59,11 @@ export type <%= name %>Base = {
 	[propName: string]: any;
 }
 
-export type Add<%= name %> = {
+export type Add<%= name %>Props = {
 	[propName: string]: any;
 } & <%= name %>Base;
 
-export type Eidt<%= name %> = {
+export type Edit<%= name %>Props = {
 	[propName: string]: any;
 } & <%= name %>Base;
 

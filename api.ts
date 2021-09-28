@@ -10,7 +10,7 @@
  *
  **********************************************************************/
 import {get, post, put, del} from "@httpClient/index";
-import {valueEnum, TableListItem, Add<%= name %>, Edit<%= name %>} from "./typing";
+import {valueEnum, TableListItem, Add<%= name %>Props, Edit<%= name %>Props} from "./typing";
 
 export const <%= name %>List = async () => {
 	const tableListDataSource: TableListItem[] = [];
@@ -45,20 +45,20 @@ export const <%= name %>List = async () => {
 /**
  * 新增接口
  */
-const add<%= name %> = async (params: Add<%= name %>)=> {
+export const add<%= name %> = async (params: Add<%= name %>Props)=> {
 	return await post('./json/OEM.json', {body: params});
 };
 
 /**
  * 编辑接口
  */
-const edit<%= name %> = async (params: Edit<%= name %>)=> {
+export const edit<%= name %> = async (params: Edit<%= name %>Props)=> {
 	return await post('./json/OEM.json', {body: params});
 };
 
 /**
  * 删除接口
  */
-const del<%= name %> = async (row: TableListItem)=> {
+export const del<%= name %> = async (row: TableListItem)=> {
 	return await del('./json/OEM.json', {body: {id: row?.id}});
 };
