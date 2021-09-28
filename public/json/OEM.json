@@ -1,11 +1,11 @@
 {
     "code": 0,
     "data": {
-        "loginName": "管理系统",
+        "loginName": "<%= title %>",
         "loginLogo": "/logo.svg",
         "loginDesc": "登录页产品描述",
         "menusLogo": "/logo.svg",
-        "menusName": "管理系统",
+        "menusName": "<%= title %>",
         "copyright": "",
         "links": null
     }
