@@ -56,14 +56,19 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	const handleOk = () => {
 		formRef?.current?.values().then((data: any) => {
 			console.log(data);
+			const handle = (res?: any)=> {
+				setIsModalVisible(false);
+				refresh();
+			}
 			// 新增处理
 			if (title === Title.add) {
-			
+				// 新增回调处理
+				handle();
 			} else {
-			
+				// 编辑回调处理
+				handle();
 			}
-			setIsModalVisible(false);
-			refresh();
+
 		});
 	};
 	

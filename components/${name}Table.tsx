@@ -16,7 +16,7 @@ import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOut
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {StoreEnum, TableListItem, TableProps} from "../typing";
 import {uuid} from '@gaopeng123/utils';
-import {list} from "../api";
+import {list, del<%= name %>} from "../api";
 import styles from '../styles.module.less';
 
 const <%= name %>Table: React.FC<TableProps> = (props) => {
@@ -35,13 +35,13 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 		});
 	};
 	/**
-	 * 删除
+	 * 删除逻辑处理
 	 */
 	const del = (row: any) => {
-		dispatch({
-			type: StoreEnum.del,
-			value: row
-		});
+        del<%= name %>(row).then((res: any)=> {
+            // @ts-ignore
+            ref.current?.reload();
+        });
 	};
 	/**
 	 * 编辑
