@@ -13,7 +13,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {FormForTableRef, ModalForTableProps, StoreEnum} from "../typing";
 import <%= name %>From from "./<%= name %>Form";
-import {Modal} from 'antd';
+import {message,Modal} from 'antd';
 import {uuid} from "@gaopeng123/utils";
 import {add<%= name %>, edit<%= name %>} from "../api";
 import styles from '../styles.module.less';
@@ -59,6 +59,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 		formRef?.current?.values().then((data: any) => {
 			console.log(data);
 			const handle = (res?: any)=> {
+                message.info(res?.message || '');
 				setIsModalVisible(false);
 				refresh();
 			}
