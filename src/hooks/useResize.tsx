@@ -9,26 +9,22 @@
  *
  *@版权所有：
  */
-import React, {useEffect, useState, useRef} from 'react';
-import {fromEvent} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
+import React, {useEffect, useState} from 'react';
+import {debounce} from "@gaopeng123/utils";
 
 const useResize = () => {
     const height = window.innerHeight;
     const [contentsHeight, setContentsHeight] = useState(height);
     useEffect(() => {
-        const wResize = fromEvent(window, 'resize')
-            .pipe(debounceTime(300))
-            .subscribe((event: any) => {
-                if (window.innerHeight > 500) {
-                    setContentsHeight(window.innerHeight);
-                }
-            });
+        const onResize = debounce(() => {
+            setContentsHeight(window.innerHeight);
+        }, 200, {leading: false});
+        window.addEventListener('resize', onResize);
         return () => {
-            wResize.unsubscribe();
+            window.removeEventListener('resize', onResize);
         };
     }, []);
     return contentsHeight
-}
+};
 
 export default useResize;

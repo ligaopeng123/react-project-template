@@ -10,11 +10,10 @@
  *@版权所有：
  */
 import React, {useEffect, useRef} from 'react';
-import './styles.scss';
-import {fromEvent} from 'rxjs/index';
-import {debounceTime} from 'rxjs/internal/operators';
 import {drawShape} from './Shape';
 import drawStarry from './Starry';
+import useResize from '@/hooks/useResize';
+import './styles.scss';
 
 const Meteor = (props: any) => {
     const {children, type, img} = props;
@@ -68,24 +67,20 @@ const Meteor = (props: any) => {
         })
     };
 
+    const contentHeight = useResize();
     useEffect(() => {
         let {
             onResize,
             onClear
         }: any = begin();
 
-        const wResize = fromEvent(window, 'resize')
-            .pipe(debounceTime(100))
-            .subscribe((event: any) => {
-                setSize(cavansRef.current);
-                onResize();
-            });
+        setSize(cavansRef.current);
+        onResize();
 
         return () => {
-            wResize.unsubscribe();
             onClear();
         };
-    }, []);
+    }, [contentHeight]);
 
     return (
         <React.Fragment>
