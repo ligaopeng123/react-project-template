@@ -1,6 +1,6 @@
 import {SearchOutlined} from '@ant-design/icons';
 import {AutoComplete, Input} from 'antd';
-import useMergeValue from 'use-merge-value';
+import {useMergeValue} from '@gaopeng123/hooks';
 import {AutoCompleteProps} from 'antd/es/auto-complete';
 import React, {useRef} from 'react';
 
