@@ -1,6 +1,6 @@
 {
-    "name": "react-screen",
-    "version": "0.1.2",
+    "name": "<%= name %>",
+    "version": "<%= version %>",
     "private": false,
     "main": "main.js",
     "homepage": ".",
