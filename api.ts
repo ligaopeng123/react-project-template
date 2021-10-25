@@ -12,7 +12,7 @@
 import {get, post, put, del} from "@httpClient/index";
 import {valueEnum, TableListItem, Add<%= name %>Props, Edit<%= name %>Props} from "./typing";
 
-export const <%= name %>List = async () => {
+export const <%= name %>List = async (params: any) => {
 	const tableListDataSource: TableListItem[] = [];
 	
 	const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
