@@ -36,7 +36,7 @@ export const <%= name %>List = async (params: any) => {
 			// @ts-ignore
 			progress: Math.ceil(Math.random() * 100) + 1,
 			// @ts-ignore
-			memo: i % 2 === 1 ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴' : '简短备注文案',
+			memo: i % 2 === 1 ? '很长很长很长很长很长很长很长的文字要展示要留下尾巴' : '简短备注文案',
 		});
 	}
 	return tableListDataSource;
