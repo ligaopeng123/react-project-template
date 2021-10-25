@@ -21,6 +21,7 @@ export const dealWithParams = (params: any, pageOptions?: any) => {
 	const newParams = Object.assign({}, removeEmptyParams(params));
 	newParams[pageNumKey] = newParams.current;
 	newParams[pageSizeKey] = newParams.pageSize;
+	// 删除冗余参数
 	if (pageNumKey !== 'current') {
 		delete newParams.current;
 	}
