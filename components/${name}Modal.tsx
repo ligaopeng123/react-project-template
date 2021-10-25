@@ -26,6 +26,7 @@ enum Title {
 const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	const {state, dispatch} = props;
 	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
 	const [title, setTitle] = useState<string>('');
 	const [formData, setFormData] = useState<string>('');
 	const formRef = useRef<FormForTableRef | any>(null);
@@ -56,6 +57,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	}, [state[StoreEnum.edit]]);
 	
 	const handleOk = () => {
+		setConfirmLoading(true);
 		formRef?.current?.values().then((data: any) => {
 			console.log(data);
 			const handle = (res?: any)=> {
@@ -80,12 +82,13 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	};
 	
 	const handleCancel = () => {
+	    setConfirmLoading(false);
 		setIsModalVisible(false);
 	};
 	
 	return (
 		<React.Fragment>
-			<Modal destroyOnClose title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+			<Modal destroyOnClose title={title} confirmLoading={confirmLoading} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
 				<<%= name %>From ref={formRef} formData={formData}/>
 			</Modal>
 		</React.Fragment>
