@@ -9,7 +9,7 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {removeEmptyParams} from '@gaopeng123/utils';
+import {makeParamsProper, isString} from '@gaopeng123/utils';
 
 /**
  * 处理表格参数
@@ -18,7 +18,7 @@ import {removeEmptyParams} from '@gaopeng123/utils';
  */
 export const dealWithParams = (params: any, pageOptions?: any) => {
 	const {pageNumKey, pageSizeKey} = Object.assign({pageNumKey: 'pageNum', pageSizeKey: 'pageSize'}, pageOptions);
-	const newParams = Object.assign({}, removeEmptyParams(params));
+	const newParams = makeParamsProper(params);
 	newParams[pageNumKey] = newParams.current;
 	newParams[pageSizeKey] = newParams.pageSize;
 	// 删除冗余参数

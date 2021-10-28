@@ -16,7 +16,7 @@
         "@gaopeng123/hooks": "^0.1.5",
         "@gaopeng123/login-module": "^0.1.13",
         "@gaopeng123/screen": "^0.1.3",
-        "@gaopeng123/utils": "^0.1.35",
+        "@gaopeng123/utils": "^0.1.36",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",
