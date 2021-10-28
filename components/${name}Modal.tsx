@@ -41,6 +41,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	};
 	
 	useEffect(() => {
+		setConfirmLoading(false);
 		if (state[StoreEnum.add]) {
 			setTitle(Title.add);
 			setFormData(state[StoreEnum.add]);
@@ -49,6 +50,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	}, [state[StoreEnum.add]]);
 	
 	useEffect(() => {
+		setConfirmLoading(false);
 		if (state[StoreEnum.edit]) {
 			setTitle(Title.edit);
 			setFormData(state[StoreEnum.edit]);
