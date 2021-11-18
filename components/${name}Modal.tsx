@@ -81,7 +81,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 				});
 			}
 		}).catch(()=> {
-			// 遇到错误
+			// 遇到错误 处理loading
 			setConfirmLoading(false);
 		});
 	};
