@@ -80,6 +80,8 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 					handle(res);
 				});
 			}
+		}).catch(()=> {
+			setConfirmLoading(false);
 		});
 	};
 	
