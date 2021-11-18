@@ -17,6 +17,7 @@ import {makeParamsProper, isString} from '@gaopeng123/utils';
  * @param pageOptions
  */
 export const dealWithParams = (params: any, pageOptions?: any) => {
+	// 此处修改为服务端字段pageNum pageSize
 	const {pageNumKey, pageSizeKey} = Object.assign({pageNumKey: 'pageNum', pageSizeKey: 'pageSize'}, pageOptions);
 	const newParams = makeParamsProper(params);
 	newParams[pageNumKey] = newParams.current;
