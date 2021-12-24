@@ -69,10 +69,16 @@ module.exports = override(
 		// config.devtool = config.mode === 'development' ? 'cheap-module-source-map' : false;
 		if (process.env.NODE_ENV === "production") {
 			config.devtool = false;
-			config.module.rules[2].oneOf.push({
+			const rules = config.module.rules;
+			const imgRules = {
 				test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
 				loader: 'file-loader'
-			});
+			}
+			if (rules[1].oneOf) {
+				config.module.rules[1].oneOf.push(imgRules);
+			} else {
+				config.module.rules[2].oneOf.push(imgRules);
+			}
 		} else {
 			// 允许访问外部的值 主要就是访问mock服务
 			config.resolve.plugins = config.resolve.plugins.filter(plugin => !(plugin instanceof ModuleScopePlugin));
