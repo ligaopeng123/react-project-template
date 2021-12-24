@@ -12,6 +12,7 @@ import useOEM from "@/hooks/useOEM";
 import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 import {menuData} from "@store/Menus";
+import {getFirstPath} from "@httpClient/Global";
 import './styles.less';
 
 /**
@@ -49,7 +50,7 @@ const BasicLayout = (props: any) => {
 	const redirect = (menuData: MenuDataItem) => {
 		if (pathname === '/') {
 			setTimeout(() => {
-				const firstPath = menuData[0].path as string;
+                const firstPath = getFirstPath(menuData) as string;
 				setPathname(firstPath);
 				props.history.push({
 					pathname: firstPath
@@ -68,7 +69,13 @@ const BasicLayout = (props: any) => {
 			redirect(menuData);
 		});
 	}, [menuData]);
-	
+    /**
+     * 路由切换是的变化
+     * @param route
+     */
+    const onRouteChange = (route: any) => {
+        route?.path && setPathname(route.path)
+    }
 	return (
 		<React.Fragment>
 			<ProLayout
@@ -112,7 +119,7 @@ const BasicLayout = (props: any) => {
 				}}
 				rightContentRender={() => (<RightLayout/>)}
 			>
-				<RouteWithModuleRoutes routers={router}/>
+                <RouteWithModuleRoutes routers={router} onRouteChange={onRouteChange}/>
 			</ProLayout>
 			<BackUp/>
 		</React.Fragment>
