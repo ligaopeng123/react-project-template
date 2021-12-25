@@ -1,7 +1,7 @@
 # 从镜像服务中拉取镜像
-FROM <%= imagesUrl %>/component/nginx:latest
+FROM xxx/component/nginx:latest
 # 权限校验
-LABEL maintainer="<%= imagesMaintainer %>"
+LABEL maintainer="xxx"
 # 编译目录
 COPY build  /webapp
 # 复制内容

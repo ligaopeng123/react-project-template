@@ -1,8 +1,8 @@
 import {asyncMemoized} from "@gaopeng123/utils";
 
 enum Global {
-	user = '<%= name %>-user',
-	oem = '<%= name %>-oem' // 定制化信息
+	user = 'react-simple-template-user',
+	oem = 'react-simple-template-oem' // 定制化信息
 }
 
 /**
@@ -30,12 +30,18 @@ export const getFirstPath = (menuInfo: any) => {
 	const child = getIsibleMenus(menuInfo);
 	return child ? getPathByRecursion(child) : '';
 };
-
+/**
+ * 兼容处理
+ * @param child
+ */
+const getChildren = (child: any) => {
+    return child.children || child.routers;
+}
 const getPathByRecursion: any = (child: any) => {
-	if (child[0] && child[0].children && child[0].children.length) {
-		return getPathByRecursion(child[0].children);
-	}
-	return child[0] ? child[0].path : '';
+    if (child[0] && getChildren(child[0])?.length) {
+        return getPathByRecursion(getChildren(child[0]));
+    }
+    return child[0] ? child[0].path : '';
 };
 /**
  * 获取可视菜单

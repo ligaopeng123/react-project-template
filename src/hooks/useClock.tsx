@@ -10,7 +10,7 @@
  *@版权所有：
  */
 import React, {useEffect, useState} from 'react';
-import AppUtil from "@share/Utils/AppUtil";
+import {formatTimestamp} from '@gaopeng123/utils';
 
 const useClock = (props: any) => {
 	const [clock, setClock] = useState<string>('');
@@ -20,7 +20,7 @@ const useClock = (props: any) => {
 	useEffect(() => {
 		const getClock = () => {
 			return setTimeout(() => {
-				setClock(AppUtil.timestampToTime(Date.now(), props?.type));
+				setClock(formatTimestamp(Date.now(), props?.type));
 				getClock();
 			}, 1000);
 		}

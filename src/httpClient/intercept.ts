@@ -12,6 +12,16 @@
 import {FetchInterceptorResponse, Intercept, Options} from "@gaopeng123/fetch";
 import {getToken} from "@httpClient/Global";
 import toLogin from "@httpClient/toLogin";
+import {message} from "antd";
+
+let messageId: any = null;
+const showMessage = (msg: string) => {
+	clearTimeout(messageId);
+	messageId = setTimeout(() => {
+		message.destroy();
+		message.warn(msg);
+	}, 200);
+};
 
 const intercept: Intercept = {
 	request: function (url: string, config: Options) {
@@ -35,8 +45,11 @@ const intercept: Intercept = {
 		if (response.request.options.responseType) {
 			// 此处拿到返回值信息 服务端权限异常 有可能放到业务接口中处理状态
 			const res = await response.clone()[response.request.options.responseType]();
-			// 鉴权失败后退出登录
-			// if (res) toLogin();
+			if (res?.status === 401 || res?.code === 401) {
+				showMessage(res?.msg);
+				// 鉴权失败后退出登录
+				if (res) toLogin();
+			}
 		}
 		return new Promise((resolve, reject) => {
 			resolve(response);
