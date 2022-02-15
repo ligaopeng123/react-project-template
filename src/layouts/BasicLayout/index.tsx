@@ -3,7 +3,7 @@
  */
 import React, {useState, createElement, useEffect} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import ProLayout from '@ant-design/pro-layout';
+import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
@@ -13,6 +13,7 @@ import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 import {menuData} from "@store/Menus";
 import {getFirstPath} from "@httpClient/Global";
+import TopTabs from "@/layouts/BasicLayout/TopTabs";
 import './styles.less';
 
 /**
@@ -102,13 +103,12 @@ const BasicLayout = (props: any) => {
                         </Link>
                     </div>);
                 }}
-                breadcrumbRender={(routes: any) => {
-                    // 面包屑
-                    return routes;
-                }}
-                itemRender={(route: any, params: any, routes: any, paths: Array<string>) => {
-                    return null;
-                }}
+                // 面包屑
+                breadcrumbRender={(routes: any) => [...routes]}
+                // 自定义面包屑
+                // itemRender={(route: any, params: any, routes: any, paths: Array<string>) => {
+                //     return null;
+                // }}
                 onPageChange={(location: any) => {
                     // 頁面跳轉是觸法
                     setPathname(location.pathname);
@@ -121,7 +121,12 @@ const BasicLayout = (props: any) => {
                     //      {/*menu 菜单的头部点击事件*/}
                 }}
                 rightContentRender={() => (<RightLayout/>)}
+                headerContentRender={() => {
+                    /*头信息*/
+                    return (<ProBreadcrumb/>)
+                }}
             >
+                <TopTabs pathname={pathname} routers={router}/>
                 <RouteWithModuleRoutes routers={router} onRouteChange={onRouteChange}/>
             </ProLayout>
             <BackUp/>

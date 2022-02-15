@@ -64,6 +64,17 @@ module.exports = override(
             }
         }
     ),
+    /**
+     * 导入esbuild-loader配置 提高编译效率
+     */
+    addWebpackModuleRule({
+        test: /\.tsx?$/,
+        loader: 'esbuild-loader',
+        options: {
+            loader: 'tsx',
+            target: 'es2015'
+        }
+    }),
     (config) => { //暴露webpack的配置
         // 去掉打包生产map 文件
         // config.devtool = config.mode === 'development' ? 'cheap-module-source-map' : false;
@@ -83,6 +94,8 @@ module.exports = override(
             // 允许访问外部的值 主要就是访问mock服务
             config.resolve.plugins = config.resolve.plugins.filter(plugin => !(plugin instanceof ModuleScopePlugin));
         }
+        // 支持static部署
+        config.output.publicPath = process.env.REACT_APP_PUBLICPATH;
         return config
     }
 );
