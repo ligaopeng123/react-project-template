@@ -1,4 +1,4 @@
-import {asyncMemoized} from "@gaopeng123/utils";
+import {asyncMemoized, pathJoin} from "@gaopeng123/utils";
 
 enum Global {
 	user = '<%= name %>-user',
@@ -10,8 +10,8 @@ enum Global {
  * @returns {any}
  */
 export const getToken = () => {
-	const userInfo: any = getCurrentUserFromStorage();
-	return userInfo.token || null;
+    const userInfo: any = getCurrentUserFromStorage();
+    return userInfo.token || null;
 };
 
 /**
@@ -27,8 +27,8 @@ export const getCurrentUserFromStorage = () => {
  * @param menuInfo
  */
 export const getFirstPath = (menuInfo: any) => {
-	const child = getIsibleMenus(menuInfo);
-	return child ? getPathByRecursion(child) : '';
+    const child = getIsibleMenus(menuInfo);
+    return child ? getPathByRecursion(child) : '';
 };
 /**
  * 兼容处理
@@ -48,7 +48,7 @@ const getPathByRecursion: any = (child: any) => {
  * @param menuInfo
  */
 export const getIsibleMenus = (menus: any = []) => {
-	return menus || [];
+    return menus || [];
 };
 
 /**
@@ -56,16 +56,16 @@ export const getIsibleMenus = (menus: any = []) => {
  * @param value
  */
 export const setCurrentUserToStorage = (value: any) => {
-	localStorage.setItem(Global.user, JSON.stringify(value));
+    localStorage.setItem(Global.user, JSON.stringify(value));
 };
 /**
  * 获取本地json数据
  * @param path
  */
 export const loadLocalJson = asyncMemoized(async (path: string) => {
-	const res = await fetch(path);
-	const json = await res.clone().json();
-	return json;
+    const res = await fetch(pathJoin(process.env.REACT_APP_PUBLICPATH || '', path));
+    const json = await res.clone().json();
+    return json;
 });
 
 

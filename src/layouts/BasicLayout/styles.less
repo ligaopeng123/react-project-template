@@ -44,3 +44,33 @@
     }
 }
 
+// 面包屑功能 第一层不能点击
+.ant-pro-global-header {
+    .ant-breadcrumb {
+        span {
+            pointer-events: none;
+
+            a {
+                color: #ffffff !important;
+                font-family: PingFang-SC-Bold, PingFang-SC;
+                font-weight: bold;
+            }
+
+            .ant-breadcrumb-separator {
+                color: #ffffff !important;
+            }
+        }
+    }
+}
+
+// logo区域限制
+.ant-pro-global-header-logo {
+    margin-left: -16px;
+    padding-left: 16px;
+    margin-right: 16px;
+    min-width: 207px;
+
+    img {
+        height: 24px !important;
+    }
+}

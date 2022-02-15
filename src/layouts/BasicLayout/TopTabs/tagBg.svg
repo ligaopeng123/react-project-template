@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="40px" viewBox="0 0 128 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>形状结合</title>
+    <g id="065-星途2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组" fill="#F4F7FA">
+            <path d="M0,40 C4.33491426,40 7.86454287,36.5521622 7.99619318,32.2491793 L8,32 L8,6 C8,2.6862915 10.6862915,6.08718376e-16 14,0 L114,0 C117.313708,-6.08718376e-16 120,2.6862915 120,6 L120,32 C120,36.418278 123.581722,40 128,40 L0,40 Z" id="形状结合"></path>
+        </g>
+    </g>
+</svg>
