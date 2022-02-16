@@ -3,7 +3,7 @@
         "id": 30,
         "name": "首页",
         "path": "/home",
-        "component": "pages/home",
+        "component": "/home",
         "exact": true,
         "auth": null,
         "icon": null
@@ -19,7 +19,7 @@
                 "id": 48,
                 "name": "菜单管理",
                 "path": "/auth/menus",
-                "component": "pages/admin/menus",
+                "component": "/admin/menus",
                 "exact": true,
                 "auth": null,
                 "icon": null
@@ -28,7 +28,7 @@
                 "id": 49,
                 "name": "组织管理",
                 "path": "/auth/organization",
-                "component": "pages/admin/organization",
+                "component": "/admin/organization",
                 "auth": null,
                 "exact": true
             },
@@ -36,7 +36,7 @@
                 "id": 50,
                 "name": "用户管理",
                 "path": "/auth/users",
-                "component": "pages/admin/users",
+                "component": "/admin/users",
                 "auth": null
             }
         ]
@@ -52,14 +52,14 @@
                 "id": 52,
                 "name": "OEM配置",
                 "path": "/system/oem",
-                "component": "pages/system/oem",
+                "component": "/system/oem",
                 "auth": null
             },
             {
                 "id": 53,
                 "name": "系统配置",
                 "path": "/system/config",
-                "component": "pages/system/config",
+                "component": "/system/config",
                 "auth": null
             }
         ]

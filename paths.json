@@ -5,9 +5,6 @@
             "@/*": [
                 "src/*"
             ],
-            "@img/*": [
-                "public/*"
-            ],
             "@assets/*": [
                 "scr/assets/*"
             ],
