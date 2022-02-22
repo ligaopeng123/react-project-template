@@ -12,7 +12,6 @@
 
 
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 import BasicContents from '@components/Contents/BasicContents';
 
 const RouterAdminMenus: React.FC<{}> = (props: any) => {
@@ -23,4 +22,4 @@ const RouterAdminMenus: React.FC<{}> = (props: any) => {
 	)
 };
 
-export default withRouter(RouterAdminMenus)
+export default RouterAdminMenus
