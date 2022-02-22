@@ -2,7 +2,7 @@
  * 布局管理
  */
 import React, {useState, createElement, useEffect} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
@@ -15,6 +15,9 @@ import {menuData} from "@store/Menus";
 import {getFirstPath} from "@httpClient/Global";
 import TopTabs from "@/layouts/BasicLayout/TopTabs";
 import './styles.less';
+import {useRecoilValue} from 'recoil';
+import CurrentUser from '@store/CurrentUser';
+import {isEmptyObject} from "@gaopeng123/utils";
 
 /**
  * 创建icon图标
@@ -29,9 +32,14 @@ const createIcon = (icon?: string): React.ReactNode | undefined => {
 
 const BasicLayout = (props: any) => {
     /**
+     * 路由数据
+     */
+    const navigate = useNavigate();
+    /**
      * 设置重定向数据 默认的加载页面
      */
-    const [pathname, setPathname] = useState<string>(props.history.location.pathname);
+    const location = useLocation();
+    const [pathname, setPathname] = useState<string>(location.pathname);
     /**
      * 路由管理
      */
@@ -44,22 +52,29 @@ const BasicLayout = (props: any) => {
      * 项目名称
      */
     const menusName = useOEM('menusName');
-
+    /**
+     * 用户数据
+     */
+    const currentUser = useRecoilValue(CurrentUser);
+    /**
+     * 检查是否登录过
+     */
+    const notLogged = isEmptyObject(currentUser);
     /**
      * 重定向到第一页
      */
     const redirect = (menuData: MenuDataItem) => {
+        if (notLogged) {
+            navigate('/login');
+        }
         if (pathname === '/') {
             setTimeout(() => {
                 const firstPath = getFirstPath(menuData) as string;
                 setPathname(firstPath);
-                props.history.push({
-                    pathname: firstPath
-                })
+                navigate(firstPath);
             });
         }
     };
-
 
     /**
      * 加载数据
@@ -133,4 +148,4 @@ const BasicLayout = (props: any) => {
         </React.Fragment>
     );
 };
-export default withRouter(BasicLayout);
+export default BasicLayout;

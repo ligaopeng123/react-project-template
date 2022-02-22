@@ -2,7 +2,6 @@
  *  用户登录模块
  */
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 import useOEM from "@/hooks/useOEM";
 import {RcLoginModule, AfterSubmit} from "@gaopeng123/rc-login-module";
 import {message} from "antd";
@@ -93,4 +92,4 @@ const UserLayout: React.FC<any> = (props: any) => {
     );
 };
 
-export default withRouter(UserLayout);
+export default UserLayout;

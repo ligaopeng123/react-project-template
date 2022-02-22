@@ -10,8 +10,6 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const {getThemeVariables} = require('antd/dist/theme');
 const path = require("path");
 // const AntdScssThemePlugin = require("antd-scss-theme-plugin");
-// 后去去掉map文件
-// process.env.GENERATE_SOURCEMAP = false
 
 module.exports = override(
     // 默认路径设置
@@ -63,17 +61,6 @@ module.exports = override(
             }
         }
     ),
-    /**
-     * 导入esbuild-loader配置 提高编译效率
-     */
-    addWebpackModuleRule({
-        test: /\.tsx?$/,
-        loader: 'esbuild-loader',
-        options: {
-            loader: 'tsx',
-            target: 'es2015'
-        }
-    }),
     (config) => { //暴露webpack的配置
         // 去掉打包生产map 文件
         // config.devtool = config.mode === 'development' ? 'cheap-module-source-map' : false;

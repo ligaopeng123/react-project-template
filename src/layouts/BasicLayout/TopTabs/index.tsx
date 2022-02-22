@@ -11,9 +11,9 @@
  **********************************************************************/
 import React, {useState, useEffect} from 'react';
 import {message, Tabs} from "antd";
-import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {findSubtreeByOrder, findTreeOrder} from "@gaopeng123/utils";
 import './index.less';
+import {useNavigate} from "react-router-dom";
 
 const {TabPane} = Tabs;
 
@@ -21,18 +21,17 @@ type TopTabsProps = {
     routers: any;
     pathname: string;
 };
-const TopTabs: React.FC<TopTabsProps & RouteComponentProps> = (props) => {
+const TopTabs: React.FC<TopTabsProps> = (props) => {
     const {pathname, routers} = props;
     const [tags, setTags] = useState<any[]>([]);
     const [activeKey, setActiveKey] = useState<string>('');
+    const navigate = useNavigate();
     /**
      * 系统处理
      * @param activeKey
      */
     const onChangeHandler = (activeKey: string) => {
-        props.history.push({
-            pathname: activeKey
-        })
+        navigate(activeKey);
     }
     /**
      * 关闭处理
@@ -101,4 +100,4 @@ const TopTabs: React.FC<TopTabsProps & RouteComponentProps> = (props) => {
     )
 };
 
-export default withRouter(TopTabs);
+export default TopTabs;
