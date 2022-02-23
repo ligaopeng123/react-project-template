@@ -10,7 +10,6 @@
  */
 
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 import BasicContents from '@components/Contents/BasicContents';
 import './styles.scss';
 
@@ -24,4 +23,4 @@ const Organization = (props: any) => {
 }
 
 
-export default withRouter(Organization);
+export default Organization;
