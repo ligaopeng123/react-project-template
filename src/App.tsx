@@ -45,4 +45,3 @@ const App: React.FC<any> = (props) => {
 };
 
 export default App;
-
