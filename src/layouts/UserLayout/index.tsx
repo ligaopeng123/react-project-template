@@ -8,6 +8,7 @@ import {message} from "antd";
 import {useRecoilState} from "recoil";
 import CurrentUser from "@store/CurrentUser";
 import './styles.less';
+import {useNavigate} from "react-router-dom";
 
 const UserLayout: React.FC<any> = (props: any) => {
     /**
@@ -16,6 +17,10 @@ const UserLayout: React.FC<any> = (props: any) => {
     const loginLogo = useOEM('loginLogo');
     const loginName = useOEM('loginName');
     const loginDesc = useOEM('loginDesc');
+    /**
+     * 处理跳转
+     */
+    const navigate = useNavigate();
 
     /**
      * 菜单的第一项 默认为初始页面
@@ -24,9 +29,7 @@ const UserLayout: React.FC<any> = (props: any) => {
         // 登录后将用户信息缓存到全局变量里面
         // 登录 菜单管理模块 处理第一次跳转的重定向问题
         setTimeout(() => {
-            props.history.push({
-                pathname: `/`,
-            });
+            navigate('/');
         }, 10);
     };
     /**
@@ -77,7 +80,7 @@ const UserLayout: React.FC<any> = (props: any) => {
             onSubmit={submit}
             onCaptchaClick={() => {
             }}
-            onSubmitError={() => {
+            onSubmitError={(data) => {
             }}
             url="/login"
             method="POST"

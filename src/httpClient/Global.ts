@@ -19,7 +19,7 @@ export const getToken = () => {
  * @returns {any}
  */
 export const getCurrentUserFromStorage = () => {
-	return JSON.parse(localStorage.getItem(Global.user) || '{}');
+    return JSON.parse(localStorage.getItem(Global.user) || '{}');
 };
 
 /**
