@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import BasicContents from '@components/Contents/BasicContents';
 import {Button, Card, Col, Row} from "antd";
-import TestTable from "@pages/table";
+import TestTable from "./table";
 import {DemoTree} from './TestTree'
 
 const RouterHome = () => {
