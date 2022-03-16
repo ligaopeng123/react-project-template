@@ -1,8 +1,9 @@
 import {asyncMemoized, pathJoin} from "@gaopeng123/utils";
 
 enum Global {
-    user = 'react-simple-template-user',
-    oem = 'react-simple-template-oem' // 定制化信息
+    user = 'react-simple-template-user', // 用户信息
+    oem = 'react-simple-template-oem', // 定制化信息
+    theme = 'react-simple-template-theme', // 主题相关
 }
 
 /**
@@ -20,6 +21,12 @@ export const getToken = () => {
  */
 export const getCurrentUserFromStorage = () => {
     return JSON.parse(localStorage.getItem(Global.user) || '{}');
+};
+/**
+ * 主题相关
+ */
+export const getCurrentThemeFromStorage = () => {
+    return JSON.parse(localStorage.getItem(Global.theme) || '{}');
 };
 
 /**
@@ -58,6 +65,15 @@ export const getIsibleMenus = (menus: any = []) => {
 export const setCurrentUserToStorage = (value: any) => {
     localStorage.setItem(Global.user, JSON.stringify(value));
 };
+
+/**
+ * 主题定制
+ * @param value
+ */
+export const setCurrentThemeToStorage = (value: any) => {
+    localStorage.setItem(Global.theme, JSON.stringify(value));
+};
+
 /**
  * 获取本地json数据
  * @param path
@@ -67,6 +83,5 @@ export const loadLocalJson = asyncMemoized(async (path: string) => {
     const json = await res.clone().json();
     return json;
 });
-
 
 export default Global;

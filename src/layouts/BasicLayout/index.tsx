@@ -3,7 +3,7 @@
  */
 import React, {useState, createElement, useEffect} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
+import ProLayout, {ProBreadcrumb, SettingDrawer} from '@ant-design/pro-layout';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
@@ -14,10 +14,10 @@ import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 import {menuData} from "@store/Menus";
 import {getFirstPath} from "@httpClient/Global";
 import TopTabs from "@/layouts/BasicLayout/TopTabs";
-import './styles.less';
 import {useRecoilValue} from 'recoil';
 import CurrentUser from '@store/CurrentUser';
 import {isEmptyObject} from "@gaopeng123/utils";
+import './styles.less';
 
 /**
  * 创建icon图标
@@ -148,4 +148,5 @@ const BasicLayout = (props: any) => {
         </React.Fragment>
     );
 };
+
 export default BasicLayout;
