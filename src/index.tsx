@@ -5,7 +5,7 @@ import App from './App';
 import HeadersJS from './headersJS';
 import {DynamicLoadScript} from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
-import './index.scss';
+import './styles/index.scss';
 
 /**
  * 加载静态资源文件
