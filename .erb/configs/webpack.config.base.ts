@@ -5,6 +5,7 @@
 import webpack from 'webpack';
 import webpackPaths from './webpack.paths';
 import {dependencies as externals} from '../../release/app/package.json';
+import {resolve} from "path";
 
 const configuration: webpack.Configuration = {
     externals: [...Object.keys(externals || {})],
@@ -40,7 +41,18 @@ const configuration: webpack.Configuration = {
      */
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-        modules: [webpackPaths.srcPath, 'node_modules']
+        modules: [webpackPaths.srcPath, 'node_modules'],
+        alias: {
+            '@': resolve(__dirname, '../../src/renderer'),
+            '@assets': resolve(__dirname, '../../assets'),
+            '@httpClient': resolve(__dirname, '../../src/renderer/httpClient'),
+            '@layouts': resolve(__dirname, '../../src/renderer/layouts'),
+            '@pages': resolve(__dirname, '../../src/renderer/pages'),
+            '@share': resolve(__dirname, '../../src/renderer/share'),
+            '@store': resolve(__dirname, '../../src/renderer/store'),
+            '@hooks': resolve(__dirname, '../../src/renderer/hooks'),
+            '@components': resolve(__dirname, '../../src/renderer/components'),
+        }
     },
 
     plugins: [
