@@ -4,7 +4,7 @@
 import React, {useState, createElement, useEffect, Fragment} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
-import proSettings from "@/defaultSettings" ;
+import proSettings from "../../defaultSettings";
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
 import RightLayout from '../RightLayout/index';

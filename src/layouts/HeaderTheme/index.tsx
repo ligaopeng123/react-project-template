@@ -16,7 +16,7 @@ import {getThemeType, setTheme, ThemeType} from './ThemeColor';
 import {useRecoilState} from "recoil";
 import CurrentTheme from "@store/CurrentTheme";
 import {SettingDrawer} from "@ant-design/pro-layout";
-import proSettings from "@/defaultSettings";
+import proSettings from "../../defaultSettings";
 
 type HeaderThemeProps = {};
 
