@@ -14,7 +14,7 @@ import {
     getCurrentThemeFromStorage,
     setCurrentThemeToStorage,
 } from "@httpClient/Global";
-import {ThemeType} from "@/layouts/HeaderTheme/ThemeColor";
+import {ThemeType} from "@layouts/HeaderTheme/ThemeColor";
 
 const ThemeState: any = atom({
     key: 'currentTheme',

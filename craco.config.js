@@ -22,6 +22,7 @@ module.exports = {
             "@components": path.resolve(__dirname, "./src/components"),
             "@hoc": path.resolve(__dirname, "./src/hoc"),
             "@hooks": path.resolve(__dirname, "./src/hooks"),
+            "@layouts": path.resolve(__dirname, "./src/layouts"),
             "@httpClient": path.resolve(__dirname, "./src/httpClient"),
             "@pages": path.resolve(__dirname, "./src/pages"),
             "@share": path.resolve(__dirname, "./src/share"),

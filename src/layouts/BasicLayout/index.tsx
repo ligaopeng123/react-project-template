@@ -1,9 +1,9 @@
 /**
  * 布局管理
  */
-import React, {useState, createElement, useEffect} from 'react';
+import React, {useState, createElement, useEffect, Fragment} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import ProLayout, {ProBreadcrumb, SettingDrawer} from '@ant-design/pro-layout';
+import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
 import proSettings from "@/defaultSettings" ;
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
@@ -13,7 +13,7 @@ import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 import {menuData} from "@store/Menus";
 import {getFirstPath} from "@httpClient/Global";
-import TopTabs from "@/layouts/BasicLayout/TopTabs";
+import TopTabs from "@layouts/BasicLayout/TopTabs";
 import {useRecoilValue} from 'recoil';
 import CurrentUser from '@store/CurrentUser';
 import {isEmptyObject} from "@gaopeng123/utils";
@@ -117,6 +117,11 @@ const BasicLayout = (props: any) => {
                             <span className={`ant-pro-menu-item-title`}>{name}</span>
                         </Link>
                     </div>);
+                }}
+                subMenuItemRender={({path, icon, name}: MenuDataItem) => {
+                    // 定义有子级菜单的菜单
+                    return <Fragment>{createIcon(icon as string)}<span
+                        className={`ant-pro-menu-item-title`}>{name}</span></Fragment>
                 }}
                 // 面包屑
                 breadcrumbRender={(routes: any) => [...routes]}

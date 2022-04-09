@@ -13,7 +13,7 @@ import styles from './index.module.less';
 import UserDropdown from '../HeaderDropdown/user';
 import HeaderNaticeInterface from '../HeaderNotice/interface';
 import HeaderSearchInterface from '../HeaderSearch/interface';
-import HeaderTheme from "@/layouts/HeaderTheme";
+import HeaderTheme from "@layouts/HeaderTheme";
 
 
 export interface GlobalHeaderRightProps extends Partial<any>, Partial<ProSettings> {

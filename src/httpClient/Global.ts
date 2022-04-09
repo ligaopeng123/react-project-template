@@ -74,6 +74,38 @@ export const setCurrentThemeToStorage = (value: any) => {
     localStorage.setItem(Global.theme, JSON.stringify(value));
 };
 
+const defaulOemtConfig = {
+    loginLogo: '/logo.svg', // 登录页logo
+    loginName: "<%= title %>", // 登录页title
+    loginDesc: '项目描述信息', // 登录页描述
+    menusLogo: `logo.svg`, // 菜单上logo
+    menusName: `管理系统`, // 菜单上logo
+    copyright: `2021 某某出品并提供技术支持`,
+    links: [{
+        key: 'cy-tech',
+        title: '博客地址',
+        href: 'https://blog.csdn.net/ligaoming_123',
+        blankTarget: true,
+    }, {
+        key: 'pgli',
+        title: 'git地址',
+        href: 'https://github.com/ligaopeng123/react-customizescreen',
+        blankTarget: true,
+    }]
+};
+
+export const getCurrentOemToStorage = () => {
+    const oem = localStorage.getItem(Global.oem);
+    return oem ? JSON.parse(oem) : defaulOemtConfig;
+}
+
+export const setCurrentOemToStorage = (value: any) => {
+    localStorage.setItem(Global.oem, JSON.stringify(Object.assign({}, defaulOemtConfig, value)))
+}
+
+export const getOemTitle = () => {
+    return getCurrentOemToStorage().loginName;
+}
 /**
  * 获取本地json数据
  * @param path

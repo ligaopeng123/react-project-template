@@ -1,4 +1,6 @@
 import {Settings as LayoutSettings} from '@ant-design/pro-layout';
+import {getOemTitle} from "@httpClient/Global";
+
 
 export default {
     "navTheme": "realDark", // 风格 realDark
@@ -11,7 +13,7 @@ export default {
         "locale": true,
         "loading": false
     },
-    "title": "管理系统",
+    "title": getOemTitle(),
     "pwa": false,
     "iconfontUrl": "",
     "splitMenus": false
