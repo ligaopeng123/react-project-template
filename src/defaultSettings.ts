@@ -1,4 +1,6 @@
 import {Settings as LayoutSettings} from '@ant-design/pro-layout';
+import {getOemTitle} from "@httpClient/Global";
+
 
 export default {
 	"navTheme": "dark", // 风格 realDark
@@ -11,10 +13,10 @@ export default {
 		"locale": true,
 		"loading": false
 	},
-	"title": "<%= title %>",
+	"title": getOemTitle(),
 	"pwa": false,
 	"iconfontUrl": "",
 	"splitMenus": false
 } as LayoutSettings & {
-	pwa: boolean;
+    pwa: boolean;
 };

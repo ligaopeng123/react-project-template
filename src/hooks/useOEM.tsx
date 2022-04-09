@@ -15,35 +15,16 @@ import React, {useState, useEffect} from 'react';
 import {useRecoilValue} from "recoil";
 import {isUndefined} from "@gaopeng123/utils";
 import OEM from "@/store/OEM";
-
-const defaultConfig = {
-	loginLogo: '/logo.svg', // 登录页logo
-	loginName: '<%= title %>', // 登录页title
-	loginDesc: '项目描述信息', // 登录页描述
-	menusLogo: `logo.svg`, // 菜单上logo
-	menusName: `<%= title %>`, // 菜单上logo
-	copyright: `${new Date().getFullYear()} 某某出品并提供技术支持`,
-	links: [{
-		key: 'cy-tech',
-		title: '博客地址',
-		href: 'https://blog.csdn.net/ligaoming_123',
-		blankTarget: true,
-	}, {
-		key: 'pgli',
-		title: 'git地址',
-		href: 'https://github.com/ligaopeng123/react-customizescreen',
-		blankTarget: true,
-	}]
-};
+import {getCurrentOemToStorage} from "@httpClient/Global";
 
 const useOEM = (key: string) => {
-	const [oem, setOem] = useState<any>('');
-	const config = useRecoilValue(OEM);
-	useEffect(() => {
-		const allConfig: any = Object.assign({}, defaultConfig, config);
-		!isUndefined(allConfig[key]) && setOem(allConfig[key]);
-	}, [config]);
-	return oem;
+    const [oem, setOem] = useState<any>('');
+    const config = useRecoilValue(OEM);
+    useEffect(() => {
+        const allConfig: any = Object.assign({}, config);
+        !isUndefined(allConfig[key]) && setOem(allConfig[key]);
+    }, [config]);
+    return oem;
 };
 
 export default useOEM;

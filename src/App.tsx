@@ -1,19 +1,20 @@
 // 主目录结构
 import React, {useEffect} from 'react';
-import {useRecoilState, useSetRecoilState} from "recoil";
+import {useSetRecoilState} from "recoil";
 import {
-    HashRouter,
     Routes,
-    Router,
     Route,
 } from 'react-router-dom';
 import {BrowserHistory} from "@httpClient/toLogin";
-import BasicLayout from './layouts/BasicLayout';
-import UserLayout from './layouts/UserLayout';
+import BasicLayout from '@layouts/BasicLayout';
+import UserLayout from '@layouts/UserLayout';
 import OEM, {oemData} from "@store/OEM";
 import {unregisterFetch} from "@/httpClient";
+import {changeRouteTitle, HistoryRouter} from "@gaopeng123/hoc";
+import {getOemTitle} from "@httpClient/Global";
 import './styles/ant.less';
 
+changeRouteTitle([{name: '登录', path: '/login'}, {name: '404', path: '/404'}], getOemTitle());
 const App: React.FC<any> = (props) => {
     /**
      * oem信息
@@ -30,9 +31,8 @@ const App: React.FC<any> = (props) => {
     // 从上到下匹配
 
     return (
-        <HashRouter>
-            {/*@ts-ignore*/}
-            <Routes history={BrowserHistory}>
+        <HistoryRouter history={BrowserHistory}>
+            <Routes>
                 {/*登录页*/}
                 <Route path="/login" element={<UserLayout/>}/>
                 {/*404*/}
@@ -40,7 +40,7 @@ const App: React.FC<any> = (props) => {
                 {/*业务业务*/}
                 <Route path="*" element={<BasicLayout/>}/>
             </Routes>
-        </HashRouter>
+        </HistoryRouter>
     );
 };
 

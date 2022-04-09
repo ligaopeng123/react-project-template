@@ -20,6 +20,9 @@
             "@httpClient/*": [
                 "src/httpClient/*"
             ],
+            "@layouts/*": [
+                "src/layouts/*"
+            ],
             "@pages/*": [
                 "src/pages/*"
             ],
