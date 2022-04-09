@@ -107,7 +107,7 @@ const BasicLayout = (props: any) => {
                     return menuData;
                 }}
                 // menu={{request: loadMenus, defaultOpenAll: true}}
-                menuItemRender={({path, icon, name}: MenuDataItem, defaultDom) => {
+                menuItemRender={({path, icon, name}: MenuDataItem, defaultDom: any) => {
                     // 渲染菜单项
                     return (<div className={`layoutMenuItem`} onClick={() => {
                         setPathname(path as string);

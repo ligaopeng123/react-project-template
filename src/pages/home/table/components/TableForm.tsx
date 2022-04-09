@@ -16,7 +16,6 @@ import {
 	Input,
 	Select,
 	Cascader,
-	DatePicker,
 	InputNumber,
 	TreeSelect,
 	Switch,
@@ -39,11 +38,11 @@ const validateMessages = {
 const TableFrom: React.FC<FormForTableProps> = forwardRef((props, ref) => {
 	const {formData} = props;
 	const formRef = useRef<FormInstance>(null);
-	
+
 	useImperativeHandle(ref, () => ({
 		values: async () => formRef.current?.validateFields()
 	}));
-	
+
 	return (
 		<React.Fragment>
 			<Form
@@ -85,9 +84,6 @@ const TableFrom: React.FC<FormForTableProps> = forwardRef((props, ref) => {
 							},
 						]}
 					/>
-				</Form.Item>
-				<Form.Item name="DatePicker" label="DatePicker">
-					<DatePicker/>
 				</Form.Item>
 				<Form.Item name="InputNumber" label="InputNumber" rules={[{type: 'number', min: 0, max: 99}]}>
 					<InputNumber/>
