@@ -45,13 +45,14 @@ const configuration: webpack.Configuration = {
         alias: {
             '@': resolve(__dirname, '../../src/renderer'),
             '@assets': resolve(__dirname, '../../assets'),
+            '@components': resolve(__dirname, '../../src/renderer/components'),
+            '@hoc': resolve(__dirname, '../../src/renderer/hoc'),
+            '@hooks': resolve(__dirname, '../../src/renderer/hooks'),
             '@httpClient': resolve(__dirname, '../../src/renderer/httpClient'),
             '@layouts': resolve(__dirname, '../../src/renderer/layouts'),
             '@pages': resolve(__dirname, '../../src/renderer/pages'),
             '@share': resolve(__dirname, '../../src/renderer/share'),
             '@store': resolve(__dirname, '../../src/renderer/store'),
-            '@hooks': resolve(__dirname, '../../src/renderer/hooks'),
-            '@components': resolve(__dirname, '../../src/renderer/components'),
         }
     },
 

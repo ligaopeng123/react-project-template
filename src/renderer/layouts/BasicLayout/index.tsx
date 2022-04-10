@@ -1,10 +1,10 @@
 /**
  * 布局管理
  */
-import React, {useState, createElement, useEffect} from 'react';
+import React, {useState, createElement, useEffect, Fragment} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
-import proSettings from "@/defaultSettings" ;
+import proSettings from "../../defaultSettings";
 import * as Icon from '@ant-design/icons';
 import BackUp from './BackTop';
 import RightLayout from '../RightLayout/index';
@@ -13,11 +13,11 @@ import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
 import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
 import {menuData} from "@store/Menus";
 import {getFirstPath} from "@httpClient/Global";
-import TopTabs from "@/layouts/BasicLayout/TopTabs";
-import './styles.less';
+import TopTabs from "@layouts/BasicLayout/TopTabs";
 import {useRecoilValue} from 'recoil';
 import CurrentUser from '@store/CurrentUser';
 import {isEmptyObject} from "@gaopeng123/utils";
+import './styles.less';
 
 /**
  * 创建icon图标
@@ -107,7 +107,7 @@ const BasicLayout = (props: any) => {
                     return menuData;
                 }}
                 // menu={{request: loadMenus, defaultOpenAll: true}}
-                menuItemRender={({path, icon, name}: MenuDataItem, defaultDom) => {
+                menuItemRender={({path, icon, name}: MenuDataItem, defaultDom: any) => {
                     // 渲染菜单项
                     return (<div className={`layoutMenuItem`} onClick={() => {
                         setPathname(path as string);
@@ -117,6 +117,11 @@ const BasicLayout = (props: any) => {
                             <span className={`ant-pro-menu-item-title`}>{name}</span>
                         </Link>
                     </div>);
+                }}
+                subMenuItemRender={({path, icon, name}: MenuDataItem) => {
+                    // 定义有子级菜单的菜单
+                    return <Fragment>{createIcon(icon as string)}<span
+                        className={`ant-pro-menu-item-title`}>{name}</span></Fragment>
                 }}
                 // 面包屑
                 breadcrumbRender={(routes: any) => [...routes]}
@@ -148,4 +153,5 @@ const BasicLayout = (props: any) => {
         </React.Fragment>
     );
 };
+
 export default BasicLayout;

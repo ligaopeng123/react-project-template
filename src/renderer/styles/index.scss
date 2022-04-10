@@ -3,7 +3,15 @@
 
 // 全局字体样式
 body {
-  font-family: $UI-FONT-FAMILY
+    margin: 0;
+    font-family: $UI-FONT-FAMILY;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 // 获取尺寸 基础尺寸为4px

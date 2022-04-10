@@ -9,18 +9,33 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {atom} from 'recoil';
-import {loadLocalJson} from "@httpClient/Global";
+import {atom, selector} from 'recoil';
+import {
+    getCurrentOemToStorage,
+    loadLocalJson,
+    setCurrentOemToStorage,
+} from "@httpClient/Global";
 
-const OEM = atom({
-	key: 'oem',
-	default: {},
+const OEMState = atom({
+    key: 'oem',
+    default: getCurrentOemToStorage(),
+});
+
+const OEM = selector({
+    key: 'oem-state',
+    get: ({get}) => {
+        return get(OEMState);
+    },
+    set: ({set}, newValue) => {
+        // 拦截输入 将用户信息写入到Storage
+        setCurrentOemToStorage(newValue);
+        set(OEMState, newValue);
+    },
 });
 
 /**
  * 获取OEM配置信息
  */
-
 export const oemData = loadLocalJson('/json/OEM.json');
 
 export default OEM;

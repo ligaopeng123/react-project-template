@@ -5,30 +5,31 @@ import App from './App';
 import HeadersJS from './headersJS';
 import {DynamicLoadScript} from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
-import './index.scss';
+import {initTheme} from "@layouts/HeaderTheme/ThemeColor";
+import './styles/index.scss';
 
 /**
  * 加载静态资源文件
  * @constructor
  */
 function LoadScript(onLoad: any) {
-	ReactDOM.render(
-		<React.StrictMode>
-			<DynamicLoadScript url={HeadersJS} onLoad={onLoad}/>
-		</React.StrictMode>,
-		document.getElementById('root')
-	)
+    ReactDOM.render(
+        <React.StrictMode>
+            <DynamicLoadScript url={HeadersJS} onLoad={onLoad}/>
+        </React.StrictMode>,
+        document.getElementById('root')
+    )
 }
 
 async function LoadApp() {
-	ReactDOM.render(
-		<React.StrictMode>
-			<RecoilRoot>
-				<App/>
-			</RecoilRoot>
-		</React.StrictMode>,
-		document.getElementById('root')
-	)
+    ReactDOM.render(
+        <React.StrictMode>
+            <RecoilRoot>
+                <App/>
+            </RecoilRoot>
+        </React.StrictMode>,
+        document.getElementById('root')
+    )
 }
 
 /**
@@ -37,9 +38,10 @@ async function LoadApp() {
  * @returns {Promise<void>}
  */
 async function startUp() {
-	LoadScript(async () => {
-		LoadApp();
-	});
+    LoadScript(async () => {
+        // initTheme();
+        LoadApp();
+    });
 }
 
 startUp();

@@ -32,15 +32,9 @@
         width: 100%;
     }
 
-    .ant-menu-submenu-title, .ant-pro-menu-item-title {
+    .ant-pro-menu-item-title {
         display: inline-block;
         opacity: 0;
-    }
-
-    .layoutMenuItem {
-        a {
-            opacity: 0;
-        }
     }
 }
 
@@ -64,13 +58,28 @@
 }
 
 // logo区域限制
-.ant-pro-global-header-logo {
-    margin-left: -16px;
-    padding-left: 16px;
-    margin-right: 16px;
-    min-width: 207px;
+.ant-pro-global-header:not(.ant-pro-global-header-layout-mix) {
+    .ant-pro-global-header-logo {
+        margin-left: -16px;
+        padding-left: 16px;
+        margin-right: 16px;
+        min-width: 207px;
 
-    img {
-        height: 24px !important;
+        img {
+            height: 24px !important;
+        }
+    }
+}
+
+// 缩放控制
+.ant-pro-global-header {
+    .ant-pro-global-header-logo {
+        h1 {
+            min-width: 140px !important;
+        }
+    }
+
+    .ant-pro-global-header-collapsed-button {
+        margin-right: 16px;
     }
 }

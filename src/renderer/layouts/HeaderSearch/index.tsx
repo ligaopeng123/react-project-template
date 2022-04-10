@@ -30,23 +30,23 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
 		defaultOpen,
 		...restProps
 	} = props;
-	
-	const inputRef = useRef<Input | null>(null);
-	
+
+	const inputRef = useRef<any>(null);
+
 	const [value, setValue] = useMergeValue<string | undefined>(defaultValue, {
 		value: props.value,
 		onChange: props.onChange,
 	});
-	
+
 	const [searchMode, setSearchMode] = useMergeValue(defaultOpen || false, {
 		value: props.open,
 		onChange: onVisibleChange,
 	});
-	
+
 	const inputClass = classNames(styles.input, {
 		[styles.show]: searchMode,
 	});
-	
+
 	return (
 		<div
 			className={classNames(className, styles.headerSearch)}
