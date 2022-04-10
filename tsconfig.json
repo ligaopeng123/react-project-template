@@ -25,34 +25,34 @@
         "outDir": "release/app/dist",
         "paths": {
             "@/*": [
-                "./src/renderer"
+                "./*"
             ],
             "@assets/*": [
                 "../../assets/*"
             ],
             "@components/*": [
-                "./src/components/*"
+                "./components/*"
             ],
             "@hooks/*": [
-                "./src/hooks/*"
+                "./hooks/*"
             ],
             "@layouts/*": [
-                "./src/layouts/*"
+                "./layouts/*"
             ],
             "@hoc/*": [
-                "./src/hoc/*"
+                "./hoc/*"
             ],
             "@httpClient/*": [
-                "./src/httpClient/*"
+                "./httpClient/*"
             ],
             "@pages/*": [
-                "./src/pages/*"
+                "./pages/*"
             ],
             "@share/*": [
-                "./src/share/*"
+                "./share/*"
             ],
             "@store/*": [
-                "./src/store/*"
+                "./store/*"
             ]
         }
     },
