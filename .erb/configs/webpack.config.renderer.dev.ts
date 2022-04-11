@@ -1,4 +1,4 @@
-import path, {resolve} from 'path';
+import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -10,11 +10,7 @@ import baseConfig from './webpack.config.base';
 import webpackPaths from './webpack.paths';
 import checkNodeEnv from '../scripts/check-node-env';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-
-const sassRegex = /\.(scss|sass)$/;
-const sassModuleRegex = /\.module\.(scss|sass)$/;
+import {lessRules, sassRules} from "./webpack.config.base.renderer";
 
 // const {getThemeVariables} = require('antd/dist/theme');
 
@@ -68,94 +64,8 @@ const configuration: webpack.Configuration = {
     },
     module: {
         rules: [
-            {
-                test: sassRegex,
-                exclude: sassModuleRegex,
-                use: [
-                    {
-                        loader: 'style-loader',
-                        options: {}
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                mode: 'local',
-                            },
-                            sourceMap: true,
-                            importLoaders: 3,
-                        },
-                    },
-                    {
-                        loader: require.resolve('postcss-loader'),
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                config: false,
-                                plugins: [
-                                    'postcss-flexbugs-fixes',
-                                    [
-                                        'postcss-preset-env',
-                                        {
-                                            autoprefixer: {
-                                                flexbox: 'no-2009',
-                                            },
-                                            stage: 3,
-                                        },
-                                    ],
-                                    'postcss-normalize',
-                                ],
-                            },
-                            sourceMap: true,
-                        },
-                    },
-                    {
-                        loader: "resolve-url-loader",
-                        options: {
-                            sourceMap: true,
-                            root: resolve(__dirname, '../../src/renderer'),
-                        },
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            // webpackImporter: false,
-                        }
-                    }
-                ],
-                sideEffects: true,
-            },
-            {
-                test: sassModuleRegex,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                mode: 'local',
-                                getLocalIdent: getCSSModuleLocalIdent,
-                            },
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {}
-                    }],
-                exclude: /\.module\.s?(c|a)ss$/,
-            },
-            {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader',
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            lessOptions: {
-                                javascriptEnabled: true,
-                            }
-                        }
-                    }],
-            },
+            ...sassRules(),
+            ...lessRules(),
             // Fonts
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -163,7 +73,7 @@ const configuration: webpack.Configuration = {
             },
             // Images
             {
-                test: /\.(png|svg|jpg|jpeg|gif|md)$/i,
+                test: /\.(svg|png|jpg|jpeg|gif|md)$/i,
                 type: 'asset/resource',
             },
         ],

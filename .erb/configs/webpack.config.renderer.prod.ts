@@ -5,7 +5,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-// @ts-ignore
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
@@ -15,8 +14,9 @@ import baseConfig from './webpack.config.base';
 import webpackPaths from './webpack.paths';
 import checkNodeEnv from '../scripts/check-node-env';
 import deleteSourceMaps from '../scripts/delete-source-maps';
+import {lessRules, sassRules} from "./webpack.config.base.renderer";
 
-// const {getThemeVariables} = require('antd/dist/theme');
+
 checkNodeEnv('production');
 deleteSourceMaps();
 
@@ -47,57 +47,8 @@ const configuration: webpack.Configuration = {
 
     module: {
         rules: [
-            {
-                test: /\.s?(a|c)ss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            sourceMap: true,
-                            importLoaders: 1,
-                        },
-                    },
-                    {
-                        loader: "resolve-url-loader",
-                        options: {
-                            sourceMap: true,
-                            root: webpackPaths.srcRendererPathSrc,
-                        },
-                    },
-                    'sass-loader',
-                ],
-                include: /\.module\.s?(c|a)ss$/,
-            },
-            {
-                test: /\.s?(a|c)ss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', {
-                    loader: "resolve-url-loader",
-                    options: {
-                        sourceMap: true,
-                        root: webpackPaths.srcRendererPathSrc,
-                    },
-                }, 'sass-loader'],
-                exclude: /\.module\.s?(c|a)ss$/,
-            },
-            {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader', {
-                    loader: 'less-loader',
-                    options: {
-                        lessOptions: {
-                            module: true,
-                            javascriptEnabled: true,
-                            // localIdentName: '[local]--[hash:base64:5]',
-                            // ...getThemeVariables({
-                            //     dark: true, // 开启暗黑模式
-                            //     compact: false, // 开启紧凑模式
-                            // }),
-                        }
-                    }
-                }],
-            },
+            ...sassRules(),
+            ...lessRules(),
             // Fonts
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -105,7 +56,7 @@ const configuration: webpack.Configuration = {
             },
             // Images
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(svg|png|jpg|jpeg|gif|md)$/i,
                 type: 'asset/resource',
             },
         ],
