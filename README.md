@@ -27,8 +27,10 @@ npm install
 
 无需编译的静态资源 统一放到根目录下得assets下
 
+.eslintrc 配置eslint
+
 ```bash
-npm start
+npm start 
 ```
 
 ## build
