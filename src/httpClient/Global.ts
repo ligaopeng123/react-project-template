@@ -42,7 +42,7 @@ export const getFirstPath = (menuInfo: any) => {
  * @param child
  */
 const getChildren = (child: any) => {
-    return child.children || child.routers;
+    return child.children || child.routers || child.routes;
 }
 const getPathByRecursion: any = (child: any) => {
     if (child[0] && getChildren(child[0])?.length) {
