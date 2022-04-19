@@ -10,13 +10,13 @@
  *
  **********************************************************************/
 import {get, post, put, del} from "@httpClient/index";
-import {valueEnum, TableListItem, Add<%= name %>Props, Edit<%= name %>Props} from "./typing";
+import {valueEnum, TableListItem, Add<%= name %>Props, Edit<%= name %>Props} from "./<%= name %>Typing";
 
 export const <%= name %>List = async (params: any) => {
 	const tableListDataSource: TableListItem[] = [];
-	
+
 	const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
-	
+
 	for (let i = 0; i < 5; i += 1) {
 		tableListDataSource.push({
 			// @ts-ignore
