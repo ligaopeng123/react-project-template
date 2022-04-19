@@ -5,7 +5,9 @@ import App from './App';
 import HeadersJS from './headersJS';
 import {DynamicLoadScript} from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
-import {initTheme} from "@layouts/HeaderTheme/ThemeColor";
+import {theme} from "@layouts/HeaderTheme/theme";
+import CssBaseline from '@mui/material/CssBaseline';
+import {ThemeProvider} from '@mui/material/styles';
 import './styles/index.scss';
 
 /**
@@ -25,7 +27,11 @@ async function LoadApp() {
     ReactDOM.render(
         <React.StrictMode>
             <RecoilRoot>
-                <App/>
+                <ThemeProvider theme={theme}>
+                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                    <CssBaseline/>
+                    <App/>
+                </ThemeProvider>
             </RecoilRoot>
         </React.StrictMode>,
         document.getElementById('root')
@@ -39,7 +45,6 @@ async function LoadApp() {
  */
 async function startUp() {
     LoadScript(async () => {
-        initTheme();
         LoadApp();
     });
 }

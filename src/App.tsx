@@ -12,7 +12,6 @@ import OEM, {oemData} from "@store/OEM";
 import {unregisterFetch} from "@httpClient/index";
 import {changeRouteTitle, HistoryRouter} from "@gaopeng123/hoc";
 import {getOemTitle} from "@httpClient/Global";
-import './styles/ant.less';
 
 changeRouteTitle([{name: '登录', path: '/login'}, {name: '404', path: '/404'}], getOemTitle());
 const App: React.FC<any> = (props) => {
