@@ -12,6 +12,7 @@ import OEM, {oemData} from "@store/OEM";
 import {unregisterFetch} from "@httpClient/index";
 import {changeRouteTitle, HistoryRouter} from "@gaopeng123/hoc";
 import {getOemTitle} from "@httpClient/Global";
+import Mobile from "@layouts/BasicLayout/Mobile";
 
 changeRouteTitle([{name: '登录', path: '/login'}, {name: '404', path: '/404'}], getOemTitle());
 const App: React.FC<any> = (props) => {
@@ -37,7 +38,7 @@ const App: React.FC<any> = (props) => {
                 {/*404*/}
                 <Route path="/404" element={<div>404</div>}/>
                 {/*业务业务*/}
-                <Route path="*" element={<BasicLayout/>}/>
+                <Route path="*" element={<Mobile/>}/>
             </Routes>
         </HistoryRouter>
     );

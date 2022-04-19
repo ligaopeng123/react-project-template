@@ -5,7 +5,7 @@ import App from './App';
 import HeadersJS from './headersJS';
 import {DynamicLoadScript} from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
-import {theme} from "@layouts/HeaderTheme/theme";
+import theme from "@layouts/HeaderTheme/theme";
 import CssBaseline from '@mui/material/CssBaseline';
 import {ThemeProvider} from '@mui/material/styles';
 import './styles/index.scss';
