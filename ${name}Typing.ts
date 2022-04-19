@@ -13,7 +13,7 @@
 /**
  * store类型系统定义
  */
-export enum StoreEnum {
+export enum <%= name %>StoreEnum {
 	add = 'add',
 	del = 'del',
 	edit = 'edit',
@@ -22,7 +22,7 @@ export enum StoreEnum {
 
 export type Action = {
 	value: any;
-	type: StoreEnum
+	type: <%= name %>StoreEnum
 }
 
 /**

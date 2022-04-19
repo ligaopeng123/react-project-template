@@ -14,7 +14,7 @@ import React, {useEffect, useRef} from 'react';
 import {Button, Tooltip, Input, Popconfirm} from 'antd';
 import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOutlined} from '@ant-design/icons';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
-import {StoreEnum, TableListItem, TableProps} from "../typing";
+import {<%= name %><%= name %>StoreEnum, TableListItem, TableProps} from "../<%= name %>Typing";
 import {uuid} from '@gaopeng123/utils';
 import {dealWithParams} from '@share/utils';
 import {<%= name %>List, del<%= name %>} from "../api";
@@ -31,7 +31,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	 */
 	const add = () => {
 		dispatch({
-			type: StoreEnum.add,
+			type: <%= name %>StoreEnum.add,
 			value: {}
 		});
 	};
@@ -49,7 +49,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	 */
 	const edit = (row: any) => {
 		dispatch({
-			type: StoreEnum.edit,
+			type: <%= name %>StoreEnum.edit,
 			// 避免编辑不触发
 			value: Object.assign({_: uuid()}, row)
 		});
@@ -58,12 +58,12 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	 * 刷新控制
 	 */
 	useEffect(() => {
-		if (state[StoreEnum.refresh]) {
+		if (state[<%= name %>StoreEnum.refresh]) {
 			// @ts-ignore
 			ref.current?.reload();
 		}
-	}, [state[StoreEnum.refresh]]);
-	
+	}, [state[<%= name %>StoreEnum.refresh]]);
+
 	const columns: ProColumns<TableListItem>[] = [
 		{
 			title: '排序',
@@ -160,7 +160,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 			],
 		},
 	];
-	
+
 	return (
 		<ProTable<TableListItem>
 			actionRef={ref}

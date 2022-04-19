@@ -21,7 +21,7 @@ import {
 	TreeSelect,
 	Switch,
 } from 'antd';
-import {FormForTableProps} from "../typing";
+import {FormForTableProps} from "../<%= name %>Typing";
 import {FormInstance} from 'antd/lib/form';
 
 
@@ -39,11 +39,11 @@ const validateMessages = {
 const <%= name %>From: React.FC<FormForTableProps> = forwardRef((props, ref) => {
 	const {formData} = props;
 	const formRef = useRef<FormInstance>(null);
-	
+
 	useImperativeHandle(ref, () => ({
 		values: async () => formRef.current?.validateFields()
 	}));
-	
+
 	return (
 		<React.Fragment>
 			<Form

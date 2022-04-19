@@ -11,7 +11,7 @@
  **********************************************************************/
 
 import React, {useEffect, useRef, useState} from 'react';
-import {FormForTableRef, ModalForTableProps, StoreEnum} from "../typing";
+import {FormForTableRef, ModalForTableProps, <%= name %>StoreEnum} from "../<%= name %>Typing";
 import <%= name %>From from "./<%= name %>Form";
 import {message,Modal} from 'antd';
 import {uuid} from "@gaopeng123/utils";
@@ -35,29 +35,29 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 	 */
 	const refresh = () => {
 		dispatch({
-			type: StoreEnum.refresh,
+			type: <%= name %>StoreEnum.refresh,
 			value: uuid()
 		});
 	};
-	
+
 	useEffect(() => {
 		setConfirmLoading(false);
-		if (state[StoreEnum.add]) {
+		if (state[<%= name %>StoreEnum.add]) {
 			setTitle(Title.add);
-			setFormData(state[StoreEnum.add]);
+			setFormData(state[<%= name %>StoreEnum.add]);
 			setIsModalVisible(true);
 		}
-	}, [state[StoreEnum.add]]);
-	
+	}, [state[<%= name %>StoreEnum.add]]);
+
 	useEffect(() => {
 		setConfirmLoading(false);
-		if (state[StoreEnum.edit]) {
+		if (state[<%= name %>StoreEnum.edit]) {
 			setTitle(Title.edit);
-			setFormData(state[StoreEnum.edit]);
+			setFormData(state[<%= name %>StoreEnum.edit]);
 			setIsModalVisible(true);
 		}
-	}, [state[StoreEnum.edit]]);
-	
+	}, [state[<%= name %>StoreEnum.edit]]);
+
 	const handleOk = () => {
 		setConfirmLoading(true);
 		formRef?.current?.values().then((data: any) => {
@@ -76,7 +76,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 
 			} else {
 				// 编辑回调处理
-				edit<%= name %>(Object.assign({}, data, {id: state[StoreEnum.edit]?.id})).then((res)=> {
+				edit<%= name %>(Object.assign({}, data, {id: state[<%= name %>StoreEnum.edit]?.id})).then((res)=> {
 					handle(res);
 				});
 			}
@@ -85,12 +85,12 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 			setConfirmLoading(false);
 		});
 	};
-	
+
 	const handleCancel = () => {
 	    setConfirmLoading(false);
 		setIsModalVisible(false);
 	};
-	
+
 	return (
 		<React.Fragment>
 			<Modal destroyOnClose title={title} confirmLoading={confirmLoading} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
