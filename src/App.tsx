@@ -9,7 +9,7 @@ import {BrowserHistory} from "@httpClient/toLogin";
 import BasicLayout from '@layouts/BasicLayout';
 import UserLayout from '@layouts/UserLayout';
 import OEM, {oemData} from "@store/OEM";
-import {unregisterFetch} from "@/httpClient";
+import {unregisterFetch} from "@httpClient/index";
 import {changeRouteTitle, HistoryRouter} from "@gaopeng123/hoc";
 import {getOemTitle} from "@httpClient/Global";
 import './styles/ant.less';
