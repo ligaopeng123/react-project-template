@@ -76,7 +76,7 @@ export const setCurrentThemeToStorage = (value: any) => {
 
 const defaulOemtConfig = {
     loginLogo: '/logo.svg', // 登录页logo
-    loginName: "<%= title %>", // 登录页title
+    loginName: "管理系统", // 登录页title
     loginDesc: '项目描述信息', // 登录页描述
     menusLogo: `logo.svg`, // 菜单上logo
     menusName: `管理系统`, // 菜单上logo
