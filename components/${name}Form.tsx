@@ -16,7 +16,6 @@ import {
 	Input,
 	Select,
 	Cascader,
-	DatePicker,
 	InputNumber,
 	TreeSelect,
 	Switch,
@@ -85,9 +84,6 @@ const <%= name %>From: React.FC<FormForTableProps> = forwardRef((props, ref) => 
 							},
 						]}
 					/>
-				</Form.Item>
-				<Form.Item name="DatePicker" label="DatePicker">
-					<DatePicker/>
 				</Form.Item>
 				<Form.Item name="InputNumber" label="InputNumber" rules={[{type: 'number', min: 0, max: 99}]}>
 					<InputNumber/>
