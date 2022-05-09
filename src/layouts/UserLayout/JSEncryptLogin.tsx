@@ -11,10 +11,11 @@
  **********************************************************************/
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import RCLoginJSEncrypt, {RCLoginCaptchaProps} from "./RCLoginJSEncrypt";
+import {RCLoginJSEncrypt, RCLoginCaptchaProps} from "@gaopeng123/rc-login-jsencrypt";
 import {get, post} from "@/httpClient";
 import {useSetRecoilState} from "recoil";
 import CurrentUser from "@store/CurrentUser";
+import useOEM from "@hooks/useOEM";
 import './styles.less';
 
 type JSEncryptLoginProps = {};
@@ -25,6 +26,12 @@ const headers = {
 
 }
 const JSEncryptLogin: React.FC<JSEncryptLoginProps> = (props) => {
+    /**
+     * oem数据消费
+     */
+    const loginLogo = useOEM('loginLogo');
+    const loginName = useOEM('loginName');
+    const loginDesc = useOEM('loginDesc');
     /**
      * 保存用户登录信息
      */
@@ -70,7 +77,7 @@ const JSEncryptLogin: React.FC<JSEncryptLoginProps> = (props) => {
             mainStyle={{backgroundImage: 'url(./assets/background.jpg)'}}
             bodyStyle={{right: '200px;'}}
             keeplogged={true}
-            title="食堂管理系统"
+            title={loginName}
         />
     )
 };
