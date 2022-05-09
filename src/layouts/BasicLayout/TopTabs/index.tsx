@@ -12,8 +12,8 @@
 import React, {useState, useEffect} from 'react';
 import {message, Tabs} from "antd";
 import {findSubtreeByOrder, findTreeOrder} from "@gaopeng123/utils";
-import './index.less';
 import {useNavigate} from "react-router-dom";
+import './index.less';
 
 const {TabPane} = Tabs;
 

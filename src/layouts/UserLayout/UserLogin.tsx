@@ -7,8 +7,8 @@ import {RcLoginModule, AfterSubmit} from "@gaopeng123/rc-login-module";
 import {message} from "antd";
 import {useRecoilState} from "recoil";
 import CurrentUser from "@store/CurrentUser";
-import './styles.less';
 import {useNavigate} from "react-router-dom";
+import './styles.less';
 
 const UserLogin: React.FC<any> = (props: any) => {
     /**
