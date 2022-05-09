@@ -61,7 +61,7 @@ const TopTabs: React.FC<TopTabsProps> = (props) => {
     useEffect(() => {
         if (pathname && pathname !== '/' && routers.length) {
             if (!tags.find((item) => item.key === pathname)) {
-                const treeOpts = {childrenKey: 'routes'};
+                const treeOpts = {childrenKey: 'children'};
                 const orders = findTreeOrder(routers, (item) => {
                     return item.path === pathname;
                 }, treeOpts);
