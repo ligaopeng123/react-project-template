@@ -12,8 +12,8 @@
 import React, {useState, useEffect} from 'react';
 import {message, Tabs} from "antd";
 import {findSubtreeByOrder, findTreeOrder} from "@gaopeng123/utils";
-import './index.less';
 import {useNavigate} from "react-router-dom";
+import './index.less';
 
 const {TabPane} = Tabs;
 
@@ -61,7 +61,7 @@ const TopTabs: React.FC<TopTabsProps> = (props) => {
     useEffect(() => {
         if (pathname && pathname !== '/' && routers.length) {
             if (!tags.find((item) => item.key === pathname)) {
-                const treeOpts = {childrenKey: 'routes'};
+                const treeOpts = {childrenKey: 'children'};
                 const orders = findTreeOrder(routers, (item) => {
                     return item.path === pathname;
                 }, treeOpts);
