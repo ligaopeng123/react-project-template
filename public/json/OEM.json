@@ -2,9 +2,9 @@
     "code": 0,
     "data": {
         "loginName": "某某管理系统",
-        "loginLogo": "/logo.svg",
+        "loginLogo": "./logo.svg",
         "loginDesc": "登录页产品描述",
-        "menusLogo": "/logo.svg",
+        "menusLogo": "./logo.svg",
         "menusName": "某某管理系统",
         "copyright": "",
         "links": null
