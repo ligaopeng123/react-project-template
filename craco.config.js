@@ -49,7 +49,7 @@ module.exports = {
             }
             // 支持static部署
             if (process.env.REACT_APP_PUBLICPATH) {
-                config.output.publicPath = process.env.REACT_APP_PUBLICPATH;
+                // config.output.publicPath = process.env.REACT_APP_PUBLICPATH;
             }
             return config
         }
