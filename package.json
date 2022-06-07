@@ -35,8 +35,13 @@
     "scripts": {
         "start": "set PORT=9000 && dotenv -e .env craco start",
         "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod craco build",
+        "preinstall": "npm-force-resolutions",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
+    },
+    "resolutions": {
+        "@types/react": "17.0.30",
+        "react-error-overlay": "6.0.9"
     },
     "eslintConfig": {
         "extends": "react-app",
