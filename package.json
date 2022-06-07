@@ -80,6 +80,7 @@
         "http-proxy-middleware": "^1.0.6",
         "less-loader": "^6.1.0",
         "mockjs": "^1.1.0",
+        "npm-force-resolutions": "0.0.10",
         "sass": "^1.37.0",
         "sass-loader": "^8.0.2"
     }
