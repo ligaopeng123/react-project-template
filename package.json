@@ -35,7 +35,7 @@
     "scripts": {
         "start": "set PORT=9000 && dotenv -e .env craco start",
         "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod craco build",
-        "preinstall": "npm-force-resolutions",
+        "postinstall": "npm-force-resolutions",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -80,6 +80,7 @@
         "http-proxy-middleware": "^1.0.6",
         "less-loader": "^6.1.0",
         "mockjs": "^1.1.0",
+        "npm-force-resolutions": "0.0.10",
         "sass": "^1.37.0",
         "sass-loader": "^8.0.2"
     }
