@@ -7,4 +7,4 @@ COPY build  /webapp
 # 复制内容
 RUN chmod 777 -R /webapp && chown nginx:nginx -R /webapp
 # 复制nginx配置
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx.${PROJECT_ENV}.conf /etc/nginx/nginx.conf

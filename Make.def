@@ -1,11 +1,13 @@
 # Top level makefile template
 
 # XXX: 镜像仓库地址 例如harbar
-REGISTRY := <%= imagesUrl %>
+REGISTRY := harbor.com.cn
 # 项目类型
 NAMESPACE := web
-# 定义项目名称
-PROJECT_NAME := <%= name %>-test
+# 定义编译环境
+PROJECT_ENV ?= pod
+# 定义项目名称(镜像名称)
+PROJECT_NAME := xxx-$(PROJECT_ENV)
 
 .PHONY: help prepare build debug push all build-r push-r all-r
 
@@ -17,8 +19,8 @@ DOCKER_BUILD_OPTIONS += --pull
 
 DOWNLOAD_WITH_MD5_CHECK := \
    function download { \
-      local url=<%= imagesMD5Url %>; \
-      local pkg=<%= imagesMD5Pkg %>; \
+      local url=$${1:?}; \
+      local pkg=$${2:-$$(basename "$$url")}; \
       ! grep $$pkg md5sum.txt | md5sum --check || return 0; \
       curl -fsSL "$$url" > $$pkg && grep $$pkg md5sum.txt | md5sum --check; \
    }; \
@@ -39,7 +41,7 @@ help:
 prepare:
 
 build: prepare
-   docker build $(DOCKER_BUILD_OPTIONS) -t $(IMAGE) .
+   docker build --build-arg PROJECT_ENV="${PROJECT_ENV}" $(DOCKER_BUILD_OPTIONS) -t $(IMAGE) .
    docker images | grep --color -E "^$(IMAGE_NAME) +$(IMAGE_TAG) "
 
 test:
