@@ -4,8 +4,10 @@
 REGISTRY := <%= imagesUrl %>
 # 项目类型
 NAMESPACE := web
-# 定义项目名称
-PROJECT_NAME := <%= name %>-test
+# 定义编译环境
+PROJECT_ENV ?= pod
+# 定义项目名称(镜像名称)
+PROJECT_NAME := <%= name %>-$(PROJECT_ENV)
 
 .PHONY: help prepare build debug push all build-r push-r all-r
 
@@ -39,7 +41,7 @@ help:
 prepare:
 
 build: prepare
-   docker build $(DOCKER_BUILD_OPTIONS) -t $(IMAGE) .
+   docker build --build-arg PROJECT_ENV="${PROJECT_ENV}" $(DOCKER_BUILD_OPTIONS) -t $(IMAGE) .
    docker images | grep --color -E "^$(IMAGE_NAME) +$(IMAGE_TAG) "
 
 test:

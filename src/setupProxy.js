@@ -1,24 +1,12 @@
-const {createProxyMiddleware} = require('http-proxy-middleware');
-module.exports = function (app) {
-	/**
-	 * socket 数据发送接口
-	 */
-	app.use(createProxyMiddleware('/receive/event', {
-		target: 'http://127.0.0.1:7001', // 目标地址
-		changeOrigin: true, // needed for virtual hosted sites
-		ws: true, // proxy websockets
-		secure: false, // 验证SSL证书。应用于https
-		// pathRewrite: {
-		//     '^/custom': ''
-		// }
-	}));
-	/**
-	 * socket 测试
-	 */
-	app.use(createProxyMiddleware('/socket', {
-		target: 'ws://127.0.0.1:7001',
-		changeOrigin: true,
-		secure: false,
-		ws: true
-	}));
-};
+/**
+ * 区分dev test pod环境
+ * @type {boolean}
+ */
+const isDev = process.env.REACT_APP_ENV === 'dev';
+const isTest = process.env.REACT_APP_ENV === 'test';
+const isPod = process.env.REACT_APP_ENV === 'pod';
+module.exports = isDev ?
+	require('./setupProxy.dev')
+	: isTest
+		? require('./setupProxy.test')
+		: require('./setupProxy.pod')
