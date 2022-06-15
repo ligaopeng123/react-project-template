@@ -186,7 +186,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 			}}
 			dateFormatter="string"
 			toolbar={{
-				title: '我是表格',
+				title: '<%= name %>Table',
 				tooltip: '',
 			}}
 			toolBarRender={() => [
