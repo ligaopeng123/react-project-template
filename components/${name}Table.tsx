@@ -194,6 +194,10 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 					<AppstoreAddOutlined/>新建
 				</Button>
 			]}
+			columnsState={{
+				persistenceKey: '<%= name %>-columnsState',
+				persistenceType: 'localStorage'
+			}}
 		/>
 	);
 };
