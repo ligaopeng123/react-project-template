@@ -16,7 +16,7 @@ import {reducer, init, State} from "./${name}Store";
 import {Props} from "./<%= name %>Typing";
 
 
-const <%= name %>: React.FC<Props> = () => {
+const <%= name %>: React.FC<any> = () => {
 	const [state, dispatch] = useReducer(reducer, State, init);
 	return (
 		<React.Fragment>
