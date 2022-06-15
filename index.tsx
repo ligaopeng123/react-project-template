@@ -13,7 +13,7 @@ import React, {useReducer} from 'react';
 import <%= name %>Table from "./components/<%= name %>Table";
 import <%= name %>Modal from "./components/<%= name %>Modal";
 import {reducer, init, State} from "./${name}Store";
-import {Props} from "./${name}Typing";
+import {Props} from "./<%= name %>Typing";
 
 
 const <%= name %>: React.FC<Props> = () => {
