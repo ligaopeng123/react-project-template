@@ -39,7 +39,7 @@
         "build:dev": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.dev craco build",
         "build:test": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.test craco build",
         "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod craco build",
-        "preinstall": "npm install --package-lock-only --ignore-scripts && npm-force-resolutions",
+        "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
