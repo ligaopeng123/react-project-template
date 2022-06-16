@@ -72,12 +72,17 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 				// 新增回调处理
 				add<%= name %>(data).then((res)=> {
 					handle(res);
+				}).catch(()=> {
+					// 遇到错误 处理loading状态
+					setConfirmLoading(false);
 				});
-
 			} else {
 				// 编辑回调处理
 				edit<%= name %>(Object.assign({}, data, {id: state[<%= name %>StoreEnum.edit]?.id})).then((res)=> {
 					handle(res);
+				}).catch(()=> {
+					// 遇到错误 处理loading状态
+					setConfirmLoading(false);
 				});
 			}
 		}).catch(()=> {
