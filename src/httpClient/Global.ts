@@ -1,4 +1,4 @@
-import {asyncMemoized, pathJoin} from "@gaopeng123/utils";
+import {asyncMemoized, isArray, pathJoin} from "@gaopeng123/utils";
 
 enum Global {
 	user = '<%= name %>-user', // 用户信息
@@ -34,19 +34,36 @@ export const getCurrentThemeFromStorage = () => {
  * @param menuInfo
  */
 export const getFirstPath = (menuInfo: any) => {
-    const child = getIsibleMenus(menuInfo);
-    return child ? getPathByRecursion(child) : '';
+    const child = getVisibleMenus(menuInfo);
+    const childrenKey = getMenuChildrenKey(child);
+    return child ? getFirstPathByMenus(child, childrenKey) : '';
 };
 /**
- * 兼容处理
- * @param child
+ * 获取当前菜单的key 兼容ProLayout 修改源数据  children routers routes
+ * @param menuData
  */
-const getChildren = (child: any) => {
-    return child.children || child.routers || child.routes;
+export const getMenuChildrenKey = (menuData: any[]) => {
+    for (const menuDatum of menuData) {
+        if (isArray(menuDatum.children)) {
+            return 'children';
+        }
+        if (isArray(menuDatum.routers)) {
+            return 'routers';
+        }
+        if (isArray(menuDatum.routes)) {
+            return 'routes';
+        }
+    }
+    return 'children';
 }
-const getPathByRecursion: any = (child: any) => {
-    if (child[0] && getChildren(child[0])?.length) {
-        return getPathByRecursion(getChildren(child[0]));
+/**
+ * 获取第一个菜单路径
+ * @param child
+ * @param childrenKey
+ */
+const getFirstPathByMenus: any = (child: any, childrenKey: string) => {
+    if (child[0] && child[0][childrenKey]?.length) {
+        return getFirstPathByMenus(child[0][childrenKey]);
     }
     return child[0] ? child[0].path : '';
 };
@@ -54,7 +71,7 @@ const getPathByRecursion: any = (child: any) => {
  * 获取可视菜单
  * @param menuInfo
  */
-export const getIsibleMenus = (menus: any = []) => {
+export const getVisibleMenus = (menus: any = []) => {
     return menus || [];
 };
 
@@ -74,7 +91,7 @@ export const setCurrentThemeToStorage = (value: any) => {
     localStorage.setItem(Global.theme, JSON.stringify(value));
 };
 
-const defaulOemtConfig = {
+const defaultOemConfig = {
     loginLogo: '/logo.svg', // 登录页logo
     loginName: "<%= title %>", // 登录页title
     loginDesc: '项目描述信息', // 登录页描述
@@ -96,11 +113,11 @@ const defaulOemtConfig = {
 
 export const getCurrentOemToStorage = () => {
     const oem = localStorage.getItem(Global.oem);
-    return oem ? JSON.parse(oem) : defaulOemtConfig;
+    return oem ? JSON.parse(oem) : defaultOemConfig;
 }
 
 export const setCurrentOemToStorage = (value: any) => {
-    localStorage.setItem(Global.oem, JSON.stringify(Object.assign({}, defaulOemtConfig, value)))
+    localStorage.setItem(Global.oem, JSON.stringify(Object.assign({}, defaultOemConfig, value)))
 }
 
 export const getOemTitle = () => {
