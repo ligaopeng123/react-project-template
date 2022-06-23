@@ -13,8 +13,8 @@ import {atom} from 'recoil';
 import {loadLocalJson} from "@httpClient/Global";
 
 const Menus = atom({
-	key: 'menus',
-	default: [],
+    key: 'filteredCurrentMenus',
+    default: [],
 });
 /**
  * 获取json数据
