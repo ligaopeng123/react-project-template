@@ -21,15 +21,13 @@ const ThemeState: any = atom({
     default: getCurrentThemeFromStorage()
 });
 
-export type CurrentThemeType = {
+export type CurrentThemeState = {
     type: ThemeType; // 用户名称
     config?: any;
 }
 
-export type CurrentUserState = Array<CurrentThemeType | any>
-
-const CurrentTheme = selector({
-    key: 'filteredTodoListCurrentTheme',
+const CurrentTheme = selector<CurrentThemeState>({
+    key: 'filteredCurrentTheme',
     get: ({get}) => {
         return get(ThemeState);
     },

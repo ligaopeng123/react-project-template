@@ -22,7 +22,7 @@ const OEMState = atom({
 });
 
 const OEM = selector({
-    key: 'oem-state',
+    key: 'filteredCurrentOem',
     get: ({get}) => {
         return get(OEMState);
     },
