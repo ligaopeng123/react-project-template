@@ -13,7 +13,7 @@
         "@ant-design/pro-list": "^1.21.30",
         "@ant-design/pro-table": "^2.64.0",
         "@gaopeng123/fetch": "latest",
-        "@gaopeng123/hoc": "latest",
+        "@gaopeng123/hoc": ">=0.3.0",
         "@gaopeng123/hooks": "latest",
         "@gaopeng123/rc-login-jsencrypt": "latest",
         "@gaopeng123/rc-login-module": "latest",
