@@ -6,6 +6,8 @@ import HeadersJS from './headersJS';
 import {DynamicLoadScript} from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
 import {initTheme} from "@layouts/HeaderTheme/ThemeColor";
+import zhCN from 'antd/lib/locale/zh_CN';
+import {ConfigProvider} from "antd";
 import './styles/index.scss';
 
 /**
@@ -25,7 +27,9 @@ async function LoadApp() {
     ReactDOM.render(
         <React.StrictMode>
             <RecoilRoot>
-                <App/>
+                <ConfigProvider locale={zhCN}>
+                    <App/>
+                </ConfigProvider>
             </RecoilRoot>
         </React.StrictMode>,
         document.getElementById('root')
