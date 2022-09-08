@@ -4,7 +4,7 @@ import {getOemTitle} from "@httpClient/Global";
 
 export default {
     "navTheme": "dark", // 风格 realDark
-    "primaryColor": 'daybreak',
+    "primaryColor": '#3370FF',
     "layout": "mix", // 'side' | 'top' | 'mix';
     "contentWidth": "Fixed", // Fixed Fluid
     "fixedHeader": true,
