@@ -11,12 +11,12 @@ public/json/menus.json: 定义路由模块相关
 
 ```typescript
 {
-                "id": 53,
-                "name": "系统配置",
-                "path": "/system/config",
-                "component": "/system/config", // pages/system/config均可 pages前不能加 '/' 
-                "auth": null
-            }
+    "id": 53,
+     "name": "系统配置",
+     "path": "/system/config",
+     "component": "/system/config", // pages/system/config均可 pages前不能加 '/' 
+     "auth": null
+}
 ```
 
 public/json/OEM.json: 定义OEM相关
@@ -44,3 +44,4 @@ body {
 #### 部署
 
 默认使用docker部署，如果使用static方式部署，需要修改REACT_APP_PUBLICPATH变量
+

@@ -1,7 +1,7 @@
 # Top level makefile template
 
 # XXX: 镜像仓库地址 例如harbar
-REGISTRY := <%= imagesUrl %>
+REGISTRY := harbor.com.cn
 # 项目类型
 NAMESPACE := web
 # 定义编译环境

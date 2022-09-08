@@ -3,20 +3,20 @@ import {getOemTitle} from "@httpClient/Global";
 
 
 export default {
-	"navTheme": "dark", // 风格 realDark
-	"primaryColor": 'daybreak',
-	"layout": "mix", // 'side' | 'top' | 'mix';
-	"contentWidth": "Fixed", // Fixed Fluid
-	"fixedHeader": true,
-	"fixSiderbar": true,
-	"menu": {
-		"locale": true,
-		"loading": false
-	},
-	"title": getOemTitle(),
-	"pwa": false,
-	"iconfontUrl": "",
-	"splitMenus": false
+    "navTheme": "realDark", // 风格 realDark
+    "primaryColor": '#3370FF',
+    "layout": "mix", // 'side' | 'top' | 'mix';
+    "contentWidth": "Fixed", // Fixed Fluid
+    "fixedHeader": true,
+    "fixSiderbar": true,
+    "menu": {
+        "locale": true,
+        "loading": false
+    },
+    "title": getOemTitle(),
+    "pwa": false,
+    "iconfontUrl": "",
+    "splitMenus": false
 } as LayoutSettings & {
     pwa: boolean;
 };
