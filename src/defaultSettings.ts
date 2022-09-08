@@ -3,8 +3,8 @@ import {getOemTitle} from "@httpClient/Global";
 
 
 export default {
-    "navTheme": "realDark", // 风格 realDark
-    "primaryColor": '#3370FF',
+    "navTheme": "dark", // 风格 realDark
+    "primaryColor": 'daybreak',
     "layout": "mix", // 'side' | 'top' | 'mix';
     "contentWidth": "Fixed", // Fixed Fluid
     "fixedHeader": true,
