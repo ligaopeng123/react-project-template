@@ -13,6 +13,7 @@ import {unregisterFetch} from "@httpClient/index";
 import {changeRouteTitle, HistoryRouter} from "@gaopeng123/hoc";
 import {getOemTitle} from "@httpClient/Global";
 import './styles/ant.less';
+import BasicFooter from "@layouts/DefaultFooter";
 
 changeRouteTitle([{name: '登录', path: '/login'}, {name: '404', path: '/404'}], getOemTitle());
 const App: React.FC<any> = (props) => {
@@ -34,7 +35,7 @@ const App: React.FC<any> = (props) => {
         <HistoryRouter history={BrowserHistory}>
             <Routes>
                 {/*登录页*/}
-                <Route path="/login" element={<UserLayout/>}/>
+                <Route path="/login" element={<><UserLayout/><BasicFooter/></>}/>
                 {/*404*/}
                 <Route path="/404" element={<div>404</div>}/>
                 {/*业务业务*/}
