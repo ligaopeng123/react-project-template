@@ -1,67 +1,92 @@
 [
     {
-        "id": 30,
+        "id": 0,
         "name": "首页",
         "path": "/home",
-        "component": "/home",
+        "component": "/home/mobile",
+        "mComponent": "/home",
         "exact": true,
         "auth": null,
-        "icon": null
+        "icon": "icon-shouye1"
     },
     {
-        "id": 47,
+        "id": 1,
         "name": "用户管理",
+        "mName": "用户",
         "path": "/auth",
         "exact": true,
-        "icon": null,
+        "icon": "icon-yonghu",
         "children": [
             {
-                "id": 48,
+                "id": 10,
                 "name": "菜单管理",
                 "path": "/auth/menus",
                 "component": "/admin/menus",
                 "exact": true,
                 "auth": null,
-                "icon": null
+                "icon": "icon-caidan"
             },
             {
-                "id": 49,
+                "id": 11,
                 "name": "组织管理",
                 "path": "/auth/organization",
-                "component": "/admin/organization",
                 "auth": null,
-                "exact": true
+                "exact": true,
+                "icon": "icon-zuzhi",
+                "children": [
+                    {
+                        "id": 110,
+                        "name": "组织列表",
+                        "path": "/auth/organization/table",
+                        "component": "/admin/organization",
+                        "exact": true,
+                        "auth": null,
+                        "icon": "icon-caidan"
+                    }
+                ]
             },
             {
-                "id": 50,
+                "id": 12,
                 "name": "用户管理",
                 "path": "/auth/users",
                 "component": "/admin/users",
-                "auth": null
+                "auth": null,
+                "icon": "icon-yonghuguanli"
             }
         ]
     },
     {
-        "id": 51,
+        "id": 2,
         "name": "系统管理",
+        "mName": "系统",
         "path": "/system",
         "auth": null,
-        "icon": null,
+        "icon": "icon-shouye",
         "children": [
             {
-                "id": 52,
+                "id": 20,
                 "name": "OEM配置",
                 "path": "/system/oem",
                 "component": "/system/oem",
                 "auth": null
             },
             {
-                "id": 53,
+                "id": 21,
                 "name": "系统配置",
                 "path": "/system/config",
                 "component": "/system/config",
                 "auth": null
             }
         ]
+    },
+    {
+        "id": 3,
+        "name": "移动端菜单",
+        "path": "/mobile-sub-menus",
+        "hideInMenu": true,
+        "component": "/mobile",
+        "exact": true,
+        "auth": null,
+        "icon": null
     }
 ]

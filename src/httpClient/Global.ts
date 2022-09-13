@@ -1,4 +1,4 @@
-import {asyncMemoized, isArray, pathJoin} from "@gaopeng123/utils";
+import { asyncMemoized, isArray, pathJoin } from "@gaopeng123/utils";
 
 enum Global {
     user = 'react-simple-template-user', // 用户信息
@@ -132,5 +132,11 @@ export const loadLocalJson = asyncMemoized(async (path: string) => {
     const json = await res.clone().json();
     return json;
 });
+/**
+ * 是否是移动端环境
+ */
+export const isMobileEnv = () => {
+    return process.env.REACT_APP_TERMINAL === 'mobile'
+}
 
 export default Global;

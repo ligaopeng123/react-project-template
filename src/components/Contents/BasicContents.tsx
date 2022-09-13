@@ -5,13 +5,15 @@
 import React from 'react';
 import { useResize } from '@gaopeng123/hooks';
 import './styles.scss';
+import { isMobileEnv } from "@httpClient/Global";
 
 export default function BasicContents(props: any) {
     const {children, className} = props;
     const {availHeight} = useResize();
     const contentsHeight = availHeight - 96 - 40;
     return (
-        <div className={className === undefined ? `center-layout` : className} style={{height: contentsHeight}}>
+        <div className={`center-layout${isMobileEnv() ? '-mobile' : ''} ${className || ''}`}
+             style={{height: contentsHeight}}>
             {children}
         </div>
     );

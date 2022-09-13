@@ -18,10 +18,15 @@ import RightLayout from "@layouts/RightLayout";
 import TopTabs from "@layouts/BasicLayout/TopTabs";
 import { RouteWithModuleRoutes } from "@gaopeng123/hoc";
 import BackUp from "@layouts/BasicLayout/BackTop";
-import { createIcon } from "@layouts/BasicLayout/utils";
+import { MenuIcon } from "@layouts/BasicLayout/components/MenuIcon";
 
 type PcRouterProps = {
-    [propsName: string]: any;
+    pathname: string;
+    menusLogo: string;
+    menusName: string;
+    router: any[]
+    setPathname: (props: any) => void;
+    onRouteChange: (props: any) => void;
 };
 const PcRouter: React.FC<PcRouterProps> = (props) => {
     const {pathname, menusLogo, menusName, router, setPathname, onRouteChange} = props;
@@ -43,15 +48,17 @@ const PcRouter: React.FC<PcRouterProps> = (props) => {
                         setPathname(path as string);
                     }}>
                         <Link to={path as string}>
-                            {createIcon(icon as string)}
+                            <MenuIcon icon={icon}/>
                             <span className={`ant-pro-menu-item-title`}>{name}</span>
                         </Link>
                     </div>);
                 }}
                 subMenuItemRender={({path, icon, name}: MenuDataItem) => {
                     // 定义有子级菜单的菜单
-                    return <Fragment>{createIcon(icon as string)}<span
-                        className={`ant-pro-menu-item-title`}>{name}</span></Fragment>
+                    return <>
+                        <MenuIcon icon={icon}/>
+                        <span className={`ant-pro-menu-item-title`}>{name}</span>
+                    </>
                 }}
                 // 面包屑
                 breadcrumbRender={(routes: any) => [...routes]}

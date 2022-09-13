@@ -1,16 +1,17 @@
 /**
- * 布局管理
+ * 布局管理 移动端和PC端入口
  */
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useOEM from "@/hooks/useOEM";
 import { MenuDataItem } from "@ant-design/pro-layout/lib/typings";
 import { menuData } from "@store/Menus";
-import { getFirstPath } from "@httpClient/Global";
+import { getFirstPath, isMobileEnv } from "@httpClient/Global";
 import { useRecoilValue } from 'recoil';
 import CurrentUser from '@store/CurrentUser';
 import { isEmptyObject } from "@gaopeng123/utils";
-import PcRouter from "@layouts/BasicLayout/PcRouter";
+import PcRouter from "@layouts/BasicLayout/Pc/PcRouter";
+import MobileRouter from "@layouts/BasicLayout/Mobile";
 import './styles.less';
 
 const BasicLayout = (props: any) => {
@@ -79,13 +80,27 @@ const BasicLayout = (props: any) => {
     }
 
     return (
-        <PcRouter
-            pathname={pathname}
-            menusLogo={menusLogo}
-            menusName={menusName}
-            router={router}
-            setPathname={setPathname}
-            onRouteChange={onRouteChange}/>
+        <>
+            {
+                isMobileEnv()
+                    ? <MobileRouter
+                        pathname={pathname}
+                        menusLogo={menusLogo}
+                        menusName={menusName}
+                        router={router}
+                        setPathname={setPathname}
+                        onRouteChange={onRouteChange}
+                    />
+                    : <PcRouter
+                        pathname={pathname}
+                        menusLogo={menusLogo}
+                        menusName={menusName}
+                        router={router}
+                        setPathname={setPathname}
+                        onRouteChange={onRouteChange}
+                    />
+            }
+        </>
     )
 };
 
