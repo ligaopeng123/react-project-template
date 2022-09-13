@@ -3,15 +3,7 @@
 
 // 内部样式设定 主要是为了给子组件设置100% 高度
 .contents {
-  .ant-card {
-    height: 100%;
-    .ant-card-body {
-      height: calc(100% - 38px);
-      .ant-row {
-        height: calc(100% - 38px);
-      }
-    }
-  }
+  height: 100%;
 }
 
 .layout {

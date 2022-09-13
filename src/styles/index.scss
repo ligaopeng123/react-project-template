@@ -21,8 +21,9 @@ code {
 
 // 居中布局
 .center-layout {
-    max-width: 1200px;
-    margin: 0px auto;
+    min-width: 1200px;
+    margin: 24px;
+    overflow: auto;
 }
 
 // 居中布局
