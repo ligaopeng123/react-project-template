@@ -26,9 +26,6 @@ type MobileBottomProps = {
     pathname: string;
 }
 
-const getPathname = (pathname: string) => {
-    return `/${pathname?.split('/')[1]}`
-}
 export default function MobileBottom(props: MobileBottomProps) {
     const {pathname, router} = props;
     const _navigate = useNavigate();
@@ -41,6 +38,7 @@ export default function MobileBottom(props: MobileBottomProps) {
     }, [value]);
 
     useEffect(() => {
+        // 设置选中的状态
         if (pathname && router?.length) {
             // @ts-ignore
             const {__path} = queryParamsFromUrl(location.href);
@@ -70,7 +68,7 @@ export default function MobileBottom(props: MobileBottomProps) {
             const currentNode: any = findSubtreeByOrder(router, orders, treeOpts);
             if (!currentNode?.children) {
                 setSubRouter(undefined)
-                setValue(getPathname(newValue));
+                setValue(newValue);
                 _navigate(newValue);
             } else {
                 if (currentNode?.components || currentNode?.mComponent) {
