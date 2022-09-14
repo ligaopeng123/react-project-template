@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { findSubtreeByOrder, findTreeOrder, queryParamsFromUrl, uuid } from "@gaopeng123/utils";
 import { getMenuChildrenKey } from "@httpClient/Global";
 import MobileBottomChildren from "@layouts/BasicLayout/Mobile/MobileBottomChildren";
@@ -56,6 +56,7 @@ export default function MobileBottom(props: MobileBottomProps) {
                 setValue(__path);
             } else {
                 setValue(currentNode?.path);
+                setSubRouter(undefined);
             }
         }
     }, [router, pathname]);

@@ -3,8 +3,8 @@
         "id": 0,
         "name": "首页",
         "path": "/home",
-        "component": "/home/mobile",
-        "mComponent": "/home",
+        "component": "/home",
+        "mComponent": "/home/mobile",
         "exact": true,
         "auth": null,
         "icon": "icon-shouye1"

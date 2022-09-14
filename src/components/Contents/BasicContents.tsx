@@ -10,7 +10,7 @@ import { isMobileEnv } from "@httpClient/Global";
 export default function BasicContents(props: any) {
     const {children, className} = props;
     const {availHeight} = useResize();
-    const contentsHeight = availHeight - 96 - 40;
+    const contentsHeight: any = isMobileEnv() ? null : availHeight - 96 - 40;
     return (
         <div className={`center-layout${isMobileEnv() ? '-mobile' : ''} ${className || ''}`}
              style={{height: contentsHeight}}>
