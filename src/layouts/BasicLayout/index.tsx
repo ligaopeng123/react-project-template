@@ -1,34 +1,18 @@
 /**
- * 布局管理
+ * 布局管理 移动端和PC端入口
  */
-import React, {useState, createElement, useEffect, Fragment} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
-import ProLayout, {ProBreadcrumb} from '@ant-design/pro-layout';
-import proSettings from "../../defaultSettings";
-import * as Icon from '@ant-design/icons';
-import BackUp from './BackTop';
-import RightLayout from '../RightLayout/index';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useOEM from "@/hooks/useOEM";
-import {RouteWithModuleRoutes} from '@gaopeng123/hoc';
-import {MenuDataItem} from "@ant-design/pro-layout/lib/typings";
-import {menuData} from "@store/Menus";
-import {getFirstPath} from "@httpClient/Global";
-import TopTabs from "@layouts/BasicLayout/TopTabs";
-import {useRecoilValue} from 'recoil';
+import { MenuDataItem } from "@ant-design/pro-layout/lib/typings";
+import { menuData } from "@store/Menus";
+import { getFirstPath, isMobileEnv } from "@httpClient/Global";
+import { useRecoilValue } from 'recoil';
 import CurrentUser from '@store/CurrentUser';
-import {isEmptyObject} from "@gaopeng123/utils";
+import { isEmptyObject } from "@gaopeng123/utils";
+import PcRouter from "@layouts/BasicLayout/Pc/PcRouter";
+import MobileRouter from "@layouts/BasicLayout/Mobile";
 import './styles.less';
-
-/**
- * 创建icon图标
- * @param icon
- */
-const createIcon = (icon?: string): React.ReactNode | undefined => {
-    const i = icon ? (Icon as any)[icon] : undefined;
-    return i ? createElement(i, {
-        style: {fontSize: '16px'}
-    }) : i;
-};
 
 const BasicLayout = (props: any) => {
     /**
@@ -96,62 +80,28 @@ const BasicLayout = (props: any) => {
     }
 
     return (
-        <React.Fragment>
-            <ProLayout
-                {...proSettings}
-                location={{pathname}}
-                logo={menusLogo}
-                title={menusName}
-                route={{routes: router, path: "/"}}
-                postMenuData={(menuData: any) => {
-                    return menuData;
-                }}
-                // menu={{request: loadMenus, defaultOpenAll: true}}
-                menuItemRender={({path, icon, name}: MenuDataItem, defaultDom: any) => {
-                    // 渲染菜单项
-                    return (<div className={`layoutMenuItem`} onClick={() => {
-                        setPathname(path as string);
-                    }}>
-                        <Link to={path as string}>
-                            {createIcon(icon as string)}
-                            <span className={`ant-pro-menu-item-title`}>{name}</span>
-                        </Link>
-                    </div>);
-                }}
-                subMenuItemRender={({path, icon, name}: MenuDataItem) => {
-                    // 定义有子级菜单的菜单
-                    return <Fragment>{createIcon(icon as string)}<span
-                        className={`ant-pro-menu-item-title`}>{name}</span></Fragment>
-                }}
-                // 面包屑
-                breadcrumbRender={(routes: any) => [...routes]}
-                // 自定义面包屑
-                // itemRender={(route: any, params: any, routes: any, paths: Array<string>) => {
-                //     return null;
-                // }}
-                onPageChange={(location: any) => {
-                    // 頁面跳轉是觸法
-                    setPathname(location.pathname);
-                }}
-                menuDataRender={(menuList: any) => {
-                    // menuData 的 render 方法，用来自定义 menuData
-                    return menuList
-                }}
-                onMenuHeaderClick={(menu: any) => {
-                    //      {/*menu 菜单的头部点击事件*/}
-                }}
-                rightContentRender={() => (<RightLayout/>)}
-                headerContentRender={() => {
-                    /*头信息*/
-                    return (<ProBreadcrumb/>)
-                }}
-            >
-                <TopTabs pathname={pathname} routers={router}/>
-                <RouteWithModuleRoutes routers={router} onRouteChange={onRouteChange}/>
-            </ProLayout>
-            <BackUp/>
-        </React.Fragment>
-    );
+        <>
+            {
+                isMobileEnv()
+                    ? <MobileRouter
+                        pathname={pathname}
+                        menusLogo={menusLogo}
+                        menusName={menusName}
+                        router={router}
+                        setPathname={setPathname}
+                        onRouteChange={onRouteChange}
+                    />
+                    : <PcRouter
+                        pathname={pathname}
+                        menusLogo={menusLogo}
+                        menusName={menusName}
+                        router={router}
+                        setPathname={setPathname}
+                        onRouteChange={onRouteChange}
+                    />
+            }
+        </>
+    )
 };
 
 export default BasicLayout;

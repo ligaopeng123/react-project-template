@@ -1,12 +1,12 @@
 // antd 组件 只定义配置类模块相关信息
 // begin 多主题相关
-@root-entry-name: default;
-@import (reference) '~antd/es/style/themes/index';
-@import (reference) '~antd/dist/antd.variable.min.css';
+//@root-entry-name: default;
+//@import (reference) '~antd/es/style/themes/index';
+//@import (reference) '~antd/dist/antd.variable.min.css';
 // end 多主题相关
 // begin 自定义主题相关
-//@import '~antd/dist/antd.less';
-//@import '~antd/lib/style/themes/default.less';
+@import '~antd/dist/antd.less';
+@import '~antd/lib/style/themes/default.less';
 //@import '~antd/dist/antd.compact.less'; // 引入官方提供的紧凑 less 样式入口文件
 //@import '~antd/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
 //@primary-color: #1890ff; // 全局主色
@@ -31,7 +31,7 @@
 // ---
 @form-item-margin-bottom: 12px;
 // end 自定义主题相关
-//// begin 多主题相关
+// begin 多主题相关
 //.ant-card-head, .ant-pro-table-list-toolbar-title {
 //    color: var(--ant-header-color) !important;
 //    font-size: 18px;
@@ -139,10 +139,10 @@
 //        }
 //    }
 //}
-//
-//// 隐藏配置主题项
-//.ant-pro-setting-drawer-handle {
-//    display: none;
-//}
+
+// 隐藏配置主题项
+.ant-pro-setting-drawer-handle {
+    display: none;
+}
 
 // end 多主题相关

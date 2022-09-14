@@ -14,10 +14,10 @@ import {valueEnum, TableListItem, AddTableProps, EditTableProps} from "./typing"
 
 export const TableList = async (params: any) => {
 	const tableListDataSource: TableListItem[] = [];
-	
+
 	const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
-	
-	for (let i = 0; i < 5; i += 1) {
+
+	for (let i = 0; i < 15; i += 1) {
 		tableListDataSource.push({
 			// @ts-ignore
 			key: i,

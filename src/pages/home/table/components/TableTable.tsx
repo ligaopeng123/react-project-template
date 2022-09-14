@@ -63,7 +63,7 @@ const TableTable: React.FC<TableProps> = (props) => {
 			ref.current?.reload();
 		}
 	}, [state[StoreEnum.refresh]]);
-	
+
 	const columns: ProColumns<TableListItem>[] = [
 		{
 			title: '排序',
@@ -160,9 +160,10 @@ const TableTable: React.FC<TableProps> = (props) => {
 			],
 		},
 	];
-	
+
 	return (
 		<ProTable<TableListItem>
+			style={{marginTop: 24}}
 			actionRef={ref}
 			columns={columns}
 			request={async (params, sorter, filter) => {

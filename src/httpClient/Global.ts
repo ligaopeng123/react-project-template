@@ -1,4 +1,4 @@
-import {asyncMemoized, isArray, pathJoin} from "@gaopeng123/utils";
+import { asyncMemoized, isArray, isMobile, pathJoin } from "@gaopeng123/utils";
 
 enum Global {
 	user = '<%= name %>-user', // 用户信息
@@ -132,5 +132,17 @@ export const loadLocalJson = asyncMemoized(async (path: string) => {
     const json = await res.clone().json();
     return json;
 });
+
+// 终端3中形态 移动端 PC端 俩种模式都支持
+type TERMINAL_VALUE = 'mobile' | 'pc' | 'auto';
+export const TERMINAL: TERMINAL_VALUE = process.env.REACT_APP_TERMINAL as TERMINAL_VALUE;
+
+/**
+ * 是否是移动端环境
+ */
+
+export const isMobileEnv = () => {
+    return TERMINAL === 'mobile' || (TERMINAL === 'auto' && isMobile());
+}
 
 export default Global;

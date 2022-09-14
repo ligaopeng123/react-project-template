@@ -3,7 +3,6 @@
  */
 const HeadersJS = [
 	'./js/screenfull.js',
-	// '/js/FileReader.js',
 ];
 
 export default HeadersJS;
