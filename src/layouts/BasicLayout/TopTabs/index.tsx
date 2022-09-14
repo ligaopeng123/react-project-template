@@ -9,21 +9,22 @@
  * @date: 2022/2/15 9:48
  *
  **********************************************************************/
-import React, {useState, useEffect} from 'react';
-import {message, Tabs} from "antd";
-import {findSubtreeByOrder, findTreeOrder} from "@gaopeng123/utils";
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { message, Tabs } from "antd";
+import { findSubtreeByOrder, findTreeOrder } from "@gaopeng123/utils";
+import { useNavigate } from "react-router-dom";
+import { getMenuChildrenKey } from '@/httpClient/Global';
 import './index.less';
-import {getMenuChildrenKey} from '@/httpClient/Global';
 
 const {TabPane} = Tabs;
 
 type TopTabsProps = {
     routers: any;
     pathname: string;
+    onRemove: (pathname: string) => void;
 };
 const TopTabs: React.FC<TopTabsProps> = (props) => {
-    const {pathname, routers} = props;
+    const {pathname, routers, onRemove} = props;
     const [tags, setTags] = useState<any[]>([]);
     const [activeKey, setActiveKey] = useState<string>('');
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ const TopTabs: React.FC<TopTabsProps> = (props) => {
     /**
      * 关闭处理
      */
-    const onEditHandler = (_activeKey: any, action: any) => {
+    const onEditHandler = (_activeKey: any, action: 'add' | 'remove') => {
         if (tags.length <= 1) {
             message.warn(`不可全部关闭！`)
         } else {
@@ -55,6 +56,9 @@ const TopTabs: React.FC<TopTabsProps> = (props) => {
                 const currentKey = newTags[previousIndex - 1].key;
                 setActiveKey(currentKey);
                 onChangeHandler(currentKey);
+            }
+            if (action === 'remove') {
+                onRemove(_activeKey as string);
             }
         }
     }

@@ -9,7 +9,7 @@
  * @date: 2022/9/13 9:17
  *
  **********************************************************************/
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 import ProLayout, { ProBreadcrumb } from "@ant-design/pro-layout";
 import proSettings from "@/defaultSettings";
 import { MenuDataItem } from "@ant-design/pro-layout/lib/typings";
@@ -30,6 +30,13 @@ type PcRouterProps = {
 };
 const PcRouter: React.FC<PcRouterProps> = (props) => {
     const {pathname, menusLogo, menusName, router, setPathname, onRouteChange} = props;
+    /**
+     * todo 请确认是否需要keep-alive功能 会有一定的性能问题
+     */
+    const [uninstallKeepAliveKeys, setUninstallKeepAliveKeys] = useState<Array<string>>([]);
+    const onRemove = (key: string) => {
+        setUninstallKeepAliveKeys([key]);
+    }
     return (
         <React.Fragment>
             <ProLayout
@@ -83,8 +90,12 @@ const PcRouter: React.FC<PcRouterProps> = (props) => {
                     return (<ProBreadcrumb/>)
                 }}
             >
-                <TopTabs pathname={pathname} routers={router}/>
-                <RouteWithModuleRoutes routers={router} onRouteChange={onRouteChange}/>
+                <TopTabs onRemove={onRemove} pathname={pathname} routers={router}/>
+                <RouteWithModuleRoutes
+                    keepAlive={`auto`}
+                    routers={router}
+                    uninstallKeepAliveKeys={uninstallKeepAliveKeys}
+                    onRouteChange={onRouteChange}/>
             </ProLayout>
             <BackUp/>
         </React.Fragment>
