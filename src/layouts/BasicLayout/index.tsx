@@ -12,7 +12,6 @@ import CurrentUser from '@store/CurrentUser';
 import { isEmptyObject } from "@gaopeng123/utils";
 import PcRouter from "@layouts/BasicLayout/Pc/PcRouter";
 import MobileRouter from "@layouts/BasicLayout/Mobile";
-import './styles.less';
 
 const BasicLayout = (props: any) => {
     /**

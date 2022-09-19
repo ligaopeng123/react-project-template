@@ -19,6 +19,7 @@ import TopTabs from "@layouts/BasicLayout/TopTabs";
 import { RouteWithModuleRoutes } from "@gaopeng123/hoc";
 import BackUp from "@layouts/BasicLayout/BackTop";
 import { MenuIcon } from "@layouts/BasicLayout/components/MenuIcon";
+import './styles.less';
 
 type PcRouterProps = {
     pathname: string;
