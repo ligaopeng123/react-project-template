@@ -78,15 +78,5 @@
                 "auth": null
             }
         ]
-    },
-    {
-        "id": 3,
-        "name": "移动端菜单",
-        "path": "/mobile-sub-menus",
-        "hideInMenu": true,
-        "component": "/mobile",
-        "exact": true,
-        "auth": null,
-        "icon": null
     }
 ]

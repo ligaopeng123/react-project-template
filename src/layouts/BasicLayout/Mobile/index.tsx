@@ -33,7 +33,11 @@ const MobileRouter: React.FC<MobileRouterProps> = (props) => {
         <ThemeProvider theme={ThemeApp}>
             <SnackbarProvider>
                 <Box component={'div'}>
-                    <RouteWithModuleRoutes routers={props.router} onRouteChange={props.onRouteChange} loading={false}/>
+                    <RouteWithModuleRoutes
+                        routers={props.router}
+                        onRouteChange={props.onRouteChange}
+                        loading={false}
+                    />
                     <MobileBottom {...props}/>
                 </Box>
                 <CssBaseline/>

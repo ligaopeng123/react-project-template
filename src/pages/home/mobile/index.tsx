@@ -12,7 +12,8 @@
 import React from 'react';
 import BasicContents from "@components/Contents/BasicContents";
 
-type HomeMobileProps = {};
+type HomeMobileProps = {
+};
 const HomeMobile: React.FC<HomeMobileProps> = (props) => {
     return (
         <BasicContents>移动端首页</BasicContents>
