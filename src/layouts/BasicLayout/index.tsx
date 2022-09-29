@@ -5,14 +5,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useOEM from "@/hooks/useOEM";
 import { MenuDataItem } from "@ant-design/pro-layout/lib/typings";
-import { menuData } from "@store/Menus";
 import { getFirstPath, isMobileEnv } from "@httpClient/Global";
 import { useRecoilValue } from 'recoil';
 import CurrentUser from '@store/CurrentUser';
 import { isEmptyObject } from "@gaopeng123/utils";
 import PcRouter from "@layouts/BasicLayout/Pc/PcRouter";
 import MobileRouter from "@layouts/BasicLayout/Mobile";
-import './styles.less';
+import useMenus from "@hooks/useMenus";
 
 const BasicLayout = (props: any) => {
     /**
@@ -63,12 +62,12 @@ const BasicLayout = (props: any) => {
     /**
      * 加载数据
      */
+    const [menuData] = useMenus();
     useEffect(() => {
-        menuData.then((res: Array<any>) => {
-            const menuData = res[0];
+        if (menuData?.length) {
             setRouter(menuData as Array<any>);
             redirect(menuData);
-        });
+        }
     }, [menuData]);
 
     /**

@@ -34,7 +34,7 @@ const MobileBottomChildren: React.FC<MobileBottomChildrenProps> = (props) => {
                     ? <Paper sx={{width: '100%', borderBottom: 0, boxShadow: 'none', ...(style || {})}}>
                         <MenuList>
                             {
-                                router?.children?.map((item: RouteItemProps) => {
+                                router?.children?.filter((item) => item.hideInMenu !== true)?.map((item: RouteItemProps) => {
                                     const hasSubChildren = item?.children?.length;
                                     return <Box key={item.path}>
                                         <MenuItem onClick={() => !hasSubChildren && onClick(item)}>

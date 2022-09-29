@@ -1,21 +1,20 @@
 // 主目录结构
-import React, {useEffect} from 'react';
-import {useSetRecoilState} from "recoil";
+import React, { useEffect } from 'react';
+import { useSetRecoilState } from "recoil";
 import {
     Routes,
     Route,
 } from 'react-router-dom';
-import {BrowserHistory} from "@httpClient/toLogin";
+import { BrowserHistory } from "@httpClient/toLogin";
 import BasicLayout from '@layouts/BasicLayout';
 import UserLayout from '@layouts/UserLayout';
-import OEM, {oemData} from "@store/OEM";
-import {unregisterFetch} from "@httpClient/index";
-import {changeRouteTitle, HistoryRouter} from "@gaopeng123/hoc";
-import {getOemTitle} from "@httpClient/Global";
-import './styles/ant.less';
+import OEM, { oemData } from "@store/OEM";
+import { unregisterFetch } from "@httpClient/index";
+import { HistoryRouter } from "@gaopeng123/hoc";
 import BasicFooter from "@layouts/DefaultFooter";
+import MobileMenus from "@layouts/BasicLayout/Mobile/MobileMenus";
+import './styles/ant.less';
 
-changeRouteTitle([{name: '登录', path: '/login'}, {name: '404', path: '/404'}], getOemTitle());
 const App: React.FC<any> = (props) => {
     /**
      * oem信息
@@ -36,6 +35,8 @@ const App: React.FC<any> = (props) => {
             <Routes>
                 {/*登录页*/}
                 <Route path="/login" element={<><UserLayout/><BasicFooter/></>}/>
+                {/*MobileBottomChildren*/}
+                <Route path="/mobile-sub-menus" element={<><MobileMenus/></>}/>
                 {/*404*/}
                 <Route path="/404" element={<div>404</div>}/>
                 {/*业务业务*/}

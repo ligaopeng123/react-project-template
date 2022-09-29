@@ -19,6 +19,7 @@ import TopTabs from "@layouts/BasicLayout/TopTabs";
 import { RouteWithModuleRoutes } from "@gaopeng123/hoc";
 import BackUp from "@layouts/BasicLayout/BackTop";
 import { MenuIcon } from "@layouts/BasicLayout/components/MenuIcon";
+import './styles.less';
 
 type PcRouterProps = {
     pathname: string;
@@ -85,10 +86,14 @@ const PcRouter: React.FC<PcRouterProps> = (props) => {
                     //      {/*menu 菜单的头部点击事件*/}
                 }}
                 rightContentRender={() => (<RightLayout/>)}
-                headerContentRender={() => {
-                    /*头信息*/
-                    return (<ProBreadcrumb/>)
-                }}
+                headerContentRender={
+                    // 菜单放置到顶部 去掉面包屑
+                    proSettings.layout === 'top'
+                        ? null
+                        : () => {
+                            /*头信息*/
+                            return (<ProBreadcrumb/>)
+                        }}
             >
                 <TopTabs onRemove={onRemove} pathname={pathname} routers={router}/>
                 <RouteWithModuleRoutes

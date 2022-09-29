@@ -1,13 +1,21 @@
-## 技术栈
+### 技术栈
 
 - React 17 
 - less + scss
 - ant + ant pro
 - recoil
 
-## 目录文件
+### 目录文件
 
 #### public/json/menus.json: 定义路由模块相关
+
+- RouteWithModuleRoutes 新增keepAlive 默认not
+
+  auto： 默认缓存菜单级别 不缓存hideInMenu路由 
+
+  force：强制缓存所有路由 
+
+  not：不缓存
 
 ```json
 {
@@ -62,17 +70,31 @@ REACT_APP_PUBLICPATH=''
 REACT_APP_TERMINAL=auto
 ```
 
-#### src/pages：业务代码放在该目录下，路由规则会基于该目录匹配。
+#### src/pages
 
-#### src/headersJS：在header中引入的外部js文件
+业务代码放在该目录下，路由规则会基于该目录匹配。
 
-#### src/httpClient/intercept：定义拦截器
+#### src/headersJS
 
-#### src/defaultSettings：定义布局相关
+在header中引入的外部js文件
 
-## 静态资源
+#### src/httpClient/intercept
 
-##### public：tsx中直接使用 /img/*.png；在样式中需要放到src目录下进行编译。
+定义拦截器
+
+#### src/defaultSettings
+
+定义布局相关
+
+### 静态资源
+
+#### public
+
+tsx中直接使用 /img/*.png；
+
+#### src
+
+会经过webpack编译处理。
 
 ```less
 body {
@@ -80,7 +102,7 @@ body {
 }
 ```
 
-## 部署
+### 部署
 
 默认使用docker部署，如果使用static方式部署，需要修改REACT_APP_PUBLICPATH变量
 
