@@ -109,7 +109,11 @@ export default function MobileBottom(props: MobileBottomProps) {
                                     key={item.path}
                                     label={item.mName || item.name}
                                     value={item.path}
-                                    icon={<MenuIcon icon={item.icon}/>}
+                                    icon={
+                                        <MenuIcon icon={value === item.path && item.checkedIcon
+                                            ? item.checkedIcon
+                                            : item.icon}/>
+                                    }
                                 />
                             })
                         }
