@@ -71,11 +71,13 @@ const TopTabs: React.FC<TopTabsProps> = (props) => {
                     return item.path === pathname;
                 }, treeOpts);
                 const currentNode = findSubtreeByOrder(routers, orders, treeOpts);
-                setTags([...tags, {
-                    title: currentNode.name,
-                    key: currentNode.path,
-                    closable: true
-                }]);
+                if (currentNode) {
+                    setTags([...tags, {
+                        title: currentNode.name,
+                        key: currentNode.path,
+                        closable: true
+                    }]);
+                }
             }
             setActiveKey(pathname);
         }
