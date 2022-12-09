@@ -86,14 +86,16 @@ const PcRouter: React.FC<PcRouterProps> = (props) => {
                     //      {/*menu 菜单的头部点击事件*/}
                 }}
                 rightContentRender={() => (<RightLayout/>)}
-                headerContentRender={
-                    // 菜单放置到顶部 去掉面包屑
-                    proSettings.layout === 'top'
-                        ? null
-                        : () => {
-                            /*头信息*/
-                            return (<ProBreadcrumb/>)
-                        }}
+                // 菜单放置到顶部 去掉面包屑
+                headerContentRender={(handerViewProps, defaultDom)=> {
+                    return <>
+                        {
+                            proSettings.layout === 'top'
+                                ? null
+                                : <ProBreadcrumb/>
+                        }
+                    </>
+                }}
             >
                 <TopTabs onRemove={onRemove} pathname={pathname} routers={router}/>
                 <RouteWithModuleRoutes

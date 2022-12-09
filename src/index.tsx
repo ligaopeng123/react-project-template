@@ -8,7 +8,26 @@ import reportWebVitals from "./serviceWorker";
 import {initTheme} from "@layouts/HeaderTheme/ThemeColor";
 import zhCN from 'antd/lib/locale/zh_CN';
 import {ConfigProvider} from "antd";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import './styles/index.scss';
+
+/**
+ * 注入sentry监听
+ */
+if (process.env.REACT_APP_SENTRY_DSN && process.env.REACT_APP_SENTRY?.trim() !== 'false') {
+    Sentry.init({
+        dsn: process.env.REACT_APP_SENTRY_DSN,
+        // environment 上报的环境 建议 按照 测试、生产区分
+        environment: process.env.REACT_APP_ENV,
+        integrations: [new BrowserTracing()],
+        release: `${process.env.REACT_APP_VERSION_RELEASE}`,
+        // Set tracesSampleRate to 1.0 to capture 100%
+        // of transactions for performance monitoring.
+        // We recommend adjusting this value in production
+        tracesSampleRate: 1.0,
+    });
+}
 
 /**
  * 加载静态资源文件

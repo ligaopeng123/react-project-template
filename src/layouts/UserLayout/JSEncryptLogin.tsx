@@ -77,7 +77,7 @@ const JSEncryptLogin: React.FC<JSEncryptLoginProps> = (props) => {
             mainStyle={{backgroundImage: 'url(./assets/background.jpg)'}}
             bodyStyle={{right: '200px;'}}
             keeplogged={true}
-            title={loginName}
+            title={loginName || ''}
         />
     )
 };

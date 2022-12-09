@@ -12,7 +12,43 @@
 const CracoLessPlugin = require('craco-less');
 const {getThemeVariables} = require('antd/dist/theme');
 const path = require("path");
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const webpack = require("webpack");
+// const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const packageOjb = require("./package.json");
+const SentryPlugin = require("@sentry/webpack-plugin");
+const { formatTimestamp } = require("@gaopeng123/utils");
+
+// 时间 用于发布小版本
+const REACT_APP_VERSION_TIME = formatTimestamp(Date.now(), 'yyyy-MM-dd_HH:mm:ss');
+const REACT_APP_VERSION_RELEASE = `${packageOjb.name}-${process.env.REACT_APP_ENV}-${packageOjb.version}-${REACT_APP_VERSION_TIME}`;
+
+const plugins = [
+    new webpack.DefinePlugin({
+        "process.env": {
+            REACT_APP_NAME: `"${packageOjb.name}"`,
+            REACT_APP_VERSION: `"${packageOjb.version}"`,
+            REACT_APP_VERSION_RELEASE: `"${REACT_APP_VERSION_RELEASE}"`,
+            REACT_APP_SENTRY: `"${process.env.REACT_APP_SENTRY}"`
+        }
+    }),
+    new webpack.ProvidePlugin({
+        process: 'process/browser',
+    }),
+];
+
+if (process.env.REACT_APP_SENTRY?.trim() !== 'false') {
+    plugins.push(new SentryPlugin({
+        org: 'ub-sentry', // 组织名称
+        project: `${packageOjb.name}-${process.env.REACT_APP_ENV}`, // 项目名称
+        authToken: "authToken", // 在私有平台上copy出来
+        release: REACT_APP_VERSION_RELEASE,
+        cleanArtifacts: true, // 删除以前的版本
+        url: 'url', // 配置指到我们的自建服务器地址
+        ignore: ['node_modules'],
+        urlPrefix: '~/static/js',
+        include: path.resolve(__dirname, '../build/static/js/')   //正则，匹配哪些文件上传
+    }))
+}
 
 module.exports = {
     webpack: {
@@ -29,20 +65,15 @@ module.exports = {
             "@store": path.resolve(__dirname, "./src/store"),
             "@mocks": path.resolve(__dirname, "../mocks"),
         },
+        plugins: {
+            add: plugins
+        },
         configure: (config, {env, paths}) => {
             // 去掉打包生产map 文件
+            if (process.env.REACT_APP_SENTRY !== 'false') {
+                config.devtool = 'source-map';
+            }
             if (process.env.NODE_ENV === "production") {
-                config.devtool = false;
-                // const rules = config.module.rules;
-                // const imgRules = {
-                //     test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                //     loader: 'file-loader'
-                // }
-                // if (rules[1].oneOf) {
-                //     config.module.rules[1].oneOf.push(imgRules);
-                // } else {
-                //     config.module.rules[2].oneOf.push(imgRules);
-                // }
             } else {
                 // 允许访问外部的值 主要就是访问mock服务
                 // config.resolve.plugins = config.resolve.plugins.filter(plugin => !(plugin instanceof ModuleScopePlugin));
