@@ -27,7 +27,8 @@ const plugins = [
         "process.env": {
             REACT_APP_NAME: `"${packageOjb.name}"`,
             REACT_APP_VERSION: `"${packageOjb.version}"`,
-            REACT_APP_VERSION_RELEASE: `"${REACT_APP_VERSION_RELEASE}"`
+            REACT_APP_VERSION_RELEASE: `"${REACT_APP_VERSION_RELEASE}"`,
+            REACT_APP_SENTRY: `"${process.env.REACT_APP_SENTRY}"`
         }
     }),
     new webpack.ProvidePlugin({
@@ -35,10 +36,9 @@ const plugins = [
     }),
 ];
 
-if (process.env.REACT_APP_ENV !== 'false') {
+if (process.env.REACT_APP_SENTRY?.trim() !== 'false') {
     plugins.push(new SentryPlugin({
         org: 'ub-sentry', // 组织名称
-        organization: 'ub-sentry', // 组织名称
         project: `${packageOjb.name}-${process.env.REACT_APP_ENV}`, // 项目名称
         authToken: "authToken", // 在私有平台上copy出来
         release: REACT_APP_VERSION_RELEASE,

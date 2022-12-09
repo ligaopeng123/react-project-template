@@ -15,7 +15,7 @@ import './styles/index.scss';
 /**
  * 注入sentry监听
  */
-if (process.env.REACT_APP_SENTRY_DSN && process.env.REACT_APP_SENTRY !== 'false') {
+if (process.env.REACT_APP_SENTRY_DSN && process.env.REACT_APP_SENTRY?.trim() !== 'false') {
     Sentry.init({
         dsn: process.env.REACT_APP_SENTRY_DSN,
         // environment 上报的环境 建议 按照 测试、生产区分
