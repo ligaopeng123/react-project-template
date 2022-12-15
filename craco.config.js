@@ -45,8 +45,8 @@ if (process.env.REACT_APP_SENTRY?.trim() !== 'false') {
         cleanArtifacts: true, // 删除以前的版本
         url: 'url', // 配置指到我们的自建服务器地址
         ignore: ['node_modules'],
-        urlPrefix: '~/static/js',
-        include: path.resolve(__dirname, '../build/static/js/')   //正则，匹配哪些文件上传
+        urlPrefix: '~/static/',
+        include: './build/static'   //正则，匹配哪些文件上传
     }))
 }
 
