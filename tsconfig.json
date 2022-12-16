@@ -1,28 +1,27 @@
 {
-  "extends": "./paths.json",
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+    "exclude": [
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "node_modules"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "noImplicitThis": false,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "outDir": "/dist",
+        "rootDir": "./",
+        "baseUrl": "./packages",
+        "module": "esnext",
+        "declaration": true,
+        "sourceMap": false,
+        "noImplicitAny": true,
+        "target": "es6",
+        "allowJs": true,
+        "moduleResolution": "node",
+        "lib": [
+            "dom",
+            "esnext"
+        ],
+        "jsx": "react",
+        "noUnusedParameters": false,
+        "paths": {}
+    },
+    "include": ["./declaration.d.ts"]
 }

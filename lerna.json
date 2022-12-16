@@ -1,0 +1,13 @@
+{
+    "packages": [
+        "packages/*"
+    ],
+    "version": "<%= version %>",
+    "useWorkspaces": true,
+    "npmClient": "pnpm",
+    "command": {
+        "bootstrap": {
+            "ignore": "@vue/*"
+        }
+    }
+}
