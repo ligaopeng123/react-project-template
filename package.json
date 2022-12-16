@@ -1,0 +1,50 @@
+{
+    "name": "<%= name %>",
+    "version": "<%= version %>",
+    "description": "描述信息",
+    "keywords": [],
+    "author": "xxx",
+    "homepage": "https://github.com/xxx#readme",
+    "license": "MIT",
+    "directories": {
+        "lib": "src",
+        "test": "__tests__"
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xxx#readme"
+    },
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "start": "tsdx watch",
+        "build": "tsdx build",
+        "test": "tsdx test",
+        "push": "pnpm publish --access public",
+        "lint": "tsdx lint",
+        "prepare": "tsdx build",
+        "size": "size-limit",
+        "analyze": "size-limit --why"
+    },
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^5.0.1",
+        "@types/jest": "^29.2.4",
+        "@types/node": "^16.4.6",
+        "husky": "^7.0.0",
+        "size-limit": "^5.0.1",
+        "ts-node": "^10.7.0",
+        "tsdx": "^0.14.1",
+        "tslib": "^2.3.0",
+        "typescript": "^4.3.5"
+    },
+    "bugs": {
+        "url": "https://github.com/***/issues"
+    }
+}
