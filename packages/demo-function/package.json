@@ -1,0 +1,53 @@
+{
+    "name": "@xxx/demo-function",
+    "version": "0.8.1",
+    "description": "换行展示",
+    "keywords": [
+        "react",
+        "br"
+    ],
+    "author": "xxx",
+    "homepage": "https://github.com/xxx/components-repo#readme",
+    "license": "MIT",
+    "directories": {
+        "lib": "src",
+        "test": "__tests__"
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xxx/components-repo#readme"
+    },
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "start": "tsdx watch",
+        "build": "tsdx build",
+        "test": "tsdx test",
+        "push": "pnpm publish --access public",
+        "lint": "tsdx lint",
+        "prepare": "tsdx build",
+        "size": "size-limit",
+        "analyze": "size-limit --why"
+    },
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^5.0.1",
+        "@types/node": "^16.4.6",
+        "husky": "^7.0.0",
+        "size-limit": "^5.0.1",
+        "ts-node": "^10.7.0",
+        "tsdx": "^0.14.1",
+        "tslib": "^2.3.0",
+        "typescript": "^4.3.5"
+    },
+    "bugs": {
+        "url": "https://github.com/***/issues"
+    },
+    "gitHead": "7d667bce8e8ab6f495fc721853de43e4d7074434"
+}
