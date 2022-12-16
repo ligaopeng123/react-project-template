@@ -1,13 +1,10 @@
 {
     "name": "@xxx/demo-component",
-    "version": "0.8.1",
-    "description": "换行展示",
-    "keywords": [
-        "react",
-        "br"
-    ],
+    "version": "0.0.1",
+    "description": "描述信息",
+    "keywords": [],
     "author": "xxx",
-    "homepage": "https://github.com/xxx/components-repo#readme",
+    "homepage": "https://github.com/xxx#readme",
     "license": "MIT",
     "directories": {
         "lib": "src",
@@ -18,7 +15,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/xxx/components-repo#readme"
+        "url": "git+https://github.com/xxx#readme"
     },
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -72,7 +69,6 @@
         "react-dom": "^17.0.2"
     },
     "bugs": {
-        "url": "https://github.com/ligaopeng123-npm/web-components-repo/issues"
-    },
-    "gitHead": "7d667bce8e8ab6f495fc721853de43e4d7074434"
+        "url": "https://github.com/xxx/issues"
+    }
 }
