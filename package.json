@@ -1,7 +1,7 @@
 {
     "name": "<%= name %>",
     "version": "<%= version %>",
-    "description": "描述信息",
+    "description": "<%= description %>",
     "keywords": [],
     "author": "xxx",
     "homepage": "https://github.com/xxx#readme",
