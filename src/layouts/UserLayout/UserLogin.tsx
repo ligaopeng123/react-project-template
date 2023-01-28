@@ -10,7 +10,7 @@ import CurrentUser from "@store/CurrentUser";
 import {useNavigate} from "react-router-dom";
 import './styles.less';
 
-const UserLogin: React.FC<any> = (props: any) => {
+const UserLogin = (props: any) => {
     /**
      * oem数据消费
      */
@@ -90,8 +90,7 @@ const UserLogin: React.FC<any> = (props: any) => {
             publicKey="***"
             mainStyle={``}
             bodyStyle="right: 200px;"
-            title={loginName}>
-        </RcLoginModule>
+            title={loginName} />
     );
 };
 

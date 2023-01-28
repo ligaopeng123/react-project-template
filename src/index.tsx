@@ -1,16 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {RecoilRoot} from 'recoil'
+import ReactDOM from 'react-dom/client';
+import { RecoilRoot } from 'recoil'
 import App from './App';
 import HeadersJS from './headersJS';
-import {DynamicLoadScript} from "@gaopeng123/hoc";
+import { DynamicLoadScript } from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
-import {initTheme} from "@layouts/HeaderTheme/ThemeColor";
+import { initTheme } from "@layouts/HeaderTheme/ThemeColor";
 import zhCN from 'antd/lib/locale/zh_CN';
-import {ConfigProvider} from "antd";
+import { ConfigProvider } from "antd";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import './styles/index.scss';
+
+const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+);
 
 /**
  * 注入sentry监听
@@ -34,24 +38,22 @@ if (process.env.REACT_APP_SENTRY_DSN && process.env.REACT_APP_SENTRY?.trim() !==
  * @constructor
  */
 function LoadScript(onLoad: any) {
-    ReactDOM.render(
+    root.render(
         <React.StrictMode>
             <DynamicLoadScript url={HeadersJS} onLoad={onLoad}/>
-        </React.StrictMode>,
-        document.getElementById('root')
+        </React.StrictMode>
     )
 }
 
 async function LoadApp() {
-    ReactDOM.render(
+    root.render(
         <React.StrictMode>
             <RecoilRoot>
                 <ConfigProvider locale={zhCN}>
                     <App/>
                 </ConfigProvider>
             </RecoilRoot>
-        </React.StrictMode>,
-        document.getElementById('root')
+        </React.StrictMode>
     )
 }
 
