@@ -22,7 +22,7 @@ export interface NoticeIconTabProps {
   list: NoticeIconData[];
   onViewMore?: (e: any) => void;
 }
-const NoticeList: React.SFC<NoticeIconTabProps> = ({
+const NoticeList = ({
   data = [],
   onClick,
   onClear,
@@ -33,7 +33,7 @@ const NoticeList: React.SFC<NoticeIconTabProps> = ({
   clearText,
   viewMoreText,
   showViewMore = false,
-}) => {
+}: NoticeIconTabProps) => {
   if (!data || data.length === 0) {
     return (
       <div className={styles.notFound}>

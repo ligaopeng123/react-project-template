@@ -93,7 +93,7 @@ const TableModal: React.FC<ModalForTableProps> = (props) => {
 	
 	return (
 		<React.Fragment>
-			<Modal destroyOnClose title={title} confirmLoading={confirmLoading} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+			<Modal destroyOnClose title={title} confirmLoading={confirmLoading} open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
 				<TableFrom ref={formRef} formData={formData}/>
 			</Modal>
 		</React.Fragment>

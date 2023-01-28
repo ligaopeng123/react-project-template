@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {Avatar, Menu, Spin, Drawer} from 'antd';
-import {LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Avatar, Menu, Spin, Drawer } from 'antd';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import HeaderDropdown from './index';
-import {useRecoilState} from "recoil";
-import CurrentUser, {CurrentUserState} from "@store/CurrentUser";
+import { useRecoilState } from "recoil";
+import CurrentUser, { CurrentUserState } from "@store/CurrentUser";
 import styles from '../RightLayout/index.module.less';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const UserDropdown: React.FC<{}> = (props: any) => {
+const UserDropdown: React.FC<any> = (props) => {
     /**
      * 设置是否可见
      */
@@ -62,8 +62,10 @@ const UserDropdown: React.FC<{}> = (props: any) => {
         </Menu>
     );
 
-    return currentUser && currentUser.name ? (
-        <HeaderDropdown overlay={menuHeaderDropdown}>
+    return (<>
+        {
+            currentUser && currentUser.name
+                ? <HeaderDropdown overlay={menuHeaderDropdown}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar size="small" className={styles.avatar} src={currentUser?.avatar || '/avatar.png'} alt="avatar"/>
               <span className={`${styles.name} anticon`}>{currentUser?.name}</span>
@@ -76,23 +78,23 @@ const UserDropdown: React.FC<{}> = (props: any) => {
                     onClose={() => {
                         setVisible(false);
                     }}
-                    visible={visible}
+                    open={visible}
                 >
                {/*<UserFormComponent disabled={true} modalData={{name: user.username, organization: '沙河集团'}}/>*/}
             </Drawer>
             </span>
-        </HeaderDropdown>
-    ) : (
-        <span className={`${styles.action} ${styles.account}`}>
-        <Spin
-            size="small"
-            style={{
-                marginLeft: 8,
-                marginRight: 8,
-            }}
-        />
-      </span>
-    );
+                </HeaderDropdown>
+                : <span className={`${styles.action} ${styles.account}`}>
+                    <Spin
+                        size="small"
+                        style={{
+                            marginLeft: 8,
+                            marginRight: 8,
+                        }}
+                    />
+                </span>
+        }
+    </>)
 };
 
 export default UserDropdown;

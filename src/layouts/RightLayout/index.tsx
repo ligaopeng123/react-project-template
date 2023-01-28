@@ -26,7 +26,7 @@ const ENVTagColor: any = {
     pre: '#87d068',
 };
 
-const RightLayout: React.SFC<GlobalHeaderRightProps> = (props) => {
+const RightLayout = (props: GlobalHeaderRightProps) => {
     const {theme, layout, currentUser, fetchingNotices, onNoticeVisibleChange} = props;
     let className = styles.right;
 
