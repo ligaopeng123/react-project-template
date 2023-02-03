@@ -47,8 +47,8 @@
         "start": "dotenv -v PORT=9000 -v REACT_APP_SENTRY=false -e .env.dev craco start",
         "start:test": "dotenv -v PORT=9001 -v REACT_APP_SENTRY=false -e .env.test craco start",
         "start:pod": "dotenv -v PORT=9002 -v REACT_APP_SENTRY=false -e .env.pod craco start",
-        "build:dev": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.dev craco build && npx rimraf ./build/static/js/*.map",
-        "build:test": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.test craco build && npx rimraf ./build/static/js/*.map",
+        "build:dev": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -v REACT_APP_SENTRY=false -e .env.dev craco build && npx rimraf ./build/static/js/*.map",
+        "build:test": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -v REACT_APP_SENTRY=false -e .env.test craco build && npx rimraf ./build/static/js/*.map",
         "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod craco build && npx rimraf ./build/static/js/*.map ",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
