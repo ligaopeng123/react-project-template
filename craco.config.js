@@ -17,6 +17,7 @@ const webpack = require("webpack");
 const packageOjb = require("./package.json");
 const SentryPlugin = require("@sentry/webpack-plugin");
 const { formatTimestamp } = require("@gaopeng123/utils");
+const CracoEsbuildPlugin = require('craco-esbuild');
 
 // 时间 用于发布小版本
 const REACT_APP_VERSION_TIME = formatTimestamp(Date.now(), 'yyyy-MM-dd_HH:mm:ss');
@@ -115,6 +116,7 @@ module.exports = {
                     },
                 },
             },
-        }
+        },
+        { plugin: CracoEsbuildPlugin }
     ],
 };
