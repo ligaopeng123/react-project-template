@@ -47,8 +47,8 @@
         "start": "dotenv -v PORT=9000 -v REACT_APP_SENTRY=false -e .env.dev craco start",
         "start:test": "dotenv -v PORT=9001 -v REACT_APP_SENTRY=false -e .env.test craco start",
         "start:pod": "dotenv -v PORT=9002 -v REACT_APP_SENTRY=false -e .env.pod craco start",
-        "build:dev": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.dev craco build && npx rimraf ./build/static/js/*.map",
-        "build:test": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.test craco build && npx rimraf ./build/static/js/*.map",
+        "build:dev": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -v REACT_APP_SENTRY=false -e .env.dev craco build && npx rimraf ./build/static/js/*.map",
+        "build:test": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -v REACT_APP_SENTRY=false -e .env.test craco build && npx rimraf ./build/static/js/*.map",
         "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod craco build && npx rimraf ./build/static/js/*.map ",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
@@ -87,7 +87,7 @@
     },
     "devDependencies": {
         "@craco/craco": "^6.4.3",
-        "@sentry/cli": "^2.10.0",
+        "@sentry/cli": "1.74.6",
         "@sentry/webpack-plugin": "^1.20.0",
         "@types/jest": "^27.4.0",
         "@types/mockjs": "^1.0.3",
@@ -96,6 +96,7 @@
         "@types/react-dom": "^18.0.10",
         "@types/react-router-dom": "^5.1.5",
         "@types/socket.io-client": "^1.4.34",
+        "craco-esbuild": "^0.5.2",
         "craco-less": "^2.0.0",
         "dotenv-cli": "^4.0.0",
         "fetch-mock": "^9.10.7",
