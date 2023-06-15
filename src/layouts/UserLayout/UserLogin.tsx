@@ -88,8 +88,8 @@ const UserLogin = (props: any) => {
             password="password"
             id="form"
             publicKey="***"
-            mainStyle={``}
-            bodyStyle="right: 200px;"
+            mainStyle={{}}
+            bodyStyle={{right: '200px'}}
             title={loginName} />
     );
 };
