@@ -16,7 +16,7 @@ const webpack = require("webpack");
 // const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const packageOjb = require("./package.json");
 const SentryPlugin = require("@sentry/webpack-plugin");
-const { formatTimestamp } = require("@gaopeng123/utils");
+const {formatTimestamp} = require("@gaopeng123/utils");
 const CracoEsbuildPlugin = require('craco-esbuild');
 
 // 时间 用于发布小版本
@@ -69,7 +69,10 @@ module.exports = {
         plugins: {
             add: plugins
         },
-        configure: (config, {env, paths}) => {
+        configure: (config, {
+            env,
+            paths
+        }) => {
             // 去掉打包生产map 文件
             if (process.env.REACT_APP_SENTRY !== 'false') {
                 config.devtool = 'source-map';
@@ -117,6 +120,28 @@ module.exports = {
                 },
             },
         },
-        { plugin: CracoEsbuildPlugin }
+        {
+            plugin: CracoEsbuildPlugin,
+            options: {
+                // includePaths: ['/external/dir/with/components'], // Optional. If you want to include components which are not in src folder
+                esbuildLoaderOptions: {
+                    // Optional. Defaults to auto-detect loader.
+                    loader: 'tsx', // Set the value to 'tsx' if you use typescript
+                    target: 'es2015',
+                },
+                esbuildMinimizerOptions: {
+                    // Optional. Defaults to:
+                    target: 'es2015',
+                    css: true, // if true, OptimizeCssAssetsWebpackPlugin will also be replaced by esbuild.
+                },
+                skipEsbuildJest: false, // Optional. Set to true if you want to use babel for jest tests,
+                esbuildJestOptions: {
+                    loaders: {
+                        '.ts': 'ts',
+                        '.tsx': 'tsx',
+                    },
+                },
+            },
+        }
     ],
 };
