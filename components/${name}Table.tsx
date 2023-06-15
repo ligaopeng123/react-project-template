@@ -68,7 +68,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 		{
 			title: '排序',
 			dataIndex: 'index',
-			valueType: 'indexBorder',
+			valueType: 'index',
 			width: 48,
 		},
 		{
