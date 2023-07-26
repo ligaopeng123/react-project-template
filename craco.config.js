@@ -144,4 +144,10 @@ module.exports = {
             },
         }
     ],
+    devServer: {
+        client: {
+            progress: true, // 展示进度
+            overlay: false, // 错误信息使用iframe覆盖
+        },
+    },
 };
