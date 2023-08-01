@@ -56,6 +56,16 @@ export const valueEnum = {
 	3: 'error',
 };
 export type <%= name %>Base = {
+	id?: number;
+	key: number;
+	name: string;
+	containers: number;
+	creator: string;
+	status: string;
+	createdAt: number;
+	progress: number;
+	money: number;
+	memo: string;
 	[propName: string]: any;
 }
 
@@ -68,14 +78,4 @@ export type Edit<%= name %>Props = {
 } & <%= name %>Base;
 
 export type <%= name %>TableListItem = {
-	id?: number;
-	key: number;
-	name: string;
-	containers: number;
-	creator: string;
-	status: string;
-	createdAt: number;
-	progress: number;
-	money: number;
-	memo: string;
-};
+} & <%= name %>Base;
