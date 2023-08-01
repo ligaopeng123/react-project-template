@@ -3,7 +3,7 @@
     "version": "<%= version %>",
     "description": "<%= description %>",
     "keywords": [],
-    "author": "xxx",
+    "author": "<%= username %>",
     "homepage": "https://github.com/xxx#readme",
     "license": "MIT",
     "directories": {
