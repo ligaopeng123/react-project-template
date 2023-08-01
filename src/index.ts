@@ -1,2 +1,2 @@
-export { default as DemoComponent } from './DemoComponent';
-export type { DemoComponent } from './DemoComponent';
+export { default as <%= name %> } from './<%= name %>';
+export type { <%= name %>Props } from './<%= name %>';

@@ -1,25 +1,25 @@
 /**********************************************************************
  *
- * @模块名称: DemoComponent
+ * @模块名称: <%= name %>
  *
- * @模块用途: DemoComponent
+ * @模块用途: <%= name %>
  *
- * @创建人:
+ * @创建人: <%= username %>
  *
- * @date: 2022/5/31 19:53
+ * @date: <%= time %>
  *
  **********************************************************************/
 import React, { FC } from 'react';
 import styles from './styles.module.less';
 
-export type DemoComponentProps = {};
+export type <%= name %>Props = {};
 
-const DemoComponent: FC<DemoComponentProps> = (props) => {
+const <%= name %>: FC<<%= name %>Props> = (props) => {
     return (
         <div className={styles.demo}>
-            DemoComponentProps
+            <%= name %>
         </div>
     )
 };
 
-export default DemoComponent;
+export default <%= name %>;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { DemoComponent } from "../src";
+import { <%= name %> } from "../src";
 
 const App = () => {
     return (
-        <DemoComponent/>
+        <<%= name %>/>
     );
 };
 
