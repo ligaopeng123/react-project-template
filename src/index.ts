@@ -1,1 +1,1 @@
-export { default as <%= name %>Component } from './${name}Component';
+export { default as <%= name %> } from './${name}Component';

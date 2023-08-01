@@ -1,1 +1,1 @@
-import <%= name %>Component from "../src";
+import <%= name %> from "../src";
