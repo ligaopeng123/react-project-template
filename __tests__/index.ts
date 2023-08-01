@@ -1,1 +1,1 @@
-import <%= name %> from "../src";
+import { <%= name %> } from "../src";
