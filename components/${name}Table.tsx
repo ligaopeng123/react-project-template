@@ -14,13 +14,13 @@ import React, {useEffect, useRef} from 'react';
 import {Button, Tooltip, Input, Popconfirm} from 'antd';
 import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOutlined} from '@ant-design/icons';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
-import {<%= name %>StoreEnum, TableListItem, TableProps} from "../<%= name %>Typing";
+import {<%= name %>StoreEnum, <%= name %>TableListItem, TableProps} from "../<%= name %>Typing";
 import {uuid} from '@gaopeng123/utils';
 import {dealWithParams} from '@share/utils';
 import {<%= name %>List, del<%= name %>} from "../api";
 import styles from '../styles.module.less';
 
-const <%= name %>Table: React.FC<TableProps> = (props) => {
+const <%= name %>Table: React.FC<<%= name %>TableProps> = (props) => {
 	const {state, dispatch} = props;
 	/**
 	 * 表格res
@@ -64,7 +64,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 		}
 	}, [state[<%= name %>StoreEnum.refresh]]);
 
-	const columns: ProColumns<TableListItem>[] = [
+	const columns: ProColumns<<%= name %>TableListItem>[] = [
 		{
 			title: '排序',
 			dataIndex: 'index',
@@ -162,7 +162,7 @@ const <%= name %>Table: React.FC<TableProps> = (props) => {
 	];
 
 	return (
-		<ProTable<TableListItem>
+		<ProTable<<%= name %>TableListItem>
 			actionRef={ref}
 			columns={columns}
 			request={async (params, sorter, filter) => {

@@ -36,7 +36,7 @@ export type Props = {
 }
 
 
-export type TableProps = Props & {};
+export type <%= name %>TableProps = Props & {};
 export type ModalForTableProps = Props & {};
 
 export type FormForTableRef = {
@@ -67,7 +67,7 @@ export type Edit<%= name %>Props = {
 	[propName: string]: any;
 } & <%= name %>Base;
 
-export type TableListItem = {
+export type <%= name %>TableListItem = {
 	id?: number;
 	key: number;
 	name: string;
