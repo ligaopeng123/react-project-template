@@ -14,7 +14,7 @@ import React, {useEffect, useRef} from 'react';
 import {Button, Tooltip, Input, Popconfirm} from 'antd';
 import {AppstoreAddOutlined, EllipsisOutlined, QuestionCircleOutlined, SearchOutlined} from '@ant-design/icons';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
-import {<%= name %>StoreEnum, <%= name %>TableListItem, TableProps} from "../<%= name %>Typing";
+import {<%= name %>StoreEnum, <%= name %>TableListItem, <%= name %>TableProps} from "../<%= name %>Typing";
 import {uuid} from '@gaopeng123/utils';
 import {dealWithParams} from '@share/utils';
 import {<%= name %>List, del<%= name %>} from "../api";
