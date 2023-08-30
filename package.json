@@ -107,6 +107,8 @@
         "process": "^0.11.10",
         "sass": "^1.56.2",
         "sass-loader": "^8.0.2",
-        "webpack": "^5.75.0"
+        "simple-progress-webpack-plugin": "^2.0.0",
+        "webpack": "^5.75.0",
+        "webpack-bundle-analyzer": "^4.9.0"
     }
 }

@@ -40,7 +40,9 @@ if (process.env.REACT_APP_SENTRY_DSN && process.env.REACT_APP_SENTRY?.trim() !==
 function LoadScript(onLoad: any) {
     root.render(
         <React.StrictMode>
-            <DynamicLoadScript url={HeadersJS} onLoad={onLoad}/>
+            <DynamicLoadScript
+                url={HeadersJS}
+                onLoad={onLoad}/>
         </React.StrictMode>
     )
 }
@@ -49,7 +51,8 @@ async function LoadApp() {
     root.render(
         <React.StrictMode>
             <RecoilRoot>
-                <ConfigProvider locale={zhCN}>
+                <ConfigProvider
+                    locale={zhCN}>
                     <App/>
                 </ConfigProvider>
             </RecoilRoot>
@@ -63,10 +66,10 @@ async function LoadApp() {
  * @returns {Promise<void>}
  */
 async function startUp() {
-    LoadScript(async () => {
-        initTheme();
-        LoadApp();
-    });
+    // LoadScript(async () => {
+    initTheme();
+    LoadApp();
+    // });
 }
 
 startUp();
