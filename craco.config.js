@@ -15,15 +15,24 @@ const path = require("path");
 const webpack = require("webpack");
 // const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const packageOjb = require("./package.json");
+const AddExternalsPlugin = require("./lib/AddExternalsPlugin");
 const SentryPlugin = require("@sentry/webpack-plugin");
 const {formatTimestamp} = require("@gaopeng123/utils");
 const CracoEsbuildPlugin = require('craco-esbuild');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 
 // 时间 用于发布小版本
 const REACT_APP_VERSION_TIME = formatTimestamp(Date.now(), 'yyyy-MM-dd_HH:mm:ss');
 const REACT_APP_VERSION_RELEASE = `${packageOjb.name}-${process.env.REACT_APP_ENV}-${packageOjb.version}-${REACT_APP_VERSION_TIME}`;
 
 const plugins = [
+    // 外链脚本
+    new AddExternalsPlugin({
+        scripts: [
+            // '/js/screenfull.js'
+        ],
+    }),
     new webpack.DefinePlugin({
         "process.env": {
             REACT_APP_NAME: `"${packageOjb.name}"`,
@@ -32,11 +41,23 @@ const plugins = [
             REACT_APP_SENTRY: `"${process.env.REACT_APP_SENTRY}"`
         }
     }),
+    // 解决process/browser报错
     new webpack.ProvidePlugin({
         process: 'process/browser',
     }),
+    // 编译进度
+    new SimpleProgressWebpackPlugin(),
 ];
 
+/**
+ * 编译包分析
+ */
+if (process.env.bundleAnalyzerPlugin) {
+    plugins.push(new BundleAnalyzerPlugin());
+}
+/**
+ * REACT_APP_SENTRY配置是否发送到sentry
+ */
 if (process.env.REACT_APP_SENTRY?.trim() !== 'false') {
     plugins.push(new SentryPlugin({
         org: 'ub-sentry', // 组织名称
@@ -81,6 +102,13 @@ module.exports = {
             } else {
                 // 允许访问外部的值 主要就是访问mock服务
                 // config.resolve.plugins = config.resolve.plugins.filter(plugin => !(plugin instanceof ModuleScopePlugin));
+            }
+            if (process.env.NODE_ENV !== 'development') {
+                // 配置外联 首屏加载优化 需要配合AddExternalsPlugin使用
+                // config.externals = {
+                //     react: 'window.React',
+                //     'react-dom': 'window.ReactDOM'
+                // }
             }
             // 支持static部署
             if (process.env.REACT_APP_PUBLICPATH) {
@@ -146,7 +174,7 @@ module.exports = {
     ],
     devServer: {
         client: {
-            progress: true, // 展示进度
+            // progress: true, // 展示进度
             overlay: false, // 错误信息使用iframe覆盖
         },
     },
