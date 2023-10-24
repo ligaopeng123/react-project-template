@@ -1,6 +1,6 @@
 {
-  "name": "flutter_repo",
-  "version": "1.0.0",
+  "name": "<%= name %>",
+  "version": "<%= version %>",
   "scripts": {
     "start": "npm run dev",
     "dev": "flutter run --dart-define=INIT_ENV=dev --dart-define=ANDROID_CHANNEL=flutter --web-port=8080",

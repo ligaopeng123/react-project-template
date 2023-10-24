@@ -1,6 +1,6 @@
 {
-    "name": "flutter_repo",
-    "short_name": "flutter_repo",
+    "name": "<%= name %>",
+    "short_name": "<%= name %>",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

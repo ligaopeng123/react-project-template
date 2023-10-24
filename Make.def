@@ -7,7 +7,7 @@ NAMESPACE := web
 # 定义编译环境
 PROJECT_ENV ?= pod
 # 定义项目名称(镜像名称)
-PROJECT_NAME := smart-iot-app-$(PROJECT_ENV)
+PROJECT_NAME := <%= name %>-$(PROJECT_ENV)
 
 .PHONY: help prepare build debug push all build-r push-r all-r
 
