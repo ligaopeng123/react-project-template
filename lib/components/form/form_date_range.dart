@@ -1,10 +1,10 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_iot_app/components/form/form_item.dart';
+import '../../components/form/form_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_iot_app/utils/index.dart';
+import '../../utils/index.dart';
 
 import '../../utils/color/color_hex.dart';
 import '../omni_date_time_picker/omni_datetime_picker.dart';

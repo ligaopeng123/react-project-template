@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_iot_app/utils/color/color_hex.dart';
+import '../../../utils/color/color_hex.dart';
 import '../../../config/app_config.dart';
 import 'package:flutter/cupertino.dart';
 import '../../login/user_util.dart' show UserUtil;

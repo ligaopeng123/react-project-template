@@ -2,7 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_iot_app/components/list/search_loading.dart';
+import './search_loading.dart';
 import 'EasyRefreshHeader.dart';
 import 'list_item_details.dart';
 

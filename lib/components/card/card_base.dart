@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_iot_app/components/basic_safe_area/basic_router.dart';
+import '../../components/basic_safe_area/basic_router.dart';
 import '../../utils/color/color_hex.dart';
 import '../../utils/index.dart';
 import 'package:flutter/cupertino.dart';

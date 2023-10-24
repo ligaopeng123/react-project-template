@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_iot_app/utils/index.dart';
+import '../../utils/index.dart';
 import '../../constants/cache_constants.dart';
 import '../../routes/route_name.dart';
 import '../../config/app_config.dart' show AppConfig;
-import '../../utils/tool/sp_util.dart';
 import '../Login/user_util.dart';
 import 'components/ad_page.dart';
 import 'components/welcome_page.dart';

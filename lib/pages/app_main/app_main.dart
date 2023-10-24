@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import '../devices/device.dart';
+import '../events/events.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jh_debug/jh_debug.dart';
 import 'package:provider/provider.dart';
@@ -102,6 +104,18 @@ class _AppMainState extends State<AppMain> with AutomaticKeepAliveClientMixin {
       'icon': CupertinoIcons.house_alt,
       'switcher_icon': CupertinoIcons.house_alt_fill,
       'body': Dashboard(),
+    },
+    {
+      'title': '设备',
+      'icon': CupertinoIcons.photo_camera,
+      'switcher_icon': CupertinoIcons.photo_camera_solid,
+      'body': Device(),
+    },
+    {
+      'title': '事件',
+      'icon': CupertinoIcons.search_circle,
+      'switcher_icon': CupertinoIcons.search_circle_fill,
+      'body': Events(),
     },
     {
       'title': '我的',

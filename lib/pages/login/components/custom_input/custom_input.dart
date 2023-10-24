@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_iot_app/utils/index.dart';
+import '../../../../utils/index.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
@@ -9,7 +9,6 @@ import '../../../../config/app_config.dart';
 import '../../../../utils/color/color_hex.dart';
 import '../../login_service.dart' show postCaptcha;
 import '../../login.m.dart' show LoginMobileCaptcha;
-import '../../../../utils/index.dart' show SpUtil, Tips;
 
 /// 输出框风格类型
 enum InputType {

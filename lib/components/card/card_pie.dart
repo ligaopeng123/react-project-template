@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:smart_iot_app/components/basic_safe_area/basic_compatibility.dart';
+import '../../components/basic_safe_area/basic_compatibility.dart';
 
 import '../../utils/color/color_hex.dart';
 

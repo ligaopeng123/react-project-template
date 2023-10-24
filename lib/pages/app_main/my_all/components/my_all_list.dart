@@ -2,7 +2,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:smart_iot_app/pages/change_password/change_password_page.dart';
+import '../../../change_password/change_password_page.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../../../../components/update_app/check_app_version.dart';
 import '../../../../utils/color/color_hex.dart';

@@ -1,7 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_iot_app/components/text/app_bar_title.dart';
+import '../../../components/text/app_bar_title.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../../../components/card/card_base.dart';
@@ -9,10 +9,8 @@ import '../../../components/card/card_pie.dart';
 import '../../../components/card/card_statistics.dart';
 import '../../../components/images/image_auth.dart';
 import '../../../utils/color/color_hex.dart';
-import '../../devices/device_home/device_home.dart';
-import '../../events/app_home/app_home.dart';
-import '../../events/events_home/events_home.dart';
-import '../../server/server_home.dart';
+import '../../devices/device.dart';
+import '../../events/events.dart';
 import 'dashboard_service.dart';
 
 class Dashboard extends StatefulWidget {
@@ -27,7 +25,6 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     _initData();
-    initApp();
   }
 
   final String home_bg = 'asset/images/home/home_bg.png';
@@ -45,11 +42,6 @@ class _DashboardState extends State<Dashboard> {
       'name': '事件中心',
       'icon': 'asset/images/home/event_icon.png',
       'key': 'events'
-    },
-    {
-      'name': '服务监控',
-      'icon': 'asset/images/home/service_icon.png',
-      'key': 'server'
     }
   ];
 
@@ -67,7 +59,12 @@ class _DashboardState extends State<Dashboard> {
   };
 
   _initData() async {
-    final Map<String, dynamic> _dataList = await getDeviceList();
+    final Map<String, dynamic> _dataList = {
+      "deviceTotal": 100,
+      "offlineTotal": 20,
+      "eventTotal": 30,
+      "onlineRate": 0.8,
+    };
     setState(() {
       todayValue = {
         'device': _dataList['deviceTotal']?.toString(),
@@ -81,21 +78,6 @@ class _DashboardState extends State<Dashboard> {
 
   _refresh(value) {
     _initData();
-  }
-
-  initApp() async {
-    final _appList = await getAppList();
-    final newAppList = _appList?.asMap().entries.map((item) {
-      dynamic itemData = item.value;
-      return {
-        'name': itemData['appName'],
-        'icon': itemData['appIcon'],
-        'key': itemData['appId']
-      };
-    }).toList();
-    setState(() {
-      appList = newAppList ?? [];
-    });
   }
 
   @override
@@ -126,7 +108,6 @@ class _DashboardState extends State<Dashboard> {
                 centerTitle: true,
               ),
               _app(),
-              _appList(),
               _appList2(),
             ],
           ),
@@ -141,8 +122,8 @@ class _DashboardState extends State<Dashboard> {
       onClick: () {
         pushNewScreenWithRouteSettings(
           context,
-          screen: Device_home(),
-          settings: RouteSettings(name: '/Device_home'),
+          screen: Device(),
+          settings: RouteSettings(name: '/Device'),
           withNavBar: false, // OPTIONAL VALUE. True by default.
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         ).then(_refresh);
@@ -184,22 +165,6 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget _appList() {
-    return CardBase(
-      title: '业务应用',
-      // onTitleClick: () {},
-      child: Container(
-        constraints: BoxConstraints(
-          minHeight: 72, // 最小高度为100
-        ),
-        child: Wrap(
-          direction: Axis.horizontal,
-          children: _appListItem(appList),
-        ),
-      ),
-    );
-  }
-
   Widget _appList2() {
     return CardBase(
       title: '统计列表',
@@ -219,8 +184,8 @@ class _DashboardState extends State<Dashboard> {
       case 'events':
         pushNewScreenWithRouteSettings(
           context,
-          screen: Events_home(),
-          settings: RouteSettings(name: '/Events_home'),
+          screen: Events(),
+          settings: RouteSettings(name: '/events'),
           withNavBar: false, // OPTIONAL VALUE. True by default.
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         ).then(_refresh);
@@ -228,30 +193,15 @@ class _DashboardState extends State<Dashboard> {
       case 'device':
         pushNewScreenWithRouteSettings(
           context,
-          screen: Device_home(),
-          settings: RouteSettings(name: '/Device_home'),
-          withNavBar: false, // OPTIONAL VALUE. True by default.
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        ).then(_refresh);
-        break;
-      case 'server':
-        pushNewScreenWithRouteSettings(
-          context,
-          screen: ServerHome(),
-          settings: RouteSettings(name: '/Server_home'),
+          screen: Device(),
+          settings: RouteSettings(name: '/device'),
           withNavBar: false, // OPTIONAL VALUE. True by default.
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         ).then(_refresh);
         break;
       default:
         if (key != null) {
-          pushNewScreenWithRouteSettings(
-            context,
-            screen: App_home(title: itemData['name'], params: itemData),
-            settings: RouteSettings(name: '/App_home'),
-            withNavBar: false, // OPTIONAL VALUE. True by default.
-            pageTransitionAnimation: PageTransitionAnimation.cupertino,
-          ).then(_refresh);
+
         }
         break;
     }

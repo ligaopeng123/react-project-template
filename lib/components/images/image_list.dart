@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_iot_app/components/images/image_auth.dart';
+import '../../components/images/image_auth.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'image_list_view.dart';
 

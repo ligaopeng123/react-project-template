@@ -2,12 +2,12 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:smart_iot_app/components/layouts/basic_layout.dart';
+import './components/layouts/basic_layout.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:jh_debug/jh_debug.dart' show DebugMode, jhDebug, jhDebugMain;
-import 'package:smart_iot_app/utils/dio/request.dart';
+import './utils/dio/request.dart';
 import 'routes/generate_route.dart' show generateRoute;
 import 'routes/router_observers.dart';
 import 'routes/routes_data.dart'; // 路由配置

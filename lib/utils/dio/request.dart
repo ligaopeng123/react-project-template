@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:smart_iot_app/utils/index.dart';
+import '../index.dart';
 import '../../config/app_config.dart';
 import '../../pages/Login/user_util.dart';
 import 'interceptors/header_interceptor.dart';

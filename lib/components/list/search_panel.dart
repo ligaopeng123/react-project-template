@@ -2,8 +2,8 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:smart_iot_app/components/list/animation_search_bar.dart';
-import 'package:smart_iot_app/utils/index.dart';
+import './animation_search_bar.dart';
+import '../../utils/index.dart';
 
 import '../../utils/color/color_hex.dart';
 import '../text/app_bar_title.dart';

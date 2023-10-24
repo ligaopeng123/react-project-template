@@ -4,25 +4,24 @@ import 'package:flutter/material.dart';
 import '../../components/text/app_bar_title.dart';
 
 ///  Created by wangxiangyu on 2023/10/24.
-class Events extends StatefulWidget {
-  Events({Key? key, this.params}) : super(key: key);
-
-  final dynamic params;
+class Device extends StatefulWidget {
+  Device({Key? key}) : super(key: key);
 
   @override
-  _EventState createState() => _EventState();
+  _DeviceState createState() => _DeviceState();
 }
 
-class _EventState extends State<Events> {
+class _DeviceState extends State<Device> {
   @override
   Widget build(BuildContext context) {
     return PageRefresh(
         // extendBodyBehindDeviceBar: true,
-        title: AppBarTitle(title: '事件概览'),
-        onRefresh: () async {},
+        title: AppBarTitle(title: '设备概览'),
+        onRefresh: () async {
+        },
         children: [
           Container(
-            child: Text('事件'),
+            child: Text('设备'),
           )
         ]);
   }
