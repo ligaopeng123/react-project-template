@@ -1,81 +1,38 @@
 {
-    "name": "react-simple-template",
-    "version": "0.1.0",
-    "private": false,
-    "main": "main.js",
-    "homepage": ".",
-    "dependencies": {
-        "@ant-design/icons": "^4.7.0",
-        "@ant-design/pro-card": "^1.18.33",
-        "@ant-design/pro-descriptions": "^1.10.45",
-        "@ant-design/pro-form": "^1.54.0",
-        "@ant-design/pro-layout": "^6.33.0",
-        "@ant-design/pro-list": "^1.21.30",
-        "@ant-design/pro-table": "^2.64.0",
-        "@gaopeng123/fetch": "latest",
-        "@gaopeng123/hoc": "latest",
-        "@gaopeng123/hooks": "latest",
-        "@gaopeng123/rc-login-jsencrypt": "latest",
-        "@gaopeng123/rc-login-module": "latest",
-        "@gaopeng123/utils": "latest",
-        "@testing-library/jest-dom": "^5.16.2",
-        "@testing-library/react": "^12.1.3",
-        "@testing-library/user-event": "^13.5.0",
-        "antd": "^4.18.8",
-        "classnames": "^2.2.6",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-router-dom": "^6.2.1",
-        "react-scripts": "5.0.0",
-        "recoil": "^0.3.1",
-        "socket.io-client": "^2.3.1",
-        "typescript": "^4.5.5",
-        "web-vitals": "^2.1.4"
-    },
-    "scripts": {
-        "start": "set PORT=9000 && dotenv -e .env craco start",
-        "build": "set NODE_OPTIONS=--max_old_space_size=36000 && dotenv -e .env.pod craco build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-        "extends": "react-app",
-        "rules": {
-            "@typescript-eslint/no-unused-vars": "off",
-            "react-hooks/exhaustive-deps": "off",
-            "no-useless-rename": "off",
-            "no-restricted-globals": "off"
-        }
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@craco/craco": "^6.4.3",
-        "@types/classnames": "^2.2.10",
-        "@types/jest": "^27.4.0",
-        "@types/mockjs": "^1.0.3",
-        "@types/node": "^17.0.18",
-        "@types/react": "^17.0.39",
-        "@types/react-dom": "^17.0.11",
-        "@types/react-router-dom": "^5.1.5",
-        "@types/socket.io-client": "^1.4.34",
-        "craco-less": "^2.0.0",
-        "dotenv-cli": "^4.0.0",
-        "fetch-mock": "^9.10.7",
-        "http-proxy-middleware": "^1.0.6",
-        "less-loader": "^6.1.0",
-        "mockjs": "^1.1.0",
-        "sass": "^1.37.0",
-        "sass-loader": "^8.0.2"
+  "name": "smart_iot_app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "flutter run --dart-define=INIT_ENV=dev --dart-define=ANDROID_CHANNEL=flutter --web-port=8080",
+    "dev:test": "flutter run --dart-define=INIT_ENV=test --dart-define=ANDROID_CHANNEL=flutter --web-port=8080",
+    "dev:prod": "flutter run --dart-define=INIT_ENV=prod --dart-define=ANDROID_CHANNEL=flutter --web-port=8080",
+    "dev:web": "flutter run -d chrome --dart-define=INIT_ENV=dev",
+    "open:ios": "open -a Simulator",
+    "build": "npm run build-apk:prod && npm run build-ios:prod",
+    "build-apk:test": "flutter build apk --dart-define=INIT_ENV=test --dart-define=ANDROID_CHANNEL=flutter",
+    "build-apk:pre": "flutter build apk --dart-define=INIT_ENV=pre --dart-define=ANDROID_CHANNEL=flutter",
+    "build-apk:prod": "flutter build apk --dart-define=INIT_ENV=prod --dart-define=ANDROID_CHANNEL=flutter",
+    "build-ios:test": "flutter build ios --dart-define=INIT_ENV=test",
+    "build-ios:pre": "flutter build ios --dart-define=INIT_ENV=pre",
+    "build-ios:prod": "flutter build ios --dart-define=INIT_ENV=prod",
+    "build-web:test": "flutter build web --dart-define=INIT_ENV=test && dotenv -v INIT_ENV=test node buildApp.js",
+    "build-web:pre": "flutter build web --dart-define=INIT_ENV=pre && node buildApp.js",
+    "build-web:prod": "flutter build web --dart-define=INIT_ENV=prod && dotenv -v INIT_ENV=prod node buildApp.js",
+    "build-windows:test": "flutter build windows --dart-define=INIT_ENV=test",
+    "build-windows:pre": "flutter build windows --dart-define=INIT_ENV=pre",
+    "build-windows:prod": "flutter build windows --dart-define=INIT_ENV=prod",
+    "appkey": "keytool -printcert -jarfile ./build/app/outputs/apk/release/app-release.apk",
+    "upsdk": "flutter upgrade",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }
