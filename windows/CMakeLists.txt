@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(smart_iot_app LANGUAGES CXX)
+project(flutter_repo LANGUAGES CXX)
 
-set(BINARY_NAME "smart_iot_app")
+set(BINARY_NAME "flutter_repo")
 
 cmake_policy(SET CMP0063 NEW)
 
