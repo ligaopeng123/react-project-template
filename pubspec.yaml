@@ -78,7 +78,6 @@ flutter:
     - asset/images/login/
     - asset/images/updateVersion/header/
     - asset/icons/
-    - asset/icons/radio/
     - asset/pem/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
