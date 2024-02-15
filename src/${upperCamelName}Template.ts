@@ -1,8 +1,8 @@
 /**********************************************************************
  *
- * @模块名称: <%= name %>Template
+ * @模块名称: <%= upperCamelName %>Template
  *
- * @模块用途: <%= name %>Template
+ * @模块用途: <%= upperCamelName %>Template
  *
  * @创建人: <%= username %>
  *

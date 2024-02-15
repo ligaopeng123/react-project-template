@@ -1,1 +1,1 @@
-import { <%= name %> } from "../src";
+import { <%= upperCamelName %> } from "../src";

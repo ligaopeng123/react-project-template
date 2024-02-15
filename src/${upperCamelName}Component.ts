@@ -1,8 +1,8 @@
 /**********************************************************************
  *
- * @模块名称: <%= name %>Component
+ * @模块名称: <%= upperCamelName %>Component
  *
- * @模块用途: <%= name %>Component
+ * @模块用途: <%= upperCamelName %>Component
  *
  * @创建人: <%= username %>
  *
@@ -10,9 +10,9 @@
  *
  **********************************************************************/
 
-import { template } from "./<%= name %>Template";
+import { template } from "./<%= upperCamelName %>Template";
 
-class <%= name %> extends HTMLElement {
+class <%= upperCamelName %> extends HTMLElement {
     shadow: ShadowRoot = null;
     /*
     * 保存配置信息
@@ -74,8 +74,8 @@ class <%= name %> extends HTMLElement {
     }
 }
 
-export default <%= name %>;
+export default <%= upperCamelName %>;
 
 if (!customElements.get("<%= name %>")) {
-    customElements.define("<%= name %>", <%= name %>);
+    customElements.define("<%= name %>", <%= upperCamelName %>);
 }
