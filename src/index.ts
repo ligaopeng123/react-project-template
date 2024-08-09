@@ -1,1 +1,1 @@
-export { default as <%= upperCamelName %> } from './${upperCamelName}Component';
+export { default as <%= upperCamelName %> } from './<%= upperCamelName %>Component';
