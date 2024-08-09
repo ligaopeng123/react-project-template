@@ -6,8 +6,8 @@ const autoprefixer = require('autoprefixer');
 const postcss = require('postcss');
 
 // 要监听的文件或目录路径
-const filePath = './src/styles.scss';
-const templatePath = './src/' + <%= upperCamelName %>Template.ts';
+const filePath = "./src/styles.scss";
+const templatePath = "./src/<%= upperCamelName %>Template.ts";
 
 // 监听文件或目录变化
 const watcher = chokidar.watch(filePath);
