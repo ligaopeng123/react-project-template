@@ -1,4 +1,4 @@
-/**********************************************************************
+/** ********************************************************************
  *
  * @模块名称: <%= name %>Table
  *
@@ -12,7 +12,6 @@
 import React, { useState,useEffect, useRef } from 'react';
 import { <%= name %>List, del<%= name %> } from "../servers";
 import { <%= name %>StoreEnum } from "../model";
-import React, { useState, useRef, useContext } from 'react';
 import { Button, Space, Input } from '@tinper/next-ui';
 import { DataTable } from 'ynf-tinper-next-pro';
 import { RefreshButton, warn } from '@ymscloud/ui';
@@ -23,7 +22,7 @@ const <%= name %>Table = (props) => {
 	/**
 	 * 表格res
 	 */
-	const ref = useRef();
+	const tableRef = useRef();
 
 	const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -42,8 +41,7 @@ const <%= name %>Table = (props) => {
 	 */
 	const del = (row) => {
         del<%= name %>(row).then((res)=> {
-            // @ts-ignore
-            ref.current?.reload();
+            tableRef.current?.reload();
         });
 	};
 	/**
@@ -56,15 +54,33 @@ const <%= name %>Table = (props) => {
 			value: Object.assign({_: Date.now()}, row)
 		});
 	};
+
+	const onSearch = () => {
+
+	};
+
+	const reload = () => {
+		tableRef.current?.reload();
+	};
 	/**
 	 * 刷新控制
 	 */
 	useEffect(() => {
 		if (state[<%= name %>StoreEnum.refresh]) {
-			// @ts-ignore
-			ref.current?.reload();
+			reload();
 		}
 	}, [state[<%= name %>StoreEnum.refresh]]);
+
+
+	function operationClick(record, { key }, e, index) {
+		if (key === 'del') {
+			console.log(record);
+		} else if (key === 'edit') {
+			edit(record);
+		}
+	}
+
+
 
 	const columns = [
 		{
@@ -110,9 +126,7 @@ const <%= name %>Table = (props) => {
 			showModeSwitch={false}
 			request={async ({ page, params }, sort) => {
 				// 表单搜索项会从 params 传入，传递给后端接口。
-				console.log(params, sorter, filter);
-				const newParams = dealWithParams(params);
-				const data = await <%= name %>List(newParams);
+				const data = await <%= name %>List(params);
 				return {
 					data,
 					success: true,
@@ -157,7 +171,6 @@ const <%= name %>Table = (props) => {
 			operationTypeProps={{
 				maxCount: 8,
 			}}
-			onRowClick={onRowClick}
 		/>
 	);
 };
