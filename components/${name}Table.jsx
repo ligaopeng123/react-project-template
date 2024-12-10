@@ -123,7 +123,7 @@ const <%= name %>Table = (props) => {
 	return (
 		<DataTable
 			ref={tableRef}
-			params={Object.assign({ searchValue: searchValue }, currentContext)}
+			params={Object.assign({ searchValue: searchValue })}
 			providerPackage="ynf-tinper-next-pro" providerEntry="DataTable"
 			showModeSwitch={false}
 			request={async ({ page, params }, sort) => {
