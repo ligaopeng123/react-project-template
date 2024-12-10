@@ -80,7 +80,9 @@ const <%= name %>Table = (props) => {
 		}
 	}
 
-
+	function onChangeSelected(selectedRowKeys, selectedRows) {
+		setSelectedRowKeys(selectedRowKeys);
+	}
 
 	const columns = [
 		{
