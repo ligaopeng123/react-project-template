@@ -12,11 +12,10 @@
 import React, {useReducer} from 'react';
 import <%= name %>Table from "./components/<%= name %>Table";
 import <%= name %>Modal from "./components/<%= name %>Modal";
-import {reducer, init, State} from "./${name}Store";
-import {Props} from "./<%= name %>Typing";
+import {reducer, init, State} from "./model";
 
 
-const <%= name %>: React.FC<any> = () => {
+const <%= name %> = () => {
 	const [state, dispatch] = useReducer(reducer, State, init);
 	return (
 		<React.Fragment>

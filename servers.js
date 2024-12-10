@@ -9,11 +9,11 @@
  * @date: <%= time %>
  *
  **********************************************************************/
-import {get, post, put, del} from "@httpClient/index";
-import {valueEnum, TableListItem, Add<%= name %>Props, Edit<%= name %>Props} from "./<%= name %>Typing";
+import { request } from "@ymscloud/sdk";
+const { get, post, put, del } = request;
 
-export const <%= name %>List = async (params: any) => {
-	const tableListDataSource: TableListItem[] = [];
+export const <%= name %>List = async (params) => {
+	const tableListDataSource = [];
 
 	const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
 
@@ -45,20 +45,20 @@ export const <%= name %>List = async (params: any) => {
 /**
  * 新增接口
  */
-export const add<%= name %> = async (params: Add<%= name %>Props)=> {
+export const add<%= name %> = async (params)=> {
 	return await post('./json/OEM.json', {body: params});
 };
 
 /**
  * 编辑接口
  */
-export const edit<%= name %> = async (params: Edit<%= name %>Props)=> {
+export const edit<%= name %> = async (params)=> {
 	return await post('./json/OEM.json', {body: params});
 };
 
 /**
  * 删除接口
  */
-export const del<%= name %> = async (row: TableListItem)=> {
+export const del<%= name %> = async (row)=> {
 	return await del('./json/OEM.json', {body: {id: row?.id}});
 };

@@ -9,15 +9,21 @@
  * @date: <%= time %>
  *
  **********************************************************************/
-import {Action, <%= name %>StoreEnum} from "./<%= name %>Typing";
+
+export const <%= name %>StoreEnum = {
+	add : 'add',
+	del : 'del',
+	edit : 'edit',
+	refresh : 'refresh',
+}
 
 export const State = {};
 
-export const init = (state: any) => {
+export const init = (state) => {
 	return state
 };
 
-export const reducer = (state: any, action: Action) => {
+export const reducer = (state, action) => {
 	switch (action.type) {
 		case <%= name %>StoreEnum.add:
 			return Object.assign({}, state, {[<%= name %>StoreEnum.add]: action.value});

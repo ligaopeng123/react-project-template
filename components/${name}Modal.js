@@ -9,34 +9,33 @@
  * @date: <%= time %>
  *
  **********************************************************************/
-
 import React, {useEffect, useRef, useState} from 'react';
-import {FormForTableRef, ModalForTableProps, <%= name %>StoreEnum} from "../<%= name %>Typing";
+import { <%= name %>StoreEnum } from "../model";
 import <%= name %>From from "./<%= name %>Form";
-import {message,Modal} from 'antd';
-import {uuid} from "@gaopeng123/utils";
-import {add<%= name %>, edit<%= name %>} from "../api";
-import styles from '../styles.module.less';
+import { Modal } from '@ymscloud/ui/lib/baseui';
+import {add<%= name %>, edit<%= name %>} from "../servers";
+import { warn } from '@ymscloud/ui';
+import  '../styles.less';
 
-enum Title {
-	add = '新增',
-	edit = '编辑'
+const Title = {
+	add : '新增',
+	edit : '编辑'
 }
 
-const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
+const <%= name %>Modal = (props) => {
 	const {state, dispatch} = props;
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-	const [title, setTitle] = useState<string>('');
-	const [formData, setFormData] = useState<string>('');
-	const formRef = useRef<FormForTableRef | any>(null);
+	const [confirmLoading, setConfirmLoading] = useState(false);
+	const [title, setTitle] = useState('');
+	const [formData, setFormData] = useState('');
+	const formRef = useRef(null);
 	/**
 	 * 刷新处理
 	 */
 	const refresh = () => {
 		dispatch({
 			type: <%= name %>StoreEnum.refresh,
-			value: uuid()
+			value: Date.now()
 		});
 	};
 
@@ -63,7 +62,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 		formRef?.current?.values().then((data: any) => {
 			console.log(data);
 			const handle = (res?: any)=> {
-                message.info(res?.message || '');
+				warn(res?.message || '');
 				setIsModalVisible(false);
 				refresh();
 			}
@@ -98,7 +97,7 @@ const <%= name %>Modal: React.FC<ModalForTableProps> = (props) => {
 
 	return (
 		<React.Fragment>
-			<Modal destroyOnClose title={title} confirmLoading={confirmLoading} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+			<Modal destroyOnClose backdropClosable={false} title={title} okButtonProps={{loading: confirmLoading}} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
 				<<%= name %>From ref={formRef} formData={formData}/>
 			</Modal>
 		</React.Fragment>

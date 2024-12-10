@@ -19,9 +19,7 @@ import {
 	InputNumber,
 	TreeSelect,
 	Switch,
-} from 'antd';
-import {FormForTableProps} from "../<%= name %>Typing";
-import {FormInstance} from 'antd/lib/form';
+} from '@tinper/next-ui';
 
 
 const validateMessages = {
@@ -35,9 +33,9 @@ const validateMessages = {
 	},
 };
 
-const <%= name %>From: React.FC<FormForTableProps> = forwardRef((props, ref) => {
+const <%= name %>From = forwardRef((props, ref) => {
 	const {formData} = props;
-	const formRef = useRef<FormInstance>(null);
+	const formRef = useRef(null);
 
 	useImperativeHandle(ref, () => ({
 		values: async () => formRef.current?.validateFields()
