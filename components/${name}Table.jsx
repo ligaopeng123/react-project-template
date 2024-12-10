@@ -18,12 +18,12 @@ import { DataTable } from 'ynf-tinper-next-pro';
 import { RefreshButton, warn } from '@ymscloud/ui';
 import '../styles.less';
 
-const <%= name %>Table: React.FC<<%= name %>TableProps> = (props) => {
+const <%= name %>Table = (props) => {
 	const {state, dispatch} = props;
 	/**
 	 * 表格res
 	 */
-	const ref = useRef<ActionType>();
+	const ref = useRef();
 
 	const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 	const [searchValue, setSearchValue] = useState('');

@@ -59,9 +59,9 @@ const <%= name %>Modal = (props) => {
 
 	const handleOk = () => {
 		setConfirmLoading(true);
-		formRef?.current?.values().then((data: any) => {
+		formRef?.current?.values().then((data) => {
 			console.log(data);
-			const handle = (res?: any)=> {
+			const handle = (res)=> {
 				warn(res?.message || '');
 				setIsModalVisible(false);
 				refresh();
