@@ -40,8 +40,8 @@ const <%= name %>Table = (props) => {
 	/**
 	 * 删除逻辑处理
 	 */
-	const del = (row: any) => {
-        del<%= name %>(row).then((res: any)=> {
+	const del = (row) => {
+        del<%= name %>(row).then((res)=> {
             // @ts-ignore
             ref.current?.reload();
         });
@@ -49,11 +49,11 @@ const <%= name %>Table = (props) => {
 	/**
 	 * 编辑
 	 */
-	const edit = (row: any) => {
+	const edit = (row) => {
 		dispatch({
 			type: <%= name %>StoreEnum.edit,
 			// 避免编辑不触发
-			value: Object.assign({_: uuid()}, row)
+			value: Object.assign({_: Date.now()}, row)
 		});
 	};
 	/**
