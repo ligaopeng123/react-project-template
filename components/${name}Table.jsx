@@ -12,7 +12,7 @@
 import React, { useState,useEffect, useRef } from 'react';
 import { <%= name %>List, del<%= name %> } from "../servers";
 import { <%= name %>StoreEnum } from "../model";
-import { Button, Space, Input } from '@tinper/next-ui';
+import { Button, Space, Input, Modal } from '@tinper/next-ui';
 import { DataTable } from 'ynf-tinper-next-pro';
 import { RefreshButton, warn } from '@ymscloud/ui';
 import '../styles.less';
@@ -44,6 +44,22 @@ const <%= name %>Table = (props) => {
             tableRef.current?.reload();
         });
 	};
+
+	/* 批量删除
+		* @returns {*}
+	*/
+	const delList = () => {
+		if (!selectedRowKeys?.length) {
+			return err(
+				'请选择要删除的链接池',
+			);
+		}
+		Modal.confirm({
+			title: '确认要删除吗',
+			onOk: () => {
+			},
+		});
+	};
 	/**
 	 * 编辑
 	 */
@@ -74,7 +90,12 @@ const <%= name %>Table = (props) => {
 
 	function operationClick(record, { key }, e, index) {
 		if (key === 'del') {
-			console.log(record);
+			Modal.confirm({
+				title: '确认要删除吗',
+				onOk: () => {
+					del(record)
+				},
+			});
 		} else if (key === 'edit') {
 			edit(record);
 		}
