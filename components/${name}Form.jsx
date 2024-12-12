@@ -9,18 +9,8 @@
  * @date: <%= time %>
  *
  **********************************************************************/
-
 import React, {forwardRef, useImperativeHandle, useRef} from 'react';
-import {
-	Form,
-	Input,
-	Select,
-	Cascader,
-	InputNumber,
-	TreeSelect,
-	Switch,
-} from '@tinper/next-ui';
-
+import { DataForm } from 'ynf-tinper-next-pro';
 
 const validateMessages = {
 	required: '<%= escape %>label} is required!',
@@ -43,7 +33,7 @@ const <%= name %>From = forwardRef((props, ref) => {
 
 	return (
 		<React.Fragment>
-			<Form
+			<DataForm
 				ref={formRef}
 				preserve={false}
 				name="<%= name %>Form"
@@ -52,44 +42,26 @@ const <%= name %>From = forwardRef((props, ref) => {
 				initialValues={formData}
 				validateMessages={validateMessages}
 			>
-				<Form.Item label="Input" name="Input" rules={[{required: true}]}>
-					<Input/>
-				</Form.Item>
-				<Form.Item name="Select" label="Select">
-					<Select>
-						<Select.Option value="demo">Demo</Select.Option>
-					</Select>
-				</Form.Item>
-				<Form.Item name="TreeSelect" label="TreeSelect">
-					<TreeSelect
-						treeData={[
-							{title: 'Light', value: 'light', children: [{title: 'Bamboo', value: 'bamboo'}]},
-						]}
-					/>
-				</Form.Item>
-				<Form.Item name="Cascader" label="Cascader">
-					<Cascader
-						options={[
+				<DataForm.Item label="Input" name="Input" rules={[{required: true}]} inputType="input" />
+				<DataForm.Item name="Select" label="Select" inputType="select" options={[{label: 'Demo', value: 'demo'}]} />
+				<DataForm.Item name="TreeSelect" label="TreeSelect" inputType="treeSelect" options={[
+					{title: 'Light', value: 'light', children: [{title: 'Bamboo', value: 'bamboo'}]},
+				]} />
+				<DataForm.Item name="Cascader" label="Cascader" inputType="cascader" options={[
+					{
+						value: 'zhejiang',
+						label: 'Zhejiang',
+						children: [
 							{
-								value: 'zhejiang',
-								label: 'Zhejiang',
-								children: [
-									{
-										value: 'hangzhou',
-										label: 'Hangzhou',
-									},
-								],
+								value: 'hangzhou',
+								label: 'Hangzhou',
 							},
-						]}
-					/>
-				</Form.Item>
-				<Form.Item name="InputNumber" label="InputNumber" rules={[{type: 'number', min: 0, max: 99}]}>
-					<InputNumber/>
-				</Form.Item>
-				<Form.Item name="Switch" label="Switch">
-					<Switch/>
-				</Form.Item>
-			</Form>
+						],
+					},
+				]} />
+				<DataForm.Item name="InputNumber" label="InputNumber" inputType="inputNumber" rules={[{type: 'number', min: 0, max: 99}]} />
+				<DataForm.Item name="Switch" label="Switch" inputType="switch" />
+			</DataForm>
 		</React.Fragment>
 	);
 });
