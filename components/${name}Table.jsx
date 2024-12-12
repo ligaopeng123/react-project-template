@@ -50,7 +50,7 @@ const <%= name %>Table = (props) => {
 	*/
 	const delList = () => {
 		if (!selectedRowKeys?.length) {
-			return err(
+			return warn(
 				'请选择要删除的链接池',
 			);
 		}
@@ -167,7 +167,7 @@ const <%= name %>Table = (props) => {
 					</Space>
 					<Space>
 						<Button onClick={add} type="primary">新增</Button>
-						<Button onClick={del}>批量删除</Button>
+						<Button onClick={delList}>批量删除</Button>
 						<RefreshButton onClick={reload}></RefreshButton>
 					</Space>
 				</div>;
