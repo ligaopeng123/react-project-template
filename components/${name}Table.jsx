@@ -89,16 +89,24 @@ const <%= name %>Table = (props) => {
 
 
 	function operationClick(record, { key }, e, index) {
-		if (key === 'del') {
+	const actions = {
+		del: ()=> {
 			Modal.confirm({
 				title: '确认要删除吗',
 				onOk: () => {
-					del(record)
+					del(record);
 				},
 			});
-		} else if (key === 'edit') {
+		},
+		edit: ()=> {
 			edit(record);
+		},
+		distribute: () => {
+		},
+		share: () => {
 		}
+	}
+	actions[key] && actions[key]();
 	}
 
 	function onChangeSelected(selectedRowKeys, selectedRows) {
