@@ -28,7 +28,7 @@ export const <%= name %>List = async (params) => {
 			// @ts-ignore
 			creator: creators[Math.floor(Math.random() * creators.length)],
 			// @ts-ignore
-			status: valueEnum[Math.floor(Math.random() * 10) % 4],
+			status: Math.floor(Math.random() * 10) % 4,
 			// @ts-ignore
 			createdAt: Date.now() - Math.floor(Math.random() * 2000),
 			// @ts-ignore

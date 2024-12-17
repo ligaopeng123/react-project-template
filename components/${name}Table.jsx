@@ -2,7 +2,7 @@
  *
  * @模块名称: <%= name %>Table
  *
- * @模块用途: <%= name %>Table  表格配置
+ * @模块用途: <%= name %>Table  <%= description %>
  *
  * @创建人: <%= username %>
  *
@@ -114,12 +114,6 @@ const <%= name %>Table = (props) => {
 	}
 
 	const columns = [
-		{
-			title: '排序',
-			dataIndex: 'index',
-			valueType: 'index',
-			width: 48,
-		},
 		{
 			title: '应用名称',
 			dataIndex: 'name',
