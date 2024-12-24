@@ -2,7 +2,7 @@
  *
  * @模块名称: <%= name %>
  *
- * @模块用途: <%= name %>
+ * @模块用途: <%= name %> <%= description %>
  *
  * @创建人: <%= username %>
  *

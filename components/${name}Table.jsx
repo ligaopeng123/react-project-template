@@ -71,8 +71,8 @@ const <%= name %>Table = (props) => {
 		});
 	};
 
-	const onSearch = () => {
-
+	const onSearch = (v) => {
+		setSearchValue(v);
 	};
 
 	const reload = () => {
