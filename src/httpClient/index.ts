@@ -12,9 +12,6 @@
 import intercept from "@httpClient/intercept";
 import {register} from '@gaopeng123/fetch';
 
-export {get as get} from "@gaopeng123/fetch";
-export {post as post} from "@gaopeng123/fetch";
-export {put as put} from "@gaopeng123/fetch";
-export {del as del} from "@gaopeng123/fetch";
+export {get, post, del, put, patch} from "@gaopeng123/fetch";
 
 export const unregisterFetch = register(intercept);

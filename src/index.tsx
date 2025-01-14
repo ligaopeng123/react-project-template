@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil'
 import App from './App';
-import HeadersJS from './headersJS';
-import { DynamicLoadScript } from "@gaopeng123/hoc";
 import reportWebVitals from "./serviceWorker";
 import { initTheme } from "@layouts/HeaderTheme/ThemeColor";
 import zhCN from 'antd/lib/locale/zh_CN';
@@ -33,20 +31,6 @@ if (process.env.REACT_APP_SENTRY_DSN && process.env.REACT_APP_SENTRY?.trim() !==
     });
 }
 
-/**
- * 加载静态资源文件
- * @constructor
- */
-function LoadScript(onLoad: any) {
-    root.render(
-        <React.StrictMode>
-            <DynamicLoadScript
-                url={HeadersJS}
-                onLoad={onLoad}/>
-        </React.StrictMode>
-    )
-}
-
 async function LoadApp() {
     root.render(
         <React.StrictMode>
@@ -65,11 +49,9 @@ async function LoadApp() {
  * 将外部依赖 加载到header上
  * @returns {Promise<void>}
  */
-async function startUp() {
-    // LoadScript(async () => {
+function startUp() {
     initTheme();
     LoadApp();
-    // });
 }
 
 startUp();

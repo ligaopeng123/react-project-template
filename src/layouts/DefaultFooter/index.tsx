@@ -14,7 +14,7 @@ const BasicFooter = (props: any) => {
                     ...item,
                     title: item.image ?
                         <span>
-							<img style={{paddingRight: 4, width: 16, height: 14}}
+							<img alt={''} style={{paddingRight: 4, width: 16, height: 14}}
                                  src={item.image}/>{item.title}
 						</span>
                         : item.title

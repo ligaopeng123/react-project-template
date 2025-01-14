@@ -74,7 +74,7 @@ const TableTable: React.FC<TableProps> = (props) => {
 		{
 			title: '应用名称',
 			dataIndex: 'name',
-			render: (_) => <a>{_}</a>,
+			render: (_) => <a href={'#'}>{_}</a>,
 			// 自定义筛选项功能具体实现请参考 https://ant.design/components/table-cn/#components-table-demo-custom-filter-panel
 			filterDropdown: () => (
 				<div style={{padding: 8}}>
