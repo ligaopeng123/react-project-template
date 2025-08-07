@@ -20,8 +20,6 @@ export interface HeaderSearchProps {
 	value?: string;
 }
 
-console.log('styles', styles)
-
 const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
 	const {
 		className,

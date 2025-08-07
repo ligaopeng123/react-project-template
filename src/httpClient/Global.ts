@@ -128,7 +128,7 @@ export const getOemTitle = () => {
  * @param path
  */
 export const loadLocalJson = asyncMemoized(async (path: string) => {
-    const res = await fetch(pathJoin(process.env.REACT_APP_PUBLICPATH || '', path));
+    const res = await fetch(pathJoin(process.env.REACT_APP_PUBLICPATH || '/', path));
     const json = await res.clone().json();
     return json;
 });

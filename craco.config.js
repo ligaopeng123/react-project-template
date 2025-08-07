@@ -105,8 +105,16 @@ module.exports = {
              * 提高构建速度
              * @type {RegExp}
              */
+             // ✅ 开启 lazyCompilation
+            // config.experiments = {
+            //     ...config.experiments,
+            //     lazyCompilation: {
+            //     entries: true,
+            //     imports: true
+            //     }
+            // };
             // 忽略解析
-            config.module.noParse = /jquery|lodash/;
+            config.module.noParse = /jquery/; // lodash
             // 不用编译
             config.externals = {
                 react: 'React',
